@@ -8,7 +8,9 @@ export default class AuthService {
     const { userName, emailId, password } = payload;
 
     try {
-      const res = await axios.post(`${base_url}/user/signup`, payload);
+      const res = await axios.post(`${base_url}/user/signup`, payload, {
+        withCredentials: true,
+      });
       return {
         data: res.data,
         error: null,
