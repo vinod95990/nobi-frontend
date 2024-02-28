@@ -1,0 +1,146 @@
+.parent-addModal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
+
+.add-modal {
+  background-color: #f4f5f0;
+  border: 2px solid #3d3266;
+  border-radius: 16px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000 !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.add-modal form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-modal input {
+  background: transparent;
+}
+
+.add-btn {
+  padding: 4px 12px;
+  position: relative;
+}
+
+.add-btn > p {
+  position: relative;
+  z-index: 5;
+  color: #ffffff;
+  text-shadow: 0 0 7px rgba(255, 255, 255, 0.3),
+    0 0 3px rgba(255, 255, 255, 0.3);
+  transition: color 0.2s ease-in-out;
+}
+
+.add-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 2;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #7152e1;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-btn:hover::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 2;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #16171c;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -3px;
+  left: -3px;
+  background-color: #f4f5f0;
+  transition: background-color 0.2s ease-in-out;
+}
+.add-btn:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -2px;
+  left: -2px;
+  background-color: #f4f5f0;
+  transition: all 0.2s ease-in-out;
+}
+
+.doodle-input {
+  position: relative;
+  z-index: 2;
+  background-color: #16171c;
+  border-radius: 16px;
+  color: #16171c;
+  align-self: stretch;
+  margin: 12px;
+}
+
+.doodle-input::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #f4f5f0;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  border-radius: 16px;
+}
+
+.doodle-input::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -5px;
+  left: -4px;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  background-color: #7152e1;
+}

@@ -1,0 +1,78 @@
+.gradient-css {
+  background-color: #3eecac;
+  background-image: linear-gradient(19deg, #3eecac 0%, #ee74e1 100%);
+
+  /* background-color: #FA8BFF;
+     background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+      */
+  /* background-color: #08AEEA;
+      background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%); */
+}
+.gradient-text {
+  background-color: #0085b6;
+  background-image: linear-gradient(0deg, #08aeea 0%, #2af598 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.doodle-btn {
+  position: relative;
+  z-index: 2;
+}
+
+/* in complete front */
+.doodle-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #f4f5f0;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  border-radius: 16px;
+}
+
+/* in back */
+.doodle-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -6px;
+  left: -5px;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  background-color: #f4f5f0;
+  transition: all 0.2s ease-in-out;
+}
+
+.doodle-btn:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -4px;
+  left: -3px;
+  transition: background-color 0.2s ease-in-out;
+  /* border:2px solid #16171c; */
+  background-color: #f4f5f0;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-modal {
+  width: 320px;
+}

@@ -1,0 +1,106 @@
+.doodle-link {
+  position: relative;
+  padding: 4px 12px;
+  z-index: 2;
+  color: #7152e1 !important;
+}
+
+.doodle-link::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #f4f5f0;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #7152e1;
+  border-radius: 16px;
+}
+
+.doodle-link::after {
+  content: "";
+  position: absolute;
+  z-index: -123;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -6px;
+  left: -5px;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #7152e1;
+  background-color: #7152e1;
+}
+
+.doodle-link span {
+  opacity: 0;
+  z-index: 120;
+
+  transition: opacity 0.2s ease-in-out; /* Add transition for smooth effect */
+}
+
+.doodle-link:hover span {
+  opacity: 1;
+  z-index: 120 !important;
+}
+
+.doodle-folder {
+  position: relative;
+  z-index: 2;
+}
+
+.doodle-folder::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #f4f5f0;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  border-radius: 16px;
+}
+
+/* in back */
+.doodle-folder::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -6px;
+  left: -5px;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  background-color: #3d3266;
+  transition: all 0.2s ease-in-out;
+}
+
+.doodle-folder:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -4px;
+  left: -3px;
+  transition: background-color 0.2s ease-in-out;
+  /* border:2px solid #16171c; */
+  background-color: #3d3266;
+  transition: all 0.2s ease-in-out;
+}
