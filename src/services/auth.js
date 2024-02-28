@@ -53,7 +53,7 @@ export default class AuthService {
     } catch (error) {
       return {
         data: null,
-        unauthorized: error?.response.status == 401 ? true : false,
+        unauthorized: error?.response?.status == 401 ? true : false,
         error: error?.response?.data?.message || "Somethiunbg broke",
       };
     }
@@ -71,8 +71,8 @@ export default class AuthService {
     } catch (error) {
       return {
         data: null,
-        unauthorized: error?.response.status == 401 ? true : false,
-        error: error?.response?.data?.message || "Somethiunbg broke",
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error: error?.response?.data?.message || "Something broke",
       };
     }
   }
