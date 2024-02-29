@@ -49,27 +49,29 @@ export default function Home({ params }) {
       }),
   });
 
-  if (queryData) {
-    const { data, error, unauthorized } = queryData;
-    if (unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
-      router.push("/guard-gate");
-    }
+  useEffect(() => {
+    if (queryData) {
+      const { data, error, unauthorized } = queryData;
+      if (unauthorized) {
+        toast.info("Please login again!", {
+          className: "toast-message",
+        });
+        router.push("/guard-gate");
+      }
 
-    if (error) {
-      toast.error(error, {
-        className: "toast-message",
-      });
-      return;
-    }
+      if (error) {
+        toast.error(error, {
+          className: "toast-message",
+        });
+        return;
+      }
 
-    if (data)
-      toast.success(data?.message, {
-        className: "toast-message",
-      });
-  }
+      if (data)
+        toast.success(data?.message, {
+          className: "toast-message",
+        });
+    }
+  }, [queryData, router]);
 
   function handleAddModal(type) {
     setAddModalType(type);

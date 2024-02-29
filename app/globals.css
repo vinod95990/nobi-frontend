@@ -351,10 +351,10 @@ input::selection {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url("/magic-1.jpg"); /*doodle-3.jpg*/
+  background-image: url("/magic-3.jpg"); /*doodle-3.jpg*/
   background-size: cover;
   background-position: right;
-  opacity: 0.12;
+  opacity: 0.25;
   z-index: 1;
 }
 

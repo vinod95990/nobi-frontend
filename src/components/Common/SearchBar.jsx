@@ -11,7 +11,7 @@ export default function SearchBar(props) {
       }}
     >
       <div className="flex items-center justify-center flex-col gap-3 text-3xl w-full ">
-        <h1 className="text-[#3d3266] shiny-text">What are you looking at?</h1>
+        <h1 className="text-[#3d3266] shiny-text">Discover your treasures</h1>
         <div
           className=" text-[#f4f5f0] p-1 rounded-full flex items-center justify-between text-sm search-box"
           style={{
@@ -25,7 +25,7 @@ export default function SearchBar(props) {
             className="w-full p-3 font-sans tracking-wider	text-[#16171c] font-bold gradient-css "
             onChange={handleSearchedStringChange}
             // value={searchedString}
-            placeholder="I'll check through everything you have"
+            placeholder="Seek answers in the whispers of time..."
             style={{
               background: "transparent",
               outline: "none",

@@ -7,7 +7,24 @@ export default function Header() {
 
   async function handleLogout() {
     const { data, error } = await AuthService.logout();
+    if (unauthorized) {
+      toast.info("Logged out successfully", {
+        className: "toast-message",
+      });
+      router.push("/guard-gate");
+    }
+
+    if (error) {
+      toast.error(error, {
+        className: "toast-message",
+      });
+      return;
+    }
+
     if (data) {
+      toast.success(data?.message, {
+        className: "toast-message",
+      });
       router.push("/guard-gate");
     }
   }
