@@ -8,7 +8,7 @@
 }
 
 .add-modal {
-  background-color: #f4f5f0;
+  background-color: #fff;
   border: 2px solid #3d3266;
   border-radius: 16px;
   position: absolute;
@@ -123,7 +123,7 @@
   height: 100%;
   top: 0;
   left: 0px;
-  background-color: #f4f5f0;
+  background-color: #fff;
   transition: background-color 0.2s ease-in-out;
   border: 2px solid #3d3266;
   border-radius: 16px;
@@ -138,9 +138,9 @@
 
   width: 100%;
   height: 100%;
-  bottom: -5px;
-  left: -4px;
+  bottom: -6px;
+  left: -5px;
   transition: all 0.2s ease-in-out;
   border: 2px solid #3d3266;
-  background-color: #7152e1;
+  /* background-color: #7152e1; */
 }

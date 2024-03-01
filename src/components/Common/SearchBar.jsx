@@ -18,11 +18,12 @@ export default function SearchBar(props) {
             width: "50%",
             position: "relative",
             zIndex: "2",
+            padding: "4px",
           }}
         >
           <input
             type="text"
-            className="w-full p-3 font-sans tracking-wider	text-[#16171c] font-bold gradient-css "
+            className="w-full p-3 font-sans tracking-wider	text-[#3d3266] font-bold gradient-css "
             onChange={handleSearchedStringChange}
             // value={searchedString}
             placeholder="Seek answers in the whispers of time..."
@@ -32,7 +33,7 @@ export default function SearchBar(props) {
             }}
           ></input>
           <div
-            className="cursor-pointer px-6 py-2 rounded-3xl   shiny-text bg-[#3d3266]  border-2 border-[#3d3266] hover:bg-[#7152e1]  text-[#f4f5f0] transition-colors"
+            className="cursor-pointer px-6 py-2 rounded-3xl   shiny-text bg-[#3d3266]  border-2 border-[#3d3266] hover:bg-[#7152e1]  text-[#fff] transition-colors"
             onClick={(e) => handleSearchClick(e)}
           >
             Search

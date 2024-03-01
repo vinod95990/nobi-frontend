@@ -2,34 +2,35 @@
 import AuthService from "@/src/services/auth";
 import "./Header.css";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 export default function Header() {
   const router = useRouter();
 
   async function handleLogout() {
-    const { data, error } = await AuthService.logout();
-    if (unauthorized) {
+    const res = await AuthService.logout();
+    if (res?.unauthorized) {
       toast.info("Logged out successfully", {
         className: "toast-message",
       });
       router.push("/guard-gate");
     }
 
-    if (error) {
-      toast.error(error, {
+    if (res?.error) {
+      toast.error(res?.error, {
         className: "toast-message",
       });
       return;
     }
 
-    if (data) {
-      toast.success(data?.message, {
+    if (res?.data) {
+      toast.success(res?.data?.message, {
         className: "toast-message",
       });
       router.push("/guard-gate");
     }
   }
   return (
-    <div className="header flex items-center justify-between text-sm font-regular relative p-4">
+    <div className="header flex items-center justify-between text-sm font-regular relative p-4 bg-[#3d3266]">
       <div className="header-wave">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
@@ -39,12 +40,16 @@ export default function Header() {
           ></path>
         </svg>
       </div>
-      <div className=" text-2xl lowercase font-sans font-bold text-[#f4f5f0] shiny-text">
+
+      <div className=" text-2xl lowercase font-sans font-bold text-[#fff] shiny-text">
         nobi.
+      </div>
+      <div>
+        <img src="nobi-logo.png" width={40}></img>
       </div>
       <div className="flex items-center  ">
         <p
-          className="px-4 py-2 text-[#7152E1]  doodle-btn shiny-text"
+          className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text"
           onClick={handleLogout}
         >
           Logout

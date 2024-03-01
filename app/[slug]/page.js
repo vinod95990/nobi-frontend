@@ -66,10 +66,11 @@ export default function Home({ params }) {
         return;
       }
 
-      if (data)
+      if (data) {
         toast.success(data?.message, {
           className: "toast-message",
         });
+      }
     }
   }, [queryData, router]);
 
