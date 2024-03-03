@@ -15,6 +15,7 @@ export default function Folders(props) {
     setOpenEditModal,
     setSelectedItem,
     isLoading,
+    sharedFolder,
   } = props;
   const queryClient = useQueryClient();
 
@@ -31,6 +32,9 @@ export default function Folders(props) {
   }
 
   function handleRightClick(event, item) {
+    if (sharedFolder) {
+      return;
+    }
     event.preventDefault();
     const containerRect = event.currentTarget.getBoundingClientRect();
     // const scrollX = window.scrollX || window.pageXOffset;
@@ -45,6 +49,10 @@ export default function Folders(props) {
   }
 
   async function handleEdit(e) {
+    //sharedfolder -> true, jab yeh folder compeontn is used in voh shared page toh events wagera nhi hone chahiye vo links pe
+    if (sharedFolder) {
+      return;
+    }
     e.stopPropagation();
     if (!selectedItem) {
       return;
@@ -52,7 +60,38 @@ export default function Folders(props) {
     setOpenEditModal(true);
   }
 
+  async function handleShareFolder(e) {
+    e.stopPropagation();
+    if (!selectedItem) {
+      return;
+    }
+    const res = await NobiServices.generateSharedFolderToken({
+      folderId: selectedItem?._id,
+    });
+
+    if (res?.unauthorized) {
+      toast.info("Please login again!", {
+        className: "toast-message",
+      });
+      router.push("/guard-gate");
+    }
+
+    if (res?.error) {
+      toast.error(res?.error, {
+        className: "toast-message",
+      });
+      return;
+    }
+
+    if (res?.data) {
+      router.push(`/shared/${res?.data?.encodedFolderToken}`);
+    }
+  }
+
   async function handleDelete() {
+    if (sharedFolder) {
+      return;
+    }
     if (!selectedItem) {
       return;
     }
@@ -122,7 +161,7 @@ export default function Folders(props) {
         zIndex: 5,
       }}
     >
-      {selectedItem && (
+      {!sharedFolder && selectedItem && (
         <div
           className="w-32 absolute z-1000 bg-[#f4f5f0] border-2 rounded-md border-[#3d3266] p-3 flex flex-col gap-3 "
           style={{
@@ -131,18 +170,39 @@ export default function Folders(props) {
             zIndex: "20",
           }}
         >
+          {selectedItem.type == nobiDocType.folder && (
+            <button
+              onClick={(e) => handleShareFolder(e)}
+              className="flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            >
+              <img
+                src="/icons/share-fat-bold.svg"
+                width={20}
+                className="z-10"
+              ></img>
+              <p>Share</p>
+            </button>
+          )}
           <button
             onClick={(e) => handleEdit(e)}
             className="flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
           >
-            <img src="/icons/edit.png" width={20} className="z-10"></img>
+            <img
+              src="/icons/pencil-simple-bold.svg"
+              width={20}
+              className="z-10"
+            ></img>
             <p>Edit</p>
           </button>
           <button
             onClick={() => handleDelete()}
             className="flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
           >
-            <img src="/icons/delete.png" width={20} className="z-10"></img>
+            <img
+              src="/icons/trash-simple-bold.svg"
+              width={20}
+              className="z-10"
+            ></img>
             <p>Delete</p>
           </button>
         </div>
@@ -161,7 +221,7 @@ export default function Folders(props) {
               onClick={() => handleFolderNavigation(data._id)}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <img src="/icons/folder.png" width={30}></img>
+              <img src="/icons/folder-bold.svg" width={30}></img>
 
               <p className="text-[#3d3266]">{data.name}</p>
             </div>
@@ -179,7 +239,7 @@ export default function Folders(props) {
               }}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <img src="/icons/link.png" width={30}></img>
+              <img src="/icons/link-simple-bold.svg" width={30}></img>
               <div className="flex flex-col justify-center flex-wrap">
                 <p className="text-[#3d3266] ">{data.name}</p>
                 <p className="text-sm text-[#7152E1] ">

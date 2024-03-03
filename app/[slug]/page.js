@@ -16,6 +16,7 @@ import { navigationTabs } from "@/src/constants/navigation";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
+import Socials from "@/src/components/Common/Socials";
 
 export default function Home({ params }) {
   const { slug } = params;
@@ -173,6 +174,7 @@ export default function Home({ params }) {
           isLoading={isLoading}
         />
       </div>
+      <Socials />
     </div>
   );
 }

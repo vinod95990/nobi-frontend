@@ -14,6 +14,7 @@ import EditModal from "@/src/components/EditModal";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
+import Socials from "@/src/components/Common/Socials";
 
 export default function Home() {
   const router = useRouter();
@@ -165,6 +166,7 @@ export default function Home() {
           isLoading={isLoading}
         />
       </div>
+      <Socials />
     </div>
   );
 }

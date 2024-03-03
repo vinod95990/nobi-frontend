@@ -12,9 +12,9 @@ export default function BreadCrumb(props) {
       <div className="flex  w-9/12 gap-3 my-1 mb-7 items-center py-2">
         <img
           className="cursor-pointer"
-          width={32}
-          height={32}
-          src="/icons/home.png"
+          width={40}
+          height={40}
+          src="/icons/house-bold.svg"
           onClick={() => handleNavigation("/")}
         ></img>
       </div>
@@ -31,15 +31,19 @@ export default function BreadCrumb(props) {
     >
       <img
         className="cursor-pointer"
-        width={32}
-        height={32}
-        src="/icons/home.png"
+        width={40}
+        height={40}
+        src="/icons/house-bold.svg"
         onClick={() => handleNavigation("/")}
       ></img>
       {parentData?.map((data, index) => {
         return (
           <>
-            <img width={30} height={30} src="/icons/direction-arrow.png"></img>
+            <img
+              width={30}
+              height={30}
+              src="/icons/arrow-fat-right-bold.svg"
+            ></img>
             <p
               key={data._id}
               className={`text-lg ${

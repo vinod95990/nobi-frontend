@@ -195,4 +195,55 @@ export default class NobiServices {
       };
     }
   }
+
+  static async generateSharedFolderToken(payload) {
+    const { folderId } = payload;
+
+    try {
+      const res = await axios.get(`${base_url}/generateSharedFolderToken`, {
+        params: {
+          folderId,
+        },
+        withCredentials: true,
+      });
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong. Please try again later.",
+      };
+    }
+  }
+
+  static async decodeSharedFolderToken(payload) {
+    const { encodedFolderToken } = payload;
+    try {
+      const res = await axios.get(`${base_url}/decodeSharedFolderToken`, {
+        params: {
+          encodedFolderToken,
+        },
+        withCredentials: true,
+      });
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong. Please try again later.",
+      };
+    }
+  }
 }

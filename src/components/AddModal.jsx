@@ -113,7 +113,13 @@ export default function AddModal(props) {
           className="absolute -top-0 -right-0  cursor-pointer   rounded-md"
           onClick={handleCloseModal}
         >
-          <img src="/icons/close.png" alt="close" width={35} height={35}></img>
+          <img
+            src="/icons/x-square-bold.svg"
+            alt="close"
+            width={35}
+            height={35}
+            className="bg-white rounded-md"
+          ></img>
         </div>
         <p
           className="text-[#f4f5f0] text-xl bg-[#3d3266] shiny-text text-center py-3"
@@ -181,7 +187,13 @@ export default function AddModal(props) {
           className="absolute -top-0 -right-0   rounded-md"
           onClick={handleCloseModal}
         >
-          <img src="/icons/close.png" alt="close" width={35} height={35}></img>
+          <img
+            src="/icons/x-square-bold.svg"
+            alt="close"
+            width={35}
+            height={35}
+            className="bg-white rounded-md"
+          ></img>
         </div>
         <p
           className="text-[#f4f5f0] text-xl bg-[#3d3266] shiny-text text-center py-3"

@@ -47,7 +47,7 @@ export default function Header() {
       <div>
         <img src="nobi-logo.png" width={40}></img>
       </div>
-      <div className="flex items-center  ">
+      <div className="flex items-center cursor-pointer ">
         <p
           className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text"
           onClick={handleLogout}
