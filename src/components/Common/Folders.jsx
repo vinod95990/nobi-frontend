@@ -6,6 +6,7 @@ import NobiServices from "@/src/services/nobiServices";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import copy from "clipboard-copy";
 
 export default function Folders(props) {
   const {
@@ -84,6 +85,19 @@ export default function Folders(props) {
     }
 
     if (res?.data) {
+      try {
+        await copy(window.location.href);
+        toast.success("Text copied successfully! 🚀", {
+          className: "toast-message",
+        });
+      } catch (err) {
+        toast.error(
+          "Oops! Couldn't copy the text. You can try copying it from the URL.",
+          {
+            className: "toast-message",
+          }
+        );
+      }
       router.push(`/shared/${res?.data?.encodedFolderToken}`);
     }
   }

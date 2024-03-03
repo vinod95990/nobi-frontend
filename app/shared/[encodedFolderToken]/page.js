@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
+import copy from "clipboard-copy";
+
 export default function Home({ params }) {
   const { encodedFolderToken } = params;
   const router = useRouter();
@@ -60,6 +62,22 @@ export default function Home({ params }) {
     router.push("/");
   }
 
+  async function handleCopy() {
+    try {
+      await copy(window.location.href);
+      toast.success("Text copied successfully! 🚀", {
+        className: "toast-message",
+      });
+    } catch (err) {
+      toast.error(
+        "Oops! Couldn't copy the text. You can try copying it from the URL.",
+        {
+          className: "toast-message",
+        }
+      );
+    }
+  }
+
   return (
     <div className=" text-5xl w-full  ">
       <div
@@ -75,38 +93,37 @@ export default function Home({ params }) {
 
       <div className="m-8 text-[#3d3266]">
         <div className="flex items-center  justify-center gap-5 ">
-          <img
-            src="../../icons/witch.png"
-            width={80}
-            className=" cursor-pointer    "
-          ></img>
-          <h1 className="text-center text-7xl ">
+          <h1 className="text-center text-5xl ">
             {queryData?.data?.data?.folderName || "Shared Nobis"}
           </h1>
         </div>
-        <p className="text-center text-2xl mt-3 mb-6 font-mono">
+        <p className="text-center text-lg mt-3 mb-6 font-mono">
           Shared with you by
-          <span className="text-[#ff7575] text-3xl font-mono font-bold">
+          <span className="text-[#ff7575] text-lg font-mono font-extrabold">
             {queryData?.data?.data?.createdBy
-              ? ` {${queryData?.data?.data?.createdBy}}`
+              ? ` ${queryData?.data?.data?.createdBy}`
               : " a Nobi warrior"}
           </span>
         </p>
-
-        <div className="flex justify-center flex-col items-center p-4 w-full my-3  ">
+        <div className="flex items-center justify-center">
+          <div
+            className="doodle-btn p-2  text-base flex items-center justify-center cursor-pointer "
+            onClick={handleCopy}
+          >
+            <p>Copy Link</p>
+            <img
+              src="../../icons/copy.svg"
+              width={30}
+              className=" cursor-pointer"
+            ></img>
+          </div>
+        </div>
+        <div className="flex justify-center flex-col items-center p-4 w-full mt-7  ">
           <Folders
             folderData={queryData?.data?.data?.links}
             isLoading={isLoading}
             sharedFolder={true}
           />
-        </div>
-
-        <div className="floating-animation absolute top-9">
-          <img
-            src="../../icons/broom-witch.png"
-            width={80}
-            className=" cursor-pointer"
-          ></img>
         </div>
       </div>
       <p
