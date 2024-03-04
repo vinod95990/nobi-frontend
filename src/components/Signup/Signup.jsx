@@ -112,13 +112,12 @@ export default function Signup(props) {
     <div
       className="w-full p-5 flex gap-4 flex-col text-2xl"
       style={{
-        width: "90%",
         height: "100%",
         position: "relative",
         zIndex: "4",
       }}
     >
-      <div className="flex justify-center gap-4 items-center w-full">
+      <div className="flex justify-center gap-4 items-center w-full mb-2">
         <div
           onClick={() => handleAuthStateChange(authStateTypes.signup)}
           className={`${
@@ -127,7 +126,7 @@ export default function Signup(props) {
               : "doodle-white"
           } cursor-pointer`}
         >
-          <p>Signup</p>
+          <p className="text-base sm:text-xl">Signup</p>
         </div>
         <div
           onClick={() => handleAuthStateChange(authStateTypes.login)}
@@ -135,17 +134,17 @@ export default function Signup(props) {
             authState == authStateTypes.login ? "doodle-active" : "doodle-white"
           } cursor-pointer`}
         >
-          <p>Login</p>
+          <p className="text-base sm:text-xl">Login</p>
         </div>
       </div>
 
       {/* form */}
-      <div className="text-white auth-form mx-6 my-4 ">
+      <div className="text-white auth-form mx-2 sm:mx-6 sm:my-4 ">
         <form onSubmit={formik.handleSubmit} className="text-center">
           {authState == authStateTypes.signup && (
             <div>
               <label htmlFor="name" className="flex items-center gap-4">
-                <p>User name</p>
+                <p className="text-base sm:text-2xl">User name</p>
                 {formik.touched.name && formik.errors.name ? (
                   <div className="text-lg text-rose-400	text-center">
                     {"{ "}
@@ -154,7 +153,7 @@ export default function Signup(props) {
                 ) : null}
               </label>
               <input
-                className=" auth-form-input font-sans"
+                className=" auth-form-input font-sans text-base sm:text-lg"
                 placeholder="Who are you in this magical realm?"
                 id="name"
                 name="name"
@@ -166,7 +165,7 @@ export default function Signup(props) {
           )}
           <div>
             <label htmlFor="emailId" className="flex items-center gap-4">
-              <p>Email Address</p>
+              <p className="text-base sm:text-2xl">Email Address</p>
               {formik.touched.emailId && formik.errors.emailId ? (
                 <div className="text-lg text-rose-400	text-center">
                   {"{ "} {formik.errors.emailId} {" }"}
@@ -174,7 +173,7 @@ export default function Signup(props) {
               ) : null}
             </label>
             <input
-              className=" auth-form-input font-sans"
+              className=" auth-form-input font-sans text-base sm:text-lg"
               id="emailId"
               name="emailId"
               placeholder="Where should the forest owls send your messages?"
@@ -185,7 +184,7 @@ export default function Signup(props) {
           </div>
           <div>
             <label htmlFor="password" className="flex items-center gap-4">
-              <p>Password</p>
+              <p className="text-base sm:text-2xl">Password</p>
               {formik.touched.password && formik.errors.password ? (
                 <div className="text-lg text-rose-400	text-center">
                   {"{ "}
@@ -195,7 +194,7 @@ export default function Signup(props) {
               ) : null}
             </label>{" "}
             <input
-              className=" auth-form-input font-sans"
+              className=" auth-form-input font-sans text-base sm:text-lg "
               id="password"
               name="password"
               type="password"
@@ -211,7 +210,7 @@ export default function Signup(props) {
           ) : (
             <button
               type="submit"
-              className={`text-center ${
+              className={`text-center text-base sm:text-xl ${
                 Object.keys(formik.errors).length > 0
                   ? "text-slate-700 opacity-30 none"
                   : "opacity-100 none "

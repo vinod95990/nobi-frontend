@@ -6,7 +6,7 @@ export default function SignupHome() {
   return (
     <AccessAuthPage>
       <div
-        className="grid w-40 grid-cols-2 h-fit"
+        className="sm:grid  sm:grid-cols-2 h-fit"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
@@ -16,7 +16,7 @@ export default function SignupHome() {
         }}
       >
         <div
-          className=" flex items-center justify-center "
+          className=" sm:flex items-center justify-center hidden"
           style={{
             position: "relative",
             background: "#16171c",
@@ -26,7 +26,7 @@ export default function SignupHome() {
         </div>
 
         {/* FORM */}
-        <div className="flex items-center justify-center doodle-img-container bg-[#16171c]">
+        <div className="w-dvw sm:w-full flex items-center justify-center doodle-img-container bg-[#16171c]">
           <Signup />
         </div>
       </div>
