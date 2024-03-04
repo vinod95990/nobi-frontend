@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const base_url = "https://nobi-backend.vercel.app/nobi";
-const base_url = "http://localhost:8081/nobi";
+const base_url = "https://nobi-backend.vercel.app/nobi";
+// const base_url = "http://localhost:8081/nobi";
 
 export default class NobiServices {
   static async getAllFolders(payload) {
