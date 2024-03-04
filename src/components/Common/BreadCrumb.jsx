@@ -46,7 +46,7 @@ export default function BreadCrumb(props) {
             ></img>
             <p
               key={data._id}
-              className={`text-lg ${
+              className={`text-sm sm:text-lg ${
                 parentData.length == index + 1
                   ? "text-[#7152E1]"
                   : "text-[#16171c]"

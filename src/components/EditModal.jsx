@@ -75,12 +75,18 @@ export default function EditModal(props) {
         e.stopPropagation();
       }}
     >
-      <div className="add-modal">
+      <div className="add-modal  w-3/4  sm:w-1/2">
         <div
           className="absolute -top-0 -right-0  cursor-pointer   rounded-md"
           onClick={handleCloseModal}
         >
-          <img src="/icons/close.png" alt="close" width={35} height={35}></img>
+          <img
+            src="/icons/x-square-bold.svg"
+            className="bg-white rounded-md"
+            alt="close"
+            width={35}
+            height={35}
+          ></img>
         </div>
         <p
           className="text-[#f4f5f0] text-xl bg-[#3d3266] shiny-text text-center py-3"
@@ -126,7 +132,7 @@ export default function EditModal(props) {
             </div>
           ) : (
             <button
-              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-xl tracking-wide"
+              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer tracking-wide"
               type="submit"
               disabled={
                 formik.isSubmitting || Object.keys(formik.errors).length > 0
@@ -134,7 +140,7 @@ export default function EditModal(props) {
                   : false
               }
             >
-              <p className="text-[#f4f5f0] text-xl">
+              <p className="text-[#f4f5f0] text-sm sm:text-xl">
                 {`Edit ${data.type == nobiDocType.folder ? "Folder" : "Link"}`}{" "}
                 Name
               </p>

@@ -87,7 +87,7 @@ export default function Folders(props) {
     if (res?.data) {
       try {
         await copy(window.location.href);
-        toast.success("Text copied successfully! 🚀", {
+        toast.success("Folder link copied successfully! 🚀", {
           className: "toast-message",
         });
       } catch (err) {
@@ -187,35 +187,35 @@ export default function Folders(props) {
           {selectedItem.type == nobiDocType.folder && (
             <button
               onClick={(e) => handleShareFolder(e)}
-              className="flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+              className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
             >
               <img
                 src="/icons/share-fat-bold.svg"
                 width={20}
-                className="z-10"
+                className="z-10 max-w-full	"
               ></img>
               <p>Share</p>
             </button>
           )}
           <button
             onClick={(e) => handleEdit(e)}
-            className="flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/pencil-simple-bold.svg"
               width={20}
-              className="z-10"
+              className="z-10 max-w-full	"
             ></img>
             <p>Edit</p>
           </button>
           <button
             onClick={() => handleDelete()}
-            className="flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/trash-simple-bold.svg"
               width={20}
-              className="z-10"
+              className="z-10 max-w-full	"
             ></img>
             <p>Delete</p>
           </button>
@@ -226,7 +226,7 @@ export default function Folders(props) {
           return data.type == nobiDocType.folder ? (
             <div
               key={index}
-              className="doodle-folder  p-3 flex items-center gap-3 cursor-pointer"
+              className="doodle-folder  p-2 sm:p-3 flex items-center gap-3 cursor-pointer text-base sm:text-xl"
               style={{
                 width: "160px",
                 position: "relative",
@@ -235,16 +235,20 @@ export default function Folders(props) {
               onClick={() => handleFolderNavigation(data._id)}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <img src="/icons/folder-bold.svg" width={30}></img>
+              <img
+                src="/icons/folder-bold.svg"
+                width={30}
+                className="max-w-full	"
+              ></img>
 
-              <p className="text-[#3d3266]">{data.name}</p>
+              <p className="text-[#3d3266]  overflow-hidden	">{data.name}</p>
             </div>
           ) : (
             <a
               key={index}
               href={data?.link || undefined}
               target="_blank"
-              className="doodle-link  p-3 flex gap-3 items-center"
+              className="doodle-link p-2 sm:p-3 flex gap-3 items-center text-base sm:text-xl"
               style={{
                 width: "280px",
                 gridColumnEnd: "span 2",
@@ -253,8 +257,12 @@ export default function Folders(props) {
               }}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <img src="/icons/link-simple-bold.svg" width={30}></img>
-              <div className="flex flex-col justify-center flex-wrap">
+              <img
+                src="/icons/link-simple-bold.svg"
+                width={30}
+                className="max-w-full	"
+              ></img>
+              <div className="flex flex-col justify-center flex-wrap overflow-hidden	">
                 <p className="text-[#3d3266] ">{data.name}</p>
                 <p className="text-sm text-[#7152E1] ">
                   {data?.link

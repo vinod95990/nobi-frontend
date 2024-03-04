@@ -30,7 +30,7 @@ export default function Header() {
     }
   }
   return (
-    <div className="header flex items-center justify-between text-sm font-regular relative p-4 bg-[#3d3266]">
+    <div className="relative flex items-center justify-between text-sm font-regular p-4 bg-[#3d3266] sm:bg-transparent">
       <div className="header-wave">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
@@ -41,15 +41,15 @@ export default function Header() {
         </svg>
       </div>
 
-      <div className=" text-2xl lowercase font-sans font-bold text-[#fff] shiny-text">
+      <div className=" text-lg sm:text-2xl lowercase font-sans font-bold text-[#fff] shiny-text">
         nobi.
       </div>
       <div>
-        <img src="nobi-logo.png" width={40}></img>
+        <img src="nobi-logo.png" width={40} className=" w-6 sm:w-10"></img>
       </div>
       <div className="flex items-center cursor-pointer ">
         <p
-          className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text"
+          className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-lg"
           onClick={handleLogout}
         >
           Logout

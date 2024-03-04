@@ -104,3 +104,14 @@
   background-color: #3d3266;
   transition: all 0.2s ease-in-out;
 }
+
+@media screen and (max-width: 768px) {
+  .doodle-link,
+  .doodle-folder,
+  .doodle-folder::after,
+  .doodle-folder::before,
+  .doodle-link::after,
+  .doodle-link::before {
+    width: 100%; /* Set width to 50% on smaller screens */
+  }
+}

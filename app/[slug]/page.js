@@ -138,20 +138,20 @@ export default function Home({ params }) {
           opacity: addModalType || openEditModal ? 0.12 : 1,
         }}
       >
-        <div className="flex items-center justify-end gap-4 text-sm p-4  w-9/12 mb-4">
+        <div className="flex items-center justify-center sm:justify-end gap-4 text-sm p-4  w-9/12 mb-4">
           <button
             disabled={addModalType || openEditModal ? true : false}
             style={{
               opacity: addModalType || openEditModal ? 0.12 : 1,
             }}
-            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-xl tracking-wide	"
+            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-base sm:text-xl tracking-wide	"
             onClick={() => handleAddModal(nobiDocType.folder)}
           >
             <p>Add Folder</p>
           </button>
           <button
             disabled={addModalType || openEditModal ? true : false}
-            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-xl tracking-wide	"
+            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-base sm:text-xl tracking-wide	"
             onClick={() => handleAddModal(nobiDocType.link)}
             style={{
               opacity: addModalType ? 0.12 : 1,

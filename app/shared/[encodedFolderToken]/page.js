@@ -1,7 +1,6 @@
 "use client";
 
 import Folders from "@/src/components/Common/Folders";
-import "./sharedFolder.css";
 import NobiServices from "@/src/services/nobiServices";
 import "../../home.css";
 import { useEffect, useState } from "react";
@@ -65,7 +64,7 @@ export default function Home({ params }) {
   async function handleCopy() {
     try {
       await copy(window.location.href);
-      toast.success("Text copied successfully! 🚀", {
+      toast.success("Folder link copied successfully! 🚀", {
         className: "toast-message",
       });
     } catch (err) {
@@ -87,19 +86,19 @@ export default function Home({ params }) {
         <img
           src="../../nobi-logo.png"
           width={40}
-          className=" cursor-pointer"
+          className=" cursor-pointer w-6 sm:w-10"
         ></img>
       </div>
 
       <div className="m-8 text-[#3d3266]">
         <div className="flex items-center  justify-center gap-5 ">
-          <h1 className="text-center text-5xl ">
+          <h1 className="text-center text-3xl sm:text-5xl ">
             {queryData?.data?.data?.folderName || "Shared Nobis"}
           </h1>
         </div>
-        <p className="text-center text-lg mt-3 mb-6 font-mono">
+        <p className="text-center text-sm sm:text-lg mt-2  mb-6  font-mono">
           Shared with you by
-          <span className="text-[#ff7575] text-lg font-mono font-extrabold">
+          <span className="text-[#ff7575] text-base sm:text-lg font-mono font-extrabold">
             {queryData?.data?.data?.createdBy
               ? ` ${queryData?.data?.data?.createdBy}`
               : " a Nobi warrior"}
@@ -114,7 +113,7 @@ export default function Home({ params }) {
             <img
               src="../../icons/copy.svg"
               width={30}
-              className=" cursor-pointer"
+              className=" cursor-pointer max-w-full"
             ></img>
           </div>
         </div>
@@ -127,7 +126,7 @@ export default function Home({ params }) {
         </div>
       </div>
       <p
-        class="transform -rotate-90 hover:bg-[#3d3266] border-2 text-[#3d3266] transition-colors cursor-pointer border-[#3d3266] text-2xl hover:shiny-text hover:text-white w-fit p-3 rounded-xl absolute bottom-1/3 left-0"
+        class="transform -rotate-90 hover:bg-[#3d3266] border-2 text-[#3d3266] transition-colors cursor-pointer border-[#3d3266] text-base sm:text-2xl hover:shiny-text hover:text-white w-fit p-3 rounded-xl absolute bottom-1/3 left-0"
         onClick={() => redirectToNobi()}
       >
         Be a Nobi

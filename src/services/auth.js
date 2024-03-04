@@ -1,7 +1,7 @@
 import axios from "axios";
-const base_url = "https://nobi-backend.vercel.app";
+// const base_url = "https://nobi-backend.vercel.app";
 
-// const base_url = "http://localhost:8081";
+const base_url = "http://localhost:8081";
 
 export default class AuthService {
   static async signup(payload) {

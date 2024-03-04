@@ -17,7 +17,7 @@ export default function Socials() {
     },
   ];
   return (
-    <div className="flex flex-col items-center gap-5 justify-center   bottom-0 right-4 fixed">
+    <div className="flex sm:flex-col items-center gap-5 justify-center  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:fixed">
       {linkToIconMap.map((data) => {
         return (
           <a
@@ -27,11 +27,11 @@ export default function Socials() {
             rel="noopener noreferrer"
             className=" cursor-pointer hover:border-y-4 transition-colors"
           >
-            <img width={30} src={data.src}></img>
+            <img width={30} className="max-w-full" src={data.src}></img>
           </a>
         );
       })}
-      <p className="h-16    w-1 bg-[#3d3266]"></p>
+      <p className="h-16  hidden sm:block w-1 bg-[#3d3266]"></p>
     </div>
   );
 }

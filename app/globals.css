@@ -68,6 +68,15 @@ input::selection {
   text-align: start;
 }
 
+@media screen and (max-width: 768px) {
+  .toast-message {
+    font-size: 14px;
+    width: 100%; /* Set width to 100% on smaller screens */
+    max-width: 90%; /* Optionally, limit the maximum width */
+    margin: 0 auto; /* Center the toast message horizontally */
+  }
+}
+
 .doodle-white {
   position: relative;
   padding: 4px 12px;

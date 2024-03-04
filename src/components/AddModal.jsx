@@ -108,7 +108,7 @@ export default function AddModal(props) {
 
   return type == nobiDocType.folder ? (
     <div className=" parent-addModal">
-      <div className="add-modal">
+      <div className="add-modal w-3/4  sm:w-1/2 ">
         <div
           className="absolute -top-0 -right-0  cursor-pointer   rounded-md"
           onClick={handleCloseModal}
@@ -165,7 +165,7 @@ export default function AddModal(props) {
             </div>
           ) : (
             <button
-              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-xl tracking-wide"
+              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer tracking-wide"
               type="submit"
               disabled={
                 folderForm.isSubmitting ||
@@ -174,7 +174,7 @@ export default function AddModal(props) {
                   : false
               }
             >
-              <p className="text-[#f4f5f0] text-xl">Add Folder</p>
+              <p className="text-[#f4f5f0] text-sm sm:text-xl ">Add Folder</p>
             </button>
           )}
         </form>
@@ -182,7 +182,7 @@ export default function AddModal(props) {
     </div>
   ) : (
     <div className=" parent-addModal">
-      <div className="add-modal">
+      <div className="add-modal  w-3/4  sm:w-1/2">
         <div
           className="absolute -top-0 -right-0   rounded-md"
           onClick={handleCloseModal}
