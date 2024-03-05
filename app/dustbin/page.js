@@ -95,6 +95,16 @@ export default function Home({ params }) {
           />
         </div>
       </div>
+
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#3d3266] opacity-25 flex  items-center  justify-center gap-3 ">
+        <h1 className="text-center text-base sm:text-xl ">
+          Nobi Fox will magically tidy up and clear data every Sunday!{" "}
+        </h1>
+        <img
+          src="../../icons/broom.svg"
+          className=" cursor-pointer w-5 sm:w-10"
+        ></img>
+      </div>
     </div>
   );
 }

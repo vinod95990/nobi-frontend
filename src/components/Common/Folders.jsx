@@ -374,7 +374,7 @@ export default function Folders(props) {
           );
         })
       ) : (
-        <p className="text-[#3d3266] text-3xl font-medium">[ NO DATA ]</p>
+        <p className="text-[#3d3266] text-3xl font-medium">[ EMPTY ]</p>
       )}
     </div>
   );
