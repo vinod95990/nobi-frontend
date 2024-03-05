@@ -68,7 +68,7 @@ export default function Home({ params }) {
         <div className="flex items-center justify-center  gap-5">
           <div className="flex  items-baseline  justify-center gap-3 ">
             <h1 className="text-center text-2xl sm:text-4xl ">
-              Pixie's Dustbin
+              Pixie&apos;s Dustbin
             </h1>
             <img
               src="../../icons/sparkle.svg"
