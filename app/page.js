@@ -8,7 +8,7 @@ import { navigationTabs } from "@/src/constants/navigation";
 import SearchBar from "@/src/components/Common/SearchBar";
 import Folders from "@/src/components/Common/Folders";
 import AddModal from "@/src/components/AddModal";
-import { nobiDocType } from "@/src/constants/NobiConstants";
+import { nobiDocType, pageTypes } from "@/src/constants/NobiConstants";
 import BreadCrumb from "@/src/components/Common/BreadCrumb";
 import EditModal from "@/src/components/EditModal";
 import { toast } from "react-toastify";
@@ -59,12 +59,6 @@ export default function Home() {
           className: "toast-message",
         });
         return;
-      }
-
-      if (data) {
-        toast.success(data?.message, {
-          className: "toast-message",
-        });
       }
     }
   }, [queryData, router]);
@@ -164,9 +158,9 @@ export default function Home() {
           setSelectedItem={setSelectedItem}
           setOpenEditModal={setOpenEditModal}
           isLoading={isLoading}
+          pageType={pageTypes.mainFolder}
         />
       </div>
-      <Socials />
     </div>
   );
 }

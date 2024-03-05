@@ -61,12 +61,9 @@ export default function AddModal(props) {
       });
       return null;
     }
-    if (res?.data) {
-      toast.success(res?.data?.message, {
-        className: "toast-message",
-      });
-    }
-    queryClient.invalidateQueries("getAllFolders");
+
+    queryClient.invalidateQueries();
+
     handleCloseModal();
   }
 
@@ -89,12 +86,9 @@ export default function AddModal(props) {
       });
       return;
     }
-    if (res?.data) {
-      toast.success(res?.data?.message, {
-        className: "toast-message",
-      });
-    }
-    queryClient.invalidateQueries("getAllFolders");
+
+    queryClient.invalidateQueries();
+
     handleCloseModal();
   }
 

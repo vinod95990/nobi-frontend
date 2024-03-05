@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import copy from "clipboard-copy";
+import { pageTypes } from "@/src/constants/NobiConstants";
 
 export default function Home({ params }) {
   const { encodedFolderToken } = params;
@@ -48,12 +49,6 @@ export default function Home({ params }) {
         });
         return;
       }
-
-      if (data) {
-        toast.success(data?.message, {
-          className: "toast-message",
-        });
-      }
     }
   }, [queryData, router]);
 
@@ -80,7 +75,7 @@ export default function Home({ params }) {
   return (
     <div className=" text-5xl w-full  ">
       <div
-        className="p-4 bg-[#3d3266] flex items-center justify-center"
+        className="p-4 flex items-center justify-center"
         onClick={() => redirectToNobi()}
       >
         <img
@@ -88,6 +83,15 @@ export default function Home({ params }) {
           width={40}
           className=" cursor-pointer w-6 sm:w-10"
         ></img>
+        <div className="header-wave">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path
+              fill="#3d3266"
+              fillOpacity="1"
+              d="M0,128L40,128C80,128,160,128,240,117.3C320,107,400,85,480,64C560,43,640,21,720,37.3C800,53,880,107,960,144C1040,181,1120,203,1200,202.7C1280,203,1360,181,1400,170.7L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
+            ></path>
+          </svg>
+        </div>
       </div>
 
       <div className="m-8 text-[#3d3266]">
@@ -121,7 +125,7 @@ export default function Home({ params }) {
           <Folders
             folderData={queryData?.data?.data?.links}
             isLoading={isLoading}
-            sharedFolder={true}
+            pageType={pageTypes.sharedFolder}
           />
         </div>
       </div>
@@ -131,7 +135,6 @@ export default function Home({ params }) {
       >
         Be a Nobi
       </p>
-      <Socials />
     </div>
   );
 }

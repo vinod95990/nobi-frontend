@@ -50,13 +50,8 @@ export default function EditModal(props) {
       });
       return null;
     }
-    if (res?.data) {
-      toast.success(res?.data?.message, {
-        className: "toast-message",
-      });
-    }
-    queryClient.invalidateQueries("getAllFolders");
 
+    queryClient.invalidateQueries();
     handleCloseModal();
   }
 

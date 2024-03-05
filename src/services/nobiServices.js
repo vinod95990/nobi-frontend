@@ -4,6 +4,10 @@ const base_url = "https://nobi-backend.vercel.app/nobi";
 // const base_url = "http://localhost:8081/nobi";
 
 export default class NobiServices {
+  static PUSH_TO_RECYCLE_BIN = `${base_url}/pushToRecycleBin`;
+  static GET_RECYCLE_BIN_DATA = `${base_url}/getRecycleBinData`;
+  static RESTORE_FROM_BIN = `${base_url}/restoreRecycledData`;
+
   static async getAllFolders(payload) {
     let { type, searchedString } = payload;
 
@@ -58,6 +62,26 @@ export default class NobiServices {
         error:
           error?.response?.data?.message ||
           "Oops! Something went wrong while fetching data. Please try again later.",
+      };
+    }
+  }
+
+  static async getRecycleBinData() {
+    try {
+      const res = await axios.get(this.GET_RECYCLE_BIN_DATA, {
+        withCredentials: true,
+      });
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while getting from recycle bin. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
       };
     }
   }
@@ -192,6 +216,50 @@ export default class NobiServices {
         error:
           error?.response?.data?.message ||
           "Oops! Something went wrong while updating link. Please try again later.",
+      };
+    }
+  }
+
+  static async pushToRecycleBin(payload) {
+    const { docId } = payload;
+    try {
+      const res = await axios.patch(this.PUSH_TO_RECYCLE_BIN, null, {
+        params: { docId },
+        withCredentials: true,
+      });
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while deleting. Please try again later.",
+      };
+    }
+  }
+
+  static async restoreFromBin(payload) {
+    const { docId } = payload;
+    try {
+      const res = await axios.patch(this.RESTORE_FROM_BIN, null, {
+        params: { docId },
+        withCredentials: true,
+      });
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while restoring. Please try again later.",
       };
     }
   }

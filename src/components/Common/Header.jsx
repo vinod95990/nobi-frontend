@@ -29,6 +29,14 @@ export default function Header() {
       router.push("/guard-gate");
     }
   }
+
+  function redirectToNobi() {
+    router.push("/");
+  }
+
+  function toDustbin() {
+    router.push("/dustbin");
+  }
   return (
     <div className="relative flex items-center justify-between text-sm font-regular p-4 bg-[#3d3266] sm:bg-transparent">
       <div className="header-wave">
@@ -41,15 +49,32 @@ export default function Header() {
         </svg>
       </div>
 
-      <div className=" text-lg sm:text-2xl lowercase font-sans font-bold text-[#fff] shiny-text">
+      <div
+        className=" text-lg sm:text-2xl lowercase font-sans font-bold text-[#fff] shiny-text cursor-pointer"
+        onClick={() => redirectToNobi()}
+      >
         nobi.
       </div>
       <div>
-        <img src="nobi-logo.png" width={40} className=" w-6 sm:w-10"></img>
+        <img
+          src="nobi-logo.png"
+          width={40}
+          className="cursor-pointer w-6 sm:w-10"
+          onClick={() => redirectToNobi()}
+        ></img>
       </div>
-      <div className="flex items-center cursor-pointer ">
+      <div className="flex items-center cursor-pointer gap-5">
         <p
-          className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-lg"
+          className="p-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-base"
+          onClick={toDustbin}
+        >
+          <img
+            src="icons/trash-simple-bold.svg"
+            className=" cursor-pointer w-4 sm:w-6 bg-white"
+          ></img>
+        </p>
+        <p
+          className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-base"
           onClick={handleLogout}
         >
           Logout

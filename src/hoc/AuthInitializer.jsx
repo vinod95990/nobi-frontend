@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addUserDetail } from "../slices/authSlice";
 import AuthService from "../services/auth";
+import Socials from "../components/Common/Socials";
 
 export default function AuthInitializer({ children }) {
   const dispatch = useDispatch();
@@ -24,5 +25,10 @@ export default function AuthInitializer({ children }) {
     me();
   }, [dispatch]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <Socials />
+    </>
+  );
 }

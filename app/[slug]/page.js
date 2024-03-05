@@ -4,7 +4,7 @@ import AddModal from "@/src/components/AddModal";
 import Folders from "@/src/components/Common/Folders";
 import Header from "@/src/components/Common/Header";
 import SearchBar from "@/src/components/Common/SearchBar";
-import { nobiDocType } from "@/src/constants/NobiConstants";
+import { nobiDocType, pageTypes } from "@/src/constants/NobiConstants";
 import NobiServices from "@/src/services/nobiServices";
 import "../home.css";
 import { useEffect, useState } from "react";
@@ -65,12 +65,6 @@ export default function Home({ params }) {
           className: "toast-message",
         });
         return;
-      }
-
-      if (data) {
-        toast.success(data?.message, {
-          className: "toast-message",
-        });
       }
     }
   }, [queryData, router]);
@@ -172,9 +166,9 @@ export default function Home({ params }) {
           setSelectedItem={setSelectedItem}
           setOpenEditModal={setOpenEditModal}
           isLoading={isLoading}
+          pageType={pageTypes.mainFolder}
         />
       </div>
-      <Socials />
     </div>
   );
 }

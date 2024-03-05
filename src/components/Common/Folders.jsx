@@ -1,4 +1,4 @@
-import { nobiDocType } from "@/src/constants/NobiConstants";
+import { nobiDocType, pageTypes } from "@/src/constants/NobiConstants";
 import { useEffect, useState } from "react";
 import "./Folder.css";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ export default function Folders(props) {
     setOpenEditModal,
     setSelectedItem,
     isLoading,
-    sharedFolder,
+    pageType,
   } = props;
   const queryClient = useQueryClient();
 
@@ -33,9 +33,6 @@ export default function Folders(props) {
   }
 
   function handleRightClick(event, item) {
-    if (sharedFolder) {
-      return;
-    }
     event.preventDefault();
     const containerRect = event.currentTarget.getBoundingClientRect();
     // const scrollX = window.scrollX || window.pageXOffset;
@@ -50,15 +47,13 @@ export default function Folders(props) {
   }
 
   async function handleEdit(e) {
-    //sharedfolder -> true, jab yeh folder compeontn is used in voh shared page toh events wagera nhi hone chahiye vo links pe
-    if (sharedFolder) {
-      return;
+    if (pageType == pageTypes.mainFolder) {
+      e.stopPropagation();
+      if (!selectedItem) {
+        return;
+      }
+      setOpenEditModal(true);
     }
-    e.stopPropagation();
-    if (!selectedItem) {
-      return;
-    }
-    setOpenEditModal(true);
   }
 
   async function handleShareFolder(e) {
@@ -103,9 +98,6 @@ export default function Folders(props) {
   }
 
   async function handleDelete() {
-    if (sharedFolder) {
-      return;
-    }
     if (!selectedItem) {
       return;
     }
@@ -150,14 +142,134 @@ export default function Folders(props) {
         });
         return null;
       }
-
-      if (data) {
-        toast.success(data?.message, {
-          className: "toast-message",
-        });
-      }
     }
-    queryClient.invalidateQueries("getAllFolders");
+
+    queryClient.invalidateQueries();
+  }
+
+  async function pushToRecycleBin() {
+    if (!selectedItem) {
+      return;
+    }
+    const { data, error, unauthorized } = await NobiServices.pushToRecycleBin({
+      docId: selectedItem._id,
+    });
+    if (unauthorized) {
+      toast.info("Please login again!", {
+        className: "toast-message",
+      });
+      router.push("/guard-gate");
+    }
+
+    if (error) {
+      toast.error(error, {
+        className: "toast-message",
+      });
+      return null;
+    }
+
+    queryClient.invalidateQueries();
+  }
+
+  async function restoreFromBin() {
+    if (!selectedItem) {
+      return;
+    }
+    const { data, error, unauthorized } = await NobiServices.restoreFromBin({
+      docId: selectedItem._id,
+    });
+
+    if (unauthorized) {
+      toast.info("Please login again!", {
+        className: "toast-message",
+      });
+      router.push("/guard-gate");
+    }
+
+    if (error) {
+      toast.error(error, {
+        className: "toast-message",
+      });
+      return null;
+    }
+
+    queryClient.invalidateQueries();
+  }
+
+  function righClickMenus() {
+    if (pageType == pageTypes.sharedFolder) {
+      return <></>;
+    }
+
+    if (pageType == pageTypes.dustbin) {
+      return (
+        <>
+          <button
+            onClick={(e) => restoreFromBin(e)}
+            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          >
+            <img
+              src="/icons/magic-wand.svg"
+              width={20}
+              className="z-10 max-w-full	"
+            ></img>
+            <p>Restore</p>
+          </button>
+
+          <button
+            onClick={() => handleDelete()}
+            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          >
+            <img
+              src="/icons/trash-simple-bold.svg"
+              width={20}
+              className="z-10 max-w-full	"
+            ></img>
+            <p>Delete</p>
+          </button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {selectedItem.type == nobiDocType.folder && (
+          <button
+            onClick={(e) => handleShareFolder(e)}
+            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          >
+            <img
+              src="/icons/share-fat-bold.svg"
+              width={20}
+              className="z-10 max-w-full	"
+            ></img>
+            <p>Share</p>
+          </button>
+        )}
+        <button
+          onClick={(e) => handleEdit(e)}
+          className="text-lg sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+        >
+          <img
+            src="/icons/pencil-simple-bold.svg"
+            width={20}
+            className="z-10 max-w-full	"
+          ></img>
+          <p>Edit</p>
+        </button>
+        <button
+          onClick={() => pushToRecycleBin()}
+          className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+        >
+          <img
+            src="/icons/trash-simple-bold.svg"
+            width={20}
+            className="z-10 max-w-full	"
+          ></img>
+          <p>Delete</p>
+        </button>
+      </>
+    );
   }
 
   if (isLoading) {
@@ -170,12 +282,13 @@ export default function Folders(props) {
 
   return (
     <div
-      className="flex flex-wrap  gap-5  text-[#16171c] text-xl w-9/12  pb-24"
+      className="flex flex-wrap  items-center gap-5  text-[#16171c] text-xl w-9/12  pb-24"
       style={{
         zIndex: 5,
       }}
     >
-      {!sharedFolder && selectedItem && (
+      {/* right click pe jo context menu ata hai */}
+      {selectedItem && (
         <div
           className="w-32 absolute z-1000 bg-[#f4f5f0] border-2 rounded-md border-[#3d3266] p-3 flex flex-col gap-3 "
           style={{
@@ -184,41 +297,7 @@ export default function Folders(props) {
             zIndex: "20",
           }}
         >
-          {selectedItem.type == nobiDocType.folder && (
-            <button
-              onClick={(e) => handleShareFolder(e)}
-              className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
-            >
-              <img
-                src="/icons/share-fat-bold.svg"
-                width={20}
-                className="z-10 max-w-full	"
-              ></img>
-              <p>Share</p>
-            </button>
-          )}
-          <button
-            onClick={(e) => handleEdit(e)}
-            className="text-lg sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
-          >
-            <img
-              src="/icons/pencil-simple-bold.svg"
-              width={20}
-              className="z-10 max-w-full	"
-            ></img>
-            <p>Edit</p>
-          </button>
-          <button
-            onClick={() => handleDelete()}
-            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
-          >
-            <img
-              src="/icons/trash-simple-bold.svg"
-              width={20}
-              className="z-10 max-w-full	"
-            ></img>
-            <p>Delete</p>
-          </button>
+          {righClickMenus()}
         </div>
       )}
       {folderData?.length >= 1 ? (
@@ -295,7 +374,7 @@ export default function Folders(props) {
           );
         })
       ) : (
-        <p className="text-[#3d3266] text-3xl">[ NO DATA ]</p>
+        <p className="text-[#3d3266] text-3xl font-medium">[ NO DATA ]</p>
       )}
     </div>
   );
