@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Nobi | Simply Links Storage",
+  title: "Nobi | Your Links Deserve Better.",
   description:
     "An online links folder where users can organize, share, and manage their links easily.",
 };
