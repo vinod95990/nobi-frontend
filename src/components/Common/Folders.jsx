@@ -34,6 +34,9 @@ export default function Folders(props) {
 
   function handleRightClick(event, item) {
     event.preventDefault();
+    if (pageType == pageTypes.sharedFolder) {
+      return;
+    }
     const containerRect = event.currentTarget.getBoundingClientRect();
     // const scrollX = window.scrollX || window.pageXOffset;
     // const scrollY = window.scrollY || window.pageYOffset;

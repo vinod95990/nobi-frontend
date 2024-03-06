@@ -96,7 +96,7 @@ export default function Home({ params }) {
 
       <div className="m-8 text-[#3d3266]">
         <div className="flex items-center  justify-center gap-5 ">
-          <h1 className="text-center text-3xl sm:text-5xl ">
+          <h1 className="text-center text-3xl sm:text-5xl bg-[#fff] p-2 rounded-md ">
             {queryData?.data?.data?.folderName || "Shared Nobis"}
           </h1>
         </div>
@@ -135,6 +135,7 @@ export default function Home({ params }) {
       >
         Be a Nobi
       </p>
+      <Socials isLoading={isLoading} />
     </div>
   );
 }

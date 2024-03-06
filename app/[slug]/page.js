@@ -169,6 +169,7 @@ export default function Home({ params }) {
           pageType={pageTypes.mainFolder}
         />
       </div>
+      <Socials isLoading={isLoading} />
     </div>
   );
 }

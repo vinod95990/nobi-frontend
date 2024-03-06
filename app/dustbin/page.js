@@ -57,7 +57,7 @@ export default function Home({ params }) {
   }
   return (
     <div
-      className=" text-5xl w-full  "
+      className=" text-5xl w-full relative h-full "
       onClick={(e) => {
         hideContextMenu();
       }}
@@ -78,7 +78,7 @@ export default function Home({ params }) {
           </div>
 
           <p
-            className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-lg"
+            className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-lg cursor-pointer"
             onClick={returnBack}
           >
             Back
@@ -105,6 +105,7 @@ export default function Home({ params }) {
           className=" cursor-pointer w-5 sm:w-10"
         ></img>
       </div>
+      <Socials isLoading={isLoading} />
     </div>
   );
 }
