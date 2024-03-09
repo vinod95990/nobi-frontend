@@ -86,6 +86,54 @@ export default class NobiServices {
     }
   }
 
+  static async getValidFoldersToMove(payload) {
+    const { docId } = payload;
+    try {
+      const res = await axios.get(`${base_url}/validMoveToFolders`, {
+        params: { docId },
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return {
+        data: res?.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while fetching data. Please try again later.",
+      };
+    }
+  }
+
+  static async moveFolder(payload) {
+    const { childId, parentId } = payload;
+    try {
+      const res = await axios.post(`${base_url}/moveFolder`, null, {
+        params: { childId, parentId },
+        withCredentials: true,
+      });
+
+      return {
+        data: res?.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while adding folder. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
+      };
+    }
+  }
+
   static async addFolder(payload) {
     const { parentId = null, name } = payload;
 
