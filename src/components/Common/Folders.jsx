@@ -329,7 +329,7 @@ export default function Folders(props) {
       {/* right click pe jo context menu ata hai */}
       {selectedItem && (
         <div
-          className=" absolute z-1000 bg-[#e4e6df] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1 w-[130px] h-[160px] sm:w-[260px] overflow-auto sm:grid-cols-2 "
+          className=" absolute z-1000 bg-[#e4e6df] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px] sm:h-max overflow-auto  "
           style={{
             top: contextMenuPosition.y,
             left: contextMenuPosition.x,
