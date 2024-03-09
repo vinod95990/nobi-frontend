@@ -39,7 +39,7 @@ input::selection {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f4f5f0;
+  background: #fff;
 }
 
 /* Handle */

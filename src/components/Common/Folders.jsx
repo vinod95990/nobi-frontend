@@ -227,7 +227,7 @@ export default function Folders(props) {
         <>
           <button
             onClick={(e) => restoreFromBin(e)}
-            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/magic-wand.svg"
@@ -239,7 +239,7 @@ export default function Folders(props) {
 
           <button
             onClick={() => handleDelete()}
-            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/trash-simple-bold.svg"
@@ -257,7 +257,7 @@ export default function Folders(props) {
         {selectedItem.type == nobiDocType.folder && (
           <button
             onClick={(e) => handleShareFolder(e)}
-            className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/share-fat-bold.svg"
@@ -269,7 +269,7 @@ export default function Folders(props) {
         )}
         <button
           onClick={(e) => handleEdit(e)}
-          className=" text-lg bg-white sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          className=" text-lg bg-white sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
         >
           <img
             src="/icons/pencil-simple-bold.svg"
@@ -280,7 +280,7 @@ export default function Folders(props) {
         </button>
         <button
           onClick={() => pushToRecycleBin()}
-          className="text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          className="text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
         >
           <img
             src="/icons/trash-simple-bold.svg"
@@ -291,7 +291,7 @@ export default function Folders(props) {
         </button>
         <button
           onClick={(e) => openMoveToModal(e)}
-          className=" text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          className=" text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
         >
           <img
             src="/icons/magic-wand.svg"
@@ -329,7 +329,7 @@ export default function Folders(props) {
       {/* right click pe jo context menu ata hai */}
       {selectedItem && (
         <div
-          className=" absolute z-1000 bg-[#e4e6df] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px] sm:h-max overflow-auto  "
+          className="custom-scrollbar absolute z-1000 bg-[#ff9090] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px]  sm:h-[210px] overflow-auto  "
           style={{
             top: contextMenuPosition.y,
             left: contextMenuPosition.x,
@@ -337,6 +337,25 @@ export default function Folders(props) {
           }}
         >
           {righClickMenus()}
+          <style>
+            {`
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;  
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #ffb8b8;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #fff;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #7152e1;
+      }
+    `}
+          </style>
         </div>
       )}
       {folderData?.length >= 1 ? (
