@@ -18,7 +18,7 @@ export default function Socials(props) {
     },
   ];
   return (
-    <div className="absolute w-fit bottom-0 left-1/2 transform -translate-x-1/2 flex sm:flex-col items-center gap-5 justify-center sm:ml-auto  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:transform-none   sm:fixed">
+    <div className="absolute w-fit bottom-0 left-1/2 transform -translate-x-1/2 flex sm:flex-col items-center gap-5 justify-center sm:ml-auto  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:transform-none   sm:fixed z-50">
       {isLoading ? (
         <></>
       ) : (
