@@ -1,8 +1,7 @@
 import "./SearchBar.css";
 
 export default function SearchBar(props) {
-  const { handleSearchClick, handleSearchedStringChange, searchedString } =
-    props;
+  const { handleSearchClick, handleSearchedStringChange } = props;
   return (
     <div
       className="flex items-center justify-center p-4 py-8 "

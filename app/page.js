@@ -13,20 +13,29 @@ import BreadCrumb from "@/src/components/Common/BreadCrumb";
 import EditModal from "@/src/components/EditModal";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
-import debounce from "lodash.debounce";
 import Socials from "@/src/components/Common/Socials";
+import MoveToModal from "@/src/components/MoveToModal";
+import useNobi from "@/src/hooks/useNobi";
 
 export default function Home() {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState(navigationTabs[0]);
-  const [addModalType, setAddModalType] = useState(null);
-  // vo right clci kkare folder pe edit delete open karate vo item hai, yahn isiliye hai ki banda bhar kahi click kare
-  // uske toh vo band hojaye
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [openEditModal, setOpenEditModal] = useState(null);
-  const [searchedString, setSearchedString] = useState("");
-
+  const {
+    selectedItem,
+    setSelectedItem,
+    openEditModal,
+    setOpenEditModal,
+    moveToModal,
+    setMoveToModal,
+    searchedString,
+    addModalType,
+    setAddModalType,
+    handleAddModal,
+    hideContextMenu,
+    openMoveToModal,
+    debouncedHandleSearchedString,
+    handleSearchClick,
+  } = useNobi();
   const {
     data: queryData,
     isLoading,
@@ -35,11 +44,11 @@ export default function Home() {
   } = useQuery({
     queryKey: [
       `getAllFolders`,
-      { type: activeTab, searchedString: searchedString || undefined },
+      { type: navigationTabs[0], searchedString: searchedString || undefined },
     ],
     queryFn: () =>
       NobiServices.getAllFolders({
-        type: activeTab,
+        type: navigationTabs[0],
         searchedString: searchedString || "",
       }),
   });
@@ -63,28 +72,6 @@ export default function Home() {
     }
   }, [queryData, router]);
 
-  function handleAddModal(type) {
-    setAddModalType(type);
-  }
-
-  function hideContextMenu() {
-    setSelectedItem(null);
-  }
-
-  function handleSearchedStringChange(e) {
-    e.preventDefault();
-    setSearchedString(e.target.value?.trim());
-  }
-
-  const debouncedHandleSearchedString = debounce(
-    handleSearchedStringChange,
-    800
-  );
-
-  async function handleSearchClick() {
-    await refetch();
-  }
-
   return (
     <div
       className=" text-5xl    w-full   home-page relative"
@@ -94,21 +81,19 @@ export default function Home() {
     >
       <div
         style={{
-          opacity: addModalType || openEditModal ? 0.12 : 1,
+          opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
         }}
       >
         <Header />
       </div>
       <div
         style={{
-          opacity: addModalType || openEditModal ? 0.12 : 1,
+          opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
         }}
       >
         <SearchBar
           handleSearchClick={handleSearchClick}
           handleSearchedStringChange={debouncedHandleSearchedString}
-          setSearchedString={setSearchedString}
-          searchedString={searchedString}
         />
       </div>
 
@@ -118,12 +103,19 @@ export default function Home() {
         openEditModal={openEditModal}
         setOpenEditModal={setOpenEditModal}
       />
+      {moveToModal && selectedItem && (
+        <MoveToModal
+          setMoveToModal={setMoveToModal}
+          selectedItem={selectedItem}
+          hideContextMenu={hideContextMenu}
+        />
+      )}
 
       <div
         className="flex justify-center flex-col items-center p-4 w-full my-3 "
         style={{
           zIndex: "5",
-          opacity: addModalType || openEditModal ? 0.12 : 1,
+          opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
         }}
       >
         <div className="flex items-center justify-center sm:justify-end gap-4 text-sm p-4  w-9/12 mb-4">
@@ -142,7 +134,7 @@ export default function Home() {
             className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer  text-base sm:text-xl  tracking-wide	"
             onClick={() => handleAddModal(nobiDocType.link)}
             style={{
-              opacity: addModalType || openEditModal ? 0.3 : 1,
+              opacity: addModalType || openEditModal || moveToModal ? 0.3 : 1,
             }}
           >
             <p>Add Link</p>
@@ -159,6 +151,8 @@ export default function Home() {
           setOpenEditModal={setOpenEditModal}
           isLoading={isLoading}
           pageType={pageTypes.mainFolder}
+          setMoveToModal={setMoveToModal}
+          openMoveToModal={openMoveToModal}
         />
       </div>
       <Socials isLoading={isLoading} />

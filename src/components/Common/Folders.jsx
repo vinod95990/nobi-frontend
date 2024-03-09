@@ -17,9 +17,10 @@ export default function Folders(props) {
     setSelectedItem,
     isLoading,
     pageType,
+    openMoveToModal,
   } = props;
   const queryClient = useQueryClient();
-
+  const [minorLoading, setMinorLoading] = useState(false);
   const router = useRouter();
   const [contextMenuPosition, setContextMenuPosition] = useState({
     x: 0,
@@ -29,6 +30,12 @@ export default function Folders(props) {
     folderData?.length > 2 ? folderData?.length - 2 : folderData?.length;
 
   function handleFolderNavigation(id) {
+    if (pageType == pageTypes.dustbin) {
+      toast.info("Don't worry! The folder is empty", {
+        className: "toast-message",
+      });
+      return;
+    }
     router.push(`/${id}`);
   }
 
@@ -64,6 +71,7 @@ export default function Folders(props) {
     if (!selectedItem) {
       return;
     }
+    setMinorLoading(true);
     const res = await NobiServices.generateSharedFolderToken({
       folderId: selectedItem?._id,
     });
@@ -96,6 +104,8 @@ export default function Folders(props) {
           }
         );
       }
+      setMinorLoading(false);
+
       router.push(`/shared/${res?.data?.encodedFolderToken}`);
     }
   }
@@ -104,6 +114,7 @@ export default function Folders(props) {
     if (!selectedItem) {
       return;
     }
+    setMinorLoading(true);
 
     if (selectedItem.type == nobiDocType.folder) {
       const { data, error, unauthorized } = await NobiServices.deleteFolder({
@@ -146,6 +157,7 @@ export default function Folders(props) {
         return null;
       }
     }
+    setMinorLoading(false);
 
     queryClient.invalidateQueries();
   }
@@ -154,6 +166,8 @@ export default function Folders(props) {
     if (!selectedItem) {
       return;
     }
+    setMinorLoading(true);
+
     const { data, error, unauthorized } = await NobiServices.pushToRecycleBin({
       docId: selectedItem._id,
     });
@@ -170,6 +184,7 @@ export default function Folders(props) {
       });
       return null;
     }
+    setMinorLoading(false);
 
     queryClient.invalidateQueries();
   }
@@ -178,6 +193,8 @@ export default function Folders(props) {
     if (!selectedItem) {
       return;
     }
+    setMinorLoading(true);
+
     const { data, error, unauthorized } = await NobiServices.restoreFromBin({
       docId: selectedItem._id,
     });
@@ -195,6 +212,7 @@ export default function Folders(props) {
       });
       return null;
     }
+    setMinorLoading(false);
 
     queryClient.invalidateQueries();
   }
@@ -271,6 +289,17 @@ export default function Folders(props) {
           ></img>
           <p>Delete</p>
         </button>
+        <button
+          onClick={(e) => openMoveToModal(e)}
+          className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+        >
+          <img
+            src="/icons/magic-wand.svg"
+            width={20}
+            className="z-10 max-w-full	"
+          ></img>
+          <p>Move</p>
+        </button>
       </>
     );
   }
@@ -287,9 +316,16 @@ export default function Folders(props) {
     <div
       className="flex flex-wrap  items-center gap-5  text-[#16171c] text-xl w-9/12  pb-24"
       style={{
-        zIndex: 5,
+        zIndex: 25,
       }}
     >
+      {minorLoading && (
+        <div className="parent-addModal bg-white  opacity-75 z-50">
+          <div className="w-3/4  sm:w-1/2">
+            <Loader />
+          </div>
+        </div>
+      )}
       {/* right click pe jo context menu ata hai */}
       {selectedItem && (
         <div
@@ -297,7 +333,7 @@ export default function Folders(props) {
           style={{
             top: contextMenuPosition.y,
             left: contextMenuPosition.x,
-            zIndex: "20",
+            zIndex: "100",
           }}
         >
           {righClickMenus()}

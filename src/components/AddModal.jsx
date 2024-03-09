@@ -56,7 +56,7 @@ export default function AddModal(props) {
     }
 
     if (res?.error) {
-      toast.error(error, {
+      toast.error(res?.error, {
         className: "toast-message",
       });
       return null;
@@ -116,7 +116,7 @@ export default function AddModal(props) {
           ></img>
         </div>
         <p
-          className="text-[#f4f5f0] text-xl bg-[#3d3266] shiny-text text-center py-3"
+          className="text-[#fff] text-xl bg-[#3d3266] shiny-text text-center py-3"
           style={{
             borderTopLeftRadius: "16px",
             borderTopRightRadius: "16px",
@@ -158,18 +158,26 @@ export default function AddModal(props) {
               <Loader />
             </div>
           ) : (
-            <button
-              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer tracking-wide"
-              type="submit"
-              disabled={
-                folderForm.isSubmitting ||
-                Object.keys(folderForm.errors).length > 0
-                  ? true
-                  : false
-              }
-            >
-              <p className="text-[#f4f5f0] text-sm sm:text-xl ">Add Folder</p>
-            </button>
+            <div className="w-full flex items-center  gap-2 p-3">
+              <button
+                className="border-2 w-full  rounded-xl border-[#3d3266] bg-[#7152E1] text-[#fff] p-2 hover:bg-[#3d3266] hover:text-[#fff] transition-colors cursor-pointer tracking-wide"
+                type="submit"
+                disabled={
+                  folderForm.isSubmitting ||
+                  Object.keys(folderForm.errors).length > 0
+                    ? true
+                    : false
+                }
+              >
+                <p className="text-[#fff] text-sm sm:text-xl ">Add Folder</p>
+              </button>
+              <button
+                className="border-2 rounded-xl  w-full border-[#3d3266] text-[#3d3266] hover:text-[#fff]  p-2 hover:bg-[#3d3266]  transition-colors cursor-pointer   tracking-wide"
+                onClick={handleCloseModal}
+              >
+                <p className=" text-base sm:text-xl">Cancel</p>
+              </button>
+            </div>
           )}
         </form>
       </div>
@@ -190,7 +198,7 @@ export default function AddModal(props) {
           ></img>
         </div>
         <p
-          className="text-[#f4f5f0] text-xl bg-[#3d3266] shiny-text text-center py-3"
+          className="text-[#fff] text-xl bg-[#3d3266] shiny-text text-center py-3"
           style={{
             borderTopLeftRadius: "16px",
             borderTopRightRadius: "16px",
@@ -256,13 +264,23 @@ export default function AddModal(props) {
               <Loader />
             </div>
           ) : (
-            <button
-              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-xl tracking-wide"
-              type="submit"
-              disabled={Object.keys(linkForm.errors).length > 0 ? true : false}
-            >
-              <p className="text-[#f4f5f0] text-xl">Add Link</p>
-            </button>
+            <div className="w-full flex items-center  gap-2 p-3">
+              <button
+                className="border-2 w-full  rounded-xl border-[#3d3266] bg-[#7152E1] text-[#fff] p-2 hover:bg-[#3d3266] hover:text-[#fff] transition-colors cursor-pointer tracking-wide"
+                type="submit"
+                disabled={
+                  Object.keys(linkForm.errors).length > 0 ? true : false
+                }
+              >
+                <p className="text-[#fff] text-base sm:text-xl">Add Link</p>
+              </button>
+              <button
+                className="border-2 rounded-xl  w-full border-[#3d3266] text-[#3d3266] hover:text-[#fff]  p-2 hover:bg-[#3d3266]  transition-colors cursor-pointer   tracking-wide"
+                onClick={handleCloseModal}
+              >
+                <p className=" text-base sm:text-xl">Cancel</p>
+              </button>
+            </div>
           )}
         </form>
       </div>

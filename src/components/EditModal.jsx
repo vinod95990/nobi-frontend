@@ -126,20 +126,30 @@ export default function EditModal(props) {
               <Loader />
             </div>
           ) : (
-            <button
-              className="border-2 rounded-xl border-[#3d3266] bg-[#7152E1] text-[#f4f5f0] p-2 hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer tracking-wide"
-              type="submit"
-              disabled={
-                formik.isSubmitting || Object.keys(formik.errors).length > 0
-                  ? true
-                  : false
-              }
-            >
-              <p className="text-[#f4f5f0] text-sm sm:text-xl">
-                {`Edit ${data.type == nobiDocType.folder ? "Folder" : "Link"}`}{" "}
-                Name
-              </p>
-            </button>
+            <div className="w-full flex items-center  gap-2 p-3">
+              <button
+                className="border-2 w-full  rounded-xl border-[#3d3266] bg-[#7152E1] text-[#fff] p-2 hover:bg-[#3d3266] hover:text-[#fff] transition-colors cursor-pointer tracking-wide"
+                type="submit"
+                disabled={
+                  formik.isSubmitting || Object.keys(formik.errors).length > 0
+                    ? true
+                    : false
+                }
+              >
+                <p className="text-[#fff] text-sm sm:text-xl">
+                  {`Edit ${
+                    data.type == nobiDocType.folder ? "Folder" : "Link"
+                  }`}{" "}
+                  Name
+                </p>
+              </button>
+              <button
+                className="border-2 rounded-xl  w-full border-[#3d3266] text-[#3d3266] hover:text-[#fff]  p-2 hover:bg-[#3d3266]  transition-colors cursor-pointer   tracking-wide"
+                onClick={handleCloseModal}
+              >
+                <p className=" text-base sm:text-xl">Cancel</p>
+              </button>
+            </div>
           )}
         </form>
       </div>
