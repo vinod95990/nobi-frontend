@@ -222,7 +222,7 @@ export default function Folders(props) {
         <>
           <button
             onClick={(e) => restoreFromBin(e)}
-            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/magic-wand.svg"
@@ -234,7 +234,7 @@ export default function Folders(props) {
 
           <button
             onClick={() => handleDelete()}
-            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/trash-simple-bold.svg"
