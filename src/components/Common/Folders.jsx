@@ -87,7 +87,6 @@ export default function Folders(props) {
       toast.error(res?.error, {
         className: "toast-message",
       });
-      return;
     }
 
     if (res?.data) {
@@ -131,7 +130,6 @@ export default function Folders(props) {
         toast.error(error, {
           className: "toast-message",
         });
-        return null;
       }
 
       if (data) {
@@ -154,7 +152,6 @@ export default function Folders(props) {
         toast.error(error, {
           className: "toast-message",
         });
-        return null;
       }
     }
     setMinorLoading(false);
@@ -182,7 +179,6 @@ export default function Folders(props) {
       toast.error(error, {
         className: "toast-message",
       });
-      return null;
     }
     setMinorLoading(false);
 
@@ -210,7 +206,6 @@ export default function Folders(props) {
       toast.error(error, {
         className: "toast-message",
       });
-      return null;
     }
     setMinorLoading(false);
 

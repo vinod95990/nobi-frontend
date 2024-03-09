@@ -18,7 +18,7 @@ export default function Socials(props) {
     },
   ];
   return (
-    <div className="absolute w-fit bottom-0 left-1/2 transform -translate-x-1/2 flex sm:flex-col items-center gap-5 justify-center sm:ml-auto  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:transform-none   sm:fixed z-50">
+    <div className="flex sm:flex-col items-center gap-5 justify-center sm:ml-auto  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:transform-none   sm:fixed z-50">
       {isLoading ? (
         <></>
       ) : (
@@ -29,7 +29,7 @@ export default function Socials(props) {
               href={data.href}
               target="_blank"
               rel="noopener noreferrer"
-              className=" cursor-pointer hover:border-y-4 transition-colors"
+              className=" cursor-pointer hover:border-b-4 hover:border-[#ff9696] transition-colors"
             >
               <img width={30} className="max-w-full" src={data.src}></img>
             </a>
