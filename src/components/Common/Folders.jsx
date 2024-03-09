@@ -257,7 +257,7 @@ export default function Folders(props) {
         {selectedItem.type == nobiDocType.folder && (
           <button
             onClick={(e) => handleShareFolder(e)}
-            className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+            className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
           >
             <img
               src="/icons/share-fat-bold.svg"
@@ -269,7 +269,7 @@ export default function Folders(props) {
         )}
         <button
           onClick={(e) => handleEdit(e)}
-          className="text-lg sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          className=" text-lg bg-white sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
         >
           <img
             src="/icons/pencil-simple-bold.svg"
@@ -280,7 +280,7 @@ export default function Folders(props) {
         </button>
         <button
           onClick={() => pushToRecycleBin()}
-          className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          className="text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
         >
           <img
             src="/icons/trash-simple-bold.svg"
@@ -291,7 +291,7 @@ export default function Folders(props) {
         </button>
         <button
           onClick={(e) => openMoveToModal(e)}
-          className="text-lg sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
+          className=" text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#7152E1] hover:text-[#f4f5f0] transition-colors	"
         >
           <img
             src="/icons/magic-wand.svg"
@@ -329,7 +329,7 @@ export default function Folders(props) {
       {/* right click pe jo context menu ata hai */}
       {selectedItem && (
         <div
-          className="w-32 absolute z-1000 bg-[#f4f5f0] border-2 rounded-md border-[#3d3266] p-3 flex flex-col gap-3 "
+          className=" absolute z-1000 bg-[#e4e6df] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1 w-[130px] h-[160px] sm:w-[260px] overflow-auto sm:grid-cols-2 "
           style={{
             top: contextMenuPosition.y,
             left: contextMenuPosition.x,
