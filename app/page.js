@@ -54,7 +54,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (queryData) {
+    if (queryData && !isLoading) {
       const { data, error, unauthorized } = queryData;
       if (unauthorized) {
         toast.info("Please login again!", {
@@ -70,7 +70,7 @@ export default function Home() {
         return;
       }
     }
-  }, [queryData, router]);
+  }, [queryData, router, isLoading]);
 
   return (
     <div
