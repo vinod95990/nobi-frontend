@@ -38,7 +38,7 @@ export default class AuthService {
       return {
         data: null,
         unauthorized: error?.response?.status == 401 ? true : false,
-        error: error?.response?.data?.message || "Somethiunbg broke",
+        error: error?.response?.data?.message || "Something broke",
       };
     }
   }
@@ -53,10 +53,17 @@ export default class AuthService {
         error: null,
       };
     } catch (error) {
+      if (error.code === "ERR_NETWORK") {
+        return {
+          data: null,
+          error: "Request timed out. Please try again later.",
+          serverError: true,
+        };
+      }
       return {
         data: null,
         unauthorized: error?.response?.status == 401 ? true : false,
-        error: error?.response?.data?.message || "Somethiunbg broke",
+        error: error?.response?.data?.message || "Something broke",
       };
     }
   }
