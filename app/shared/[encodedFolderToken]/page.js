@@ -86,7 +86,7 @@ export default function Home({ params }) {
         <div className="header-wave">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
-              fill="#3d3266"
+              fill="#cebae4"
               fillOpacity="1"
               d="M0,128L40,128C80,128,160,128,240,117.3C320,107,400,85,480,64C560,43,640,21,720,37.3C800,53,880,107,960,144C1040,181,1120,203,1200,202.7C1280,203,1360,181,1400,170.7L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
             ></path>
@@ -136,6 +136,24 @@ export default function Home({ params }) {
         Be a Nobi
       </p>
       <Socials isLoading={isLoading} />
+      <img
+        className="w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-shared-leaf-cat-girl   rotate-[90deg]"
+        src="../floats/f1.jpg"
+      ></img>
+      <img
+        className="w-44  fixed -bottom-16 -left-12 -z-10 neuShadow-orange-cat-girl  rotate-[30deg]"
+        src="../floats/f9.jpg"
+      ></img>
+
+      <img
+        className="w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-shared-curl-girl  -rotate-45"
+        src="../floats/f3.jpg"
+      ></img>
+
+      <img
+        className="w-48 fixed -bottom-24 right-32 -z-10 neuShadow-moon-witch   -rotate-3"
+        src="../floats/f11.jpg"
+      ></img>
     </div>
   );
 }

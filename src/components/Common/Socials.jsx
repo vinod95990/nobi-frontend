@@ -18,7 +18,7 @@ export default function Socials(props) {
     },
   ];
   return (
-    <div className="flex sm:flex-col items-center gap-5 justify-center sm:ml-auto  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:transform-none   sm:fixed z-50">
+    <div className="bg-white flex sm:flex-col items-center gap-5 justify-center sm:ml-auto  pb-2 sm:p-0 sm:bottom-0 sm:right-4 sm:transform-none   sm:fixed z-50">
       {isLoading ? (
         <></>
       ) : (

@@ -10,8 +10,9 @@ import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import Header from "@/src/components/Common/Header";
 import { pageTypes } from "@/src/constants/NobiConstants";
+import withAuth from "@/src/hoc/withAuth";
 
-export default function Home({ params }) {
+function Home({ params }) {
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -96,7 +97,7 @@ export default function Home({ params }) {
         </div>
       </div>
 
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#3d3266] opacity-25 flex  items-center  justify-center gap-3 ">
+      <div className="hidden md:flex fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#3d3266] opacity-25  items-center  justify-center gap-3 ">
         <h1 className="text-center text-base sm:text-xl ">
           Nobi Fox will magically tidy up and clear data every Sunday!{" "}
         </h1>
@@ -106,6 +107,27 @@ export default function Home({ params }) {
         ></img>
       </div>
       <Socials isLoading={isLoading} />
+
+      <img
+        className="w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-camp-fire   rotate-[50deg]"
+        src="floats/f7.jpg"
+      ></img>
+      <img
+        className="w-44  fixed -bottom-5 -left-10 -z-10 neuShadow-frog-lion  rotate-[30deg]"
+        src="floats/f8.jpg"
+      ></img>
+
+      <img
+        className="w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-group-fire-camp  -rotate-45"
+        src="floats/f6.jpg"
+      ></img>
+
+      <img
+        className="w-48 fixed -bottom-24 right-32 -z-10 neuShadow-mermaid   -rotate-3"
+        src="floats/f10.jpg"
+      ></img>
     </div>
   );
 }
+
+export default withAuth(Home);

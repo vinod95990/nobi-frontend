@@ -7,6 +7,7 @@ import Loader from "./Loader";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import copy from "clipboard-copy";
+import Link from "next/link";
 
 export default function Folders(props) {
   const {
@@ -91,7 +92,9 @@ export default function Folders(props) {
 
     if (res?.data) {
       try {
-        await copy(window.location.href);
+        await copy(
+          `${window.location.origin}/shared/${res?.data?.encodedFolderToken}`
+        );
         toast.success("Folder link copied successfully! 🚀", {
           className: "toast-message",
         });
@@ -376,7 +379,7 @@ export default function Folders(props) {
               <p className="text-[#3d3266]  overflow-hidden	">{data.name}</p>
             </div>
           ) : (
-            <a
+            <Link
               key={index}
               href={data?.link || undefined}
               target="_blank"
@@ -423,7 +426,7 @@ export default function Folders(props) {
                   </p>
                 </span>
               )}
-            </a>
+            </Link>
           );
         })
       ) : (

@@ -17,8 +17,9 @@ import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import MoveToModal from "@/src/components/MoveToModal";
 import useNobi from "@/src/hooks/useNobi";
+import withAuth from "@/src/hoc/withAuth";
 
-export default function Home({ params }) {
+function Home({ params }) {
   const { slug } = params;
   const router = useRouter();
 
@@ -76,6 +77,10 @@ export default function Home({ params }) {
         return;
       }
     }
+
+    // return () => {
+    //   return null;
+    // };
   }, [queryData, router]);
 
   return (
@@ -169,6 +174,27 @@ export default function Home({ params }) {
         />
       </div>
       <Socials isLoading={isLoading} />
+
+      <img
+        className="w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
+        src="floats/f1.jpg"
+      ></img>
+      <img
+        className="w-44  fixed -bottom-5 -left-10 -z-10 neuShadow-dragon-girl  rotate-[30deg]"
+        src="floats/f4.jpg"
+      ></img>
+
+      <img
+        className="w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-curl-girl  -rotate-45"
+        src="floats/f5.jpg"
+      ></img>
+
+      <img
+        className="w-48 fixed -bottom-24 right-32 -z-10 neuShadow-girl-with-pot-at-back   -rotate-3"
+        src="floats/f3.jpg"
+      ></img>
     </div>
   );
 }
+
+export default withAuth(Home);

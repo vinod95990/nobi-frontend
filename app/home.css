@@ -72,3 +72,104 @@
   background-color: #fff;
   transition: all 0.2s ease-in-out;
 }
+
+/* SHADOW */
+
+.neuShadow-dragon-girl {
+  border-radius: 12px;
+  background: #fff;
+  opacity: 0.7;
+  border: 4px solid #758f9c;
+  box-shadow: 5px 5px 0px #758f9c, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-curl-girl {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #f8dbc5;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #f8dbc5, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-girl-with-pot-at-back {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #cebae4;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #cebae4, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-brave {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #d78971;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #d78971, -4px -4px 0px #ffffff;
+}
+
+/* DUSTBIN CARDS */
+.neuShadow-camp-fire {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #fee6a8;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #fee6a8, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-frog-lion {
+  border-radius: 12px;
+  background: #fff;
+  opacity: 0.7;
+  border: 4px solid #b60475;
+  box-shadow: 5px 5px 0px #b60475, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-mermaid {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #bbc0c7;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #bbc0c7, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-group-fire-camp {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #7aaec3;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #7aaec3, -4px -4px 0px #ffffff;
+}
+
+/* SHARED FOLDER  CARDS */
+
+.neuShadow-orange-cat-girl {
+  border-radius: 12px;
+  background: #fff;
+  opacity: 0.7;
+  border: 4px solid #f5f3f0;
+  box-shadow: 5px 5px 0px #f5f3f0, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-shared-curl-girl {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #f0f0f0;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #f0f0f0, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-moon-witch {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #9aa3d8;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #9aa3d8, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-shared-leaf-cat-girl {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #feb398;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #feb398, -4px -4px 0px #ffffff;
+}

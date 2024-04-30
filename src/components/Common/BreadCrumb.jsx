@@ -1,4 +1,5 @@
 import { useRouter } from "next/navigation";
+import React from "react";
 
 export default function BreadCrumb(props) {
   const { parentData = null, current } = props;
@@ -38,14 +39,13 @@ export default function BreadCrumb(props) {
       ></img>
       {parentData?.map((data, index) => {
         return (
-          <>
+          <React.Fragment key={data._id}>
             <img
               width={30}
               height={30}
               src="/icons/arrow-fat-right-bold.svg"
             ></img>
             <p
-              key={data._id}
               className={`text-sm sm:text-lg ${
                 parentData.length == index + 1
                   ? "text-[#7152E1]"
@@ -56,7 +56,7 @@ export default function BreadCrumb(props) {
             >
               {data.name}
             </p>
-          </>
+          </React.Fragment>
         );
       })}
     </div>

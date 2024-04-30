@@ -1,9 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/src/Providers.jsx";
-import AuthInitializer from "@/src/hoc/AuthInitializer";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,30 +10,26 @@ export const metadata = {
   description:
     "An online links folder where users can organize, share, and manage their links easily.",
 };
-const queryClient = new QueryClient();
+
 export default function RootLayout({ children }) {
   return (
     <Providers>
       <html lang="en">
         <body className={inter.className}>
-          <AuthInitializer>
-            <div
-              style={{
-                background: "#101010",
-                color: "#16171c",
-              }}
-            >
-              <ToastContainer
-                hideProgressBar={false}
-                position="top-center"
-                autoClose={3000}
-                limit={2}
-              />
-            </div>
-            {/* <QueryClientProvider client={queryClient}> */}
-            {children}
-            {/* </QueryClientProvider> */}
-          </AuthInitializer>
+          <div
+            style={{
+              background: "#101010",
+              color: "#16171c",
+            }}
+          >
+            <ToastContainer
+              hideProgressBar={false}
+              position="top-center"
+              autoClose={3000}
+              limit={2}
+            />
+          </div>
+          {children}
         </body>
       </html>
     </Providers>
