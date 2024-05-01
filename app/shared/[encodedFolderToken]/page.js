@@ -144,7 +144,7 @@ export default function Home({ params }) {
       </p>
       <Socials isLoading={isLoading} />
       <Image
-        className="w-36 sm:w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-shared-leaf-cat-girl   rotate-[90deg]"
+        className="w-36 sm:w-44 fixed bottom-52  -left-20 -z-10 neuShadow-shared-leaf-cat-girl   rotate-[90deg]"
         src="/floats/f1.jpg"
         width={176}
         height={176}
@@ -161,7 +161,7 @@ export default function Home({ params }) {
       ></Image>
 
       <Image
-        className="w-36 sm:w-44 fixed bottom-1/3 -right-20 -z-10 neuShadow-shared-curl-girl  -rotate-45"
+        className="w-36 sm:w-44 fixed bottom-52  -right-20 -z-10 neuShadow-shared-curl-girl  -rotate-45"
         src="/floats/f3.jpg"
         width={176}
         height={176}
@@ -170,8 +170,8 @@ export default function Home({ params }) {
       ></Image>
 
       <Image
-        className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-moon-witch   -rotate-3"
-        src="/floats/f11.jpg"
+        className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-sheep-stack   -rotate-3"
+        src="/floats/f17.jpg"
         width={192}
         height={192}
         alt="cards"

@@ -116,7 +116,7 @@ function Home({ params }) {
       <Socials isLoading={isLoading} />
 
       <Image
-        className="w-36 sm:w-44   fixed bottom-1/3 -left-20 -z-10 neuShadow-camp-fire   rotate-[50deg]"
+        className="w-36 sm:w-44   fixed bottom-52  -left-20 -z-10 neuShadow-camp-fire   rotate-[50deg]"
         src="/floats/f7.jpg"
         width={176}
         height={176}
@@ -124,8 +124,8 @@ function Home({ params }) {
         loading="lazy"
       ></Image>
       <Image
-        className="w-36 sm:w-44    fixed -bottom-5 -left-10 -z-10 neuShadow-frog-lion  rotate-[30deg]"
-        src="/floats/f8.jpg"
+        className="w-36 sm:w-44    fixed -bottom-11 -left-10 -z-10 neuShadow-pink-cat-girl  rotate-[30deg]"
+        src="/floats/f22.jpg"
         width={176}
         height={176}
         alt="cards"
@@ -133,7 +133,7 @@ function Home({ params }) {
       ></Image>
 
       <Image
-        className="w-36 sm:w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-group-fire-camp  -rotate-45"
+        className="w-36 sm:w-44  fixed bottom-52  -right-20 -z-10 neuShadow-group-fire-camp  -rotate-45"
         src="/floats/f6.jpg"
         width={176}
         height={176}
@@ -143,7 +143,7 @@ function Home({ params }) {
 
       <Image
         className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-mermaid   -rotate-3"
-        src="/floats/f10.jpg"
+        src="/floats/f18.jpg"
         width={192}
         height={192}
         alt="cards"

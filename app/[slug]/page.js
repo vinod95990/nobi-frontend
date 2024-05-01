@@ -177,7 +177,7 @@ function Home({ params }) {
       <Socials isLoading={isLoading} />
 
       <Image
-        className="w-36 sm:w-44  fixed bottom-1/3 -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
+        className="w-36 sm:w-44  fixed bottom-52  -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
         src="/floats/f1.jpg"
         alt="cards"
         width={176}
@@ -194,7 +194,7 @@ function Home({ params }) {
       ></Image>
 
       <Image
-        className="w-36 sm:w-44   fixed bottom-1/3 -right-20 -z-10 neuShadow-curl-girl  -rotate-45"
+        className="w-36 sm:w-44   fixed bottom-52  -right-20 -z-10 neuShadow-curl-girl  -rotate-45"
         src="/floats/f5.jpg"
         width={176}
         height={176}
@@ -203,7 +203,7 @@ function Home({ params }) {
       ></Image>
 
       <Image
-        className="w-40 sm:w-48 fixed -bottom-24 right-32 -z-10 neuShadow-girl-with-pot-at-back   -rotate-3"
+        className="w-40 sm:w-48 right-0  fixed -bottom-24 sm:right-32 -z-10 neuShadow-girl-with-pot-at-back   -rotate-3"
         src="/floats/f3.jpg"
         width={192}
         height={192}
