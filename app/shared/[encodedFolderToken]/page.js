@@ -80,7 +80,7 @@ export default function Home({ params }) {
         onClick={() => redirectToNobi()}
       >
         <Image
-          src="/../../nobi-logo.png"
+          src="/nobi-logo.png"
           width={40}
           height={40}
           className=" cursor-pointer w-6 sm:w-10"
@@ -145,7 +145,7 @@ export default function Home({ params }) {
       <Socials isLoading={isLoading} />
       <Image
         className="w-36 sm:w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-shared-leaf-cat-girl   rotate-[90deg]"
-        src="/../floats/f1.jpg"
+        src="/floats/f1.jpg"
         width={176}
         height={176}
         alt="cards"
@@ -153,7 +153,7 @@ export default function Home({ params }) {
       ></Image>
       <Image
         className="w-36 sm:w-44 fixed -bottom-16 -left-12 -z-10 neuShadow-orange-cat-girl  rotate-[30deg]"
-        src="/../floats/f9.jpg"
+        src="/floats/f9.jpg"
         alt="cards"
         width={176}
         height={176}
@@ -162,7 +162,7 @@ export default function Home({ params }) {
 
       <Image
         className="w-36 sm:w-44 fixed bottom-1/3 -right-20 -z-10 neuShadow-shared-curl-girl  -rotate-45"
-        src="/../floats/f3.jpg"
+        src="/floats/f3.jpg"
         width={176}
         height={176}
         alt="cards"
@@ -171,7 +171,7 @@ export default function Home({ params }) {
 
       <Image
         className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-moon-witch   -rotate-3"
-        src="/../floats/f11.jpg"
+        src="/floats/f11.jpg"
         width={192}
         height={192}
         alt="cards"
