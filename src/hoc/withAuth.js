@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Common/Loader";
 
 export default function withAuth(WrappedComponent) {
-  return (props) => {
+  return function WrappedComponentWithAuth(props) {
     const router = useRouter();
     const dispatch = useDispatch();
     const { userDetails } = useSelector((state) => state.auth);
@@ -39,7 +39,7 @@ export default function withAuth(WrappedComponent) {
         }
         meRequest();
       }
-    }, []);
+    }, [dispatch, userDetails, router]);
 
     if (userDetails) {
       return <WrappedComponent {...props} />;

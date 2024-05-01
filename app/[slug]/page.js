@@ -18,6 +18,7 @@ import Socials from "@/src/components/Common/Socials";
 import MoveToModal from "@/src/components/MoveToModal";
 import useNobi from "@/src/hooks/useNobi";
 import withAuth from "@/src/hoc/withAuth";
+import Image from "next/image";
 
 function Home({ params }) {
   const { slug } = params;
@@ -175,24 +176,40 @@ function Home({ params }) {
       </div>
       <Socials isLoading={isLoading} />
 
-      <img
-        className="w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
-        src="floats/f1.jpg"
-      ></img>
-      <img
-        className="w-44  fixed -bottom-5 -left-10 -z-10 neuShadow-dragon-girl  rotate-[30deg]"
-        src="floats/f4.jpg"
-      ></img>
+      <Image
+        className="w-36 sm:w-44  fixed bottom-1/3 -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
+        src="/floats/f1.jpg"
+        alt="cards"
+        width={176}
+        height={176}
+        loading="lazy"
+      ></Image>
+      <Image
+        className="w-36 sm:w-44    fixed -bottom-5 -left-10 -z-10 neuShadow-dragon-girl  rotate-[30deg]"
+        src="/floats/f4.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
 
-      <img
-        className="w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-curl-girl  -rotate-45"
-        src="floats/f5.jpg"
-      ></img>
+      <Image
+        className="w-36 sm:w-44   fixed bottom-1/3 -right-20 -z-10 neuShadow-curl-girl  -rotate-45"
+        src="/floats/f5.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
 
-      <img
-        className="w-48 fixed -bottom-24 right-32 -z-10 neuShadow-girl-with-pot-at-back   -rotate-3"
-        src="floats/f3.jpg"
-      ></img>
+      <Image
+        className="w-40 sm:w-48 fixed -bottom-24 right-32 -z-10 neuShadow-girl-with-pot-at-back   -rotate-3"
+        src="/floats/f3.jpg"
+        width={192}
+        height={192}
+        alt="cards"
+        loading="lazy"
+      ></Image>
     </div>
   );
 }

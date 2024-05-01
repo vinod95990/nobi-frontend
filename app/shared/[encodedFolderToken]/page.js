@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import copy from "clipboard-copy";
 import { pageTypes } from "@/src/constants/NobiConstants";
+import Image from "next/image";
 
 export default function Home({ params }) {
   const { encodedFolderToken } = params;
@@ -78,11 +79,14 @@ export default function Home({ params }) {
         className="p-4 flex items-center justify-center"
         onClick={() => redirectToNobi()}
       >
-        <img
-          src="../../nobi-logo.png"
+        <Image
+          src="/../../nobi-logo.png"
           width={40}
+          height={40}
           className=" cursor-pointer w-6 sm:w-10"
-        ></img>
+          alt="logo"
+          loading="lazy"
+        ></Image>
         <div className="header-wave">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
@@ -114,11 +118,14 @@ export default function Home({ params }) {
             onClick={handleCopy}
           >
             <p>Copy Link</p>
-            <img
-              src="../../icons/copy.svg"
+            <Image
+              src="/../../icons/copy.svg"
               width={30}
+              height={30}
               className=" cursor-pointer max-w-full"
-            ></img>
+              alt="copy"
+              loading="lazy"
+            ></Image>
           </div>
         </div>
         <div className="flex justify-center flex-col items-center p-4 w-full mt-7  ">
@@ -136,24 +143,40 @@ export default function Home({ params }) {
         Be a Nobi
       </p>
       <Socials isLoading={isLoading} />
-      <img
-        className="w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-shared-leaf-cat-girl   rotate-[90deg]"
-        src="../floats/f1.jpg"
-      ></img>
-      <img
-        className="w-44  fixed -bottom-16 -left-12 -z-10 neuShadow-orange-cat-girl  rotate-[30deg]"
-        src="../floats/f9.jpg"
-      ></img>
+      <Image
+        className="w-36 sm:w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-shared-leaf-cat-girl   rotate-[90deg]"
+        src="/../floats/f1.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
+      <Image
+        className="w-36 sm:w-44 fixed -bottom-16 -left-12 -z-10 neuShadow-orange-cat-girl  rotate-[30deg]"
+        src="/../floats/f9.jpg"
+        alt="cards"
+        width={176}
+        height={176}
+        loading="lazy"
+      ></Image>
 
-      <img
-        className="w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-shared-curl-girl  -rotate-45"
-        src="../floats/f3.jpg"
-      ></img>
+      <Image
+        className="w-36 sm:w-44 fixed bottom-1/3 -right-20 -z-10 neuShadow-shared-curl-girl  -rotate-45"
+        src="/../floats/f3.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
 
-      <img
-        className="w-48 fixed -bottom-24 right-32 -z-10 neuShadow-moon-witch   -rotate-3"
-        src="../floats/f11.jpg"
-      ></img>
+      <Image
+        className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-moon-witch   -rotate-3"
+        src="/../floats/f11.jpg"
+        width={192}
+        height={192}
+        alt="cards"
+        loading="lazy"
+      ></Image>
     </div>
   );
 }

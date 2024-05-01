@@ -11,6 +11,7 @@ import Socials from "@/src/components/Common/Socials";
 import Header from "@/src/components/Common/Header";
 import { pageTypes } from "@/src/constants/NobiConstants";
 import withAuth from "@/src/hoc/withAuth";
+import Image from "next/image";
 
 function Home({ params }) {
   const router = useRouter();
@@ -71,11 +72,13 @@ function Home({ params }) {
             <h1 className="text-center text-2xl sm:text-4xl ">
               Pixie&apos;s Dustbin
             </h1>
-            <img
-              src="../../icons/sparkle.svg"
+            <Image
+              src="/../../icons/sparkle.svg"
               width={40}
+              height={40}
+              alt="sparkle"
               className=" cursor-pointer w-6 sm:w-10"
-            ></img>
+            ></Image>
           </div>
 
           <p
@@ -101,31 +104,51 @@ function Home({ params }) {
         <h1 className="text-center text-base sm:text-xl ">
           Nobi Fox will magically tidy up and clear data every Sunday!{" "}
         </h1>
-        <img
-          src="../../icons/broom.svg"
+        <Image
+          src="/../../icons/broom.svg"
           className=" cursor-pointer w-5 sm:w-10"
-        ></img>
+          alt="broom"
+          loading="lazy"
+          width={20}
+          height={20}
+        ></Image>
       </div>
       <Socials isLoading={isLoading} />
 
-      <img
-        className="w-44 fixed bottom-1/3 -left-20 -z-10 neuShadow-camp-fire   rotate-[50deg]"
-        src="floats/f7.jpg"
-      ></img>
-      <img
-        className="w-44  fixed -bottom-5 -left-10 -z-10 neuShadow-frog-lion  rotate-[30deg]"
-        src="floats/f8.jpg"
-      ></img>
+      <Image
+        className="w-36 sm:w-44   fixed bottom-1/3 -left-20 -z-10 neuShadow-camp-fire   rotate-[50deg]"
+        src="/floats/f7.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
+      <Image
+        className="w-36 sm:w-44    fixed -bottom-5 -left-10 -z-10 neuShadow-frog-lion  rotate-[30deg]"
+        src="/floats/f8.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
 
-      <img
-        className="w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-group-fire-camp  -rotate-45"
-        src="floats/f6.jpg"
-      ></img>
+      <Image
+        className="w-36 sm:w-44  fixed bottom-1/3 -right-20 -z-10 neuShadow-group-fire-camp  -rotate-45"
+        src="/floats/f6.jpg"
+        width={176}
+        height={176}
+        alt="cards"
+        loading="lazy"
+      ></Image>
 
-      <img
-        className="w-48 fixed -bottom-24 right-32 -z-10 neuShadow-mermaid   -rotate-3"
-        src="floats/f10.jpg"
-      ></img>
+      <Image
+        className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-mermaid   -rotate-3"
+        src="/floats/f10.jpg"
+        width={192}
+        height={192}
+        alt="cards"
+        loading="lazy"
+      ></Image>
     </div>
   );
 }

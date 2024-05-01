@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -11,13 +12,14 @@ export default function BreadCrumb(props) {
   if (!parentData) {
     return (
       <div className="flex  w-9/12 gap-3 my-1 mb-7 items-center py-2">
-        <img
+        <Image
           className="cursor-pointer"
           width={40}
           height={40}
+          alt="home"
           src="/icons/house-bold.svg"
           onClick={() => handleNavigation("/")}
-        ></img>
+        ></Image>
       </div>
     );
   }
@@ -30,21 +32,23 @@ export default function BreadCrumb(props) {
         scrollbarColor: "#7152E1 transparent",
       }}
     >
-      <img
+      <Image
         className="cursor-pointer"
         width={40}
         height={40}
+        alt="navigation"
         src="/icons/house-bold.svg"
         onClick={() => handleNavigation("/")}
-      ></img>
+      ></Image>
       {parentData?.map((data, index) => {
         return (
           <React.Fragment key={data._id}>
-            <img
+            <Image
               width={30}
               height={30}
+              alt="path"
               src="/icons/arrow-fat-right-bold.svg"
-            ></img>
+            ></Image>
             <p
               className={`text-sm sm:text-lg ${
                 parentData.length == index + 1

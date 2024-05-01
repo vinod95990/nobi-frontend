@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const FolderPig = (props) => {
   const { folder, setSelectedParent, selectedParent, selectedItem } = props;
@@ -127,13 +128,13 @@ export default function MoveToModal(props) {
           className="absolute -top-0 -right-0  cursor-pointer   rounded-md"
           onClick={handleCloseModal}
         >
-          <img
+          <Image
             src="/icons/x-square-bold.svg"
             alt="close"
             width={35}
             height={35}
             className="bg-white rounded-md"
-          ></img>
+          ></Image>
         </div>
         <p
           className="text-[#fff] text-xl bg-[#3d3266] text-center py-3 "
@@ -146,13 +147,13 @@ export default function MoveToModal(props) {
         </p>
         <div className="flex-col flex lg:flex-row items-center gap-3 justify-around">
           <div className="flex items-center flex-col m-2  ">
-            <img
-              src="harry-potter.png"
+            <Image
+              src="/harry-potter.png"
               alt="close"
               width={45}
               height={45}
               className="bg-white rounded-md"
-            ></img>{" "}
+            ></Image>
             <p className="text-sm sm:text-lg  px-2 py-1 bg-[#3d3266] text-white rounded-md shiny-text">
               {selectedItem?.name}
             </p>

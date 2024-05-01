@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import copy from "clipboard-copy";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Folders(props) {
   const {
@@ -227,11 +228,13 @@ export default function Folders(props) {
             onClick={(e) => restoreFromBin(e)}
             className="text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
-            <img
+            <Image
               src="/icons/magic-wand.svg"
               width={20}
+              height={20}
+              alt="restore"
               className="z-10 max-w-full	"
-            ></img>
+            ></Image>
             <p>Restore</p>
           </button>
 
@@ -239,11 +242,13 @@ export default function Folders(props) {
             onClick={() => handleDelete()}
             className="text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
-            <img
+            <Image
               src="/icons/trash-simple-bold.svg"
               width={20}
+              height={20}
+              alt="delete"
               className="z-10 max-w-full	"
-            ></img>
+            ></Image>
             <p>Delete</p>
           </button>
         </>
@@ -257,11 +262,13 @@ export default function Folders(props) {
             onClick={(e) => handleShareFolder(e)}
             className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
           >
-            <img
+            <Image
               src="/icons/share-fat-bold.svg"
               width={20}
+              height={20}
+              alt="share"
               className="z-10 max-w-full	"
-            ></img>
+            ></Image>
             <p>Share</p>
           </button>
         )}
@@ -269,33 +276,39 @@ export default function Folders(props) {
           onClick={(e) => handleEdit(e)}
           className=" text-lg bg-white sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
         >
-          <img
+          <Image
             src="/icons/pencil-simple-bold.svg"
             width={20}
+            height={20}
+            alt="edit"
             className="z-10 max-w-full	"
-          ></img>
+          ></Image>
           <p>Edit</p>
         </button>
         <button
           onClick={() => pushToRecycleBin()}
           className="text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
         >
-          <img
+          <Image
             src="/icons/trash-simple-bold.svg"
             width={20}
+            height={20}
+            alt="trash"
             className="z-10 max-w-full	"
-          ></img>
+          ></Image>
           <p>Delete</p>
         </button>
         <button
           onClick={(e) => openMoveToModal(e)}
           className=" text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
         >
-          <img
+          <Image
             src="/icons/magic-wand.svg"
             width={20}
+            height={20}
+            alt="move folder/link"
             className="z-10 max-w-full	"
-          ></img>
+          ></Image>
           <p>Move</p>
         </button>
       </>
@@ -370,11 +383,13 @@ export default function Folders(props) {
               onClick={() => handleFolderNavigation(data._id)}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <img
+              <Image
                 src="/icons/folder-bold.svg"
                 width={30}
+                alt="folder"
+                height={30}
                 className="max-w-full	"
-              ></img>
+              ></Image>
 
               <p className="text-[#3d3266]  overflow-hidden	">{data.name}</p>
             </div>
@@ -392,11 +407,13 @@ export default function Folders(props) {
               }}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <img
+              <Image
                 src="/icons/link-simple-bold.svg"
                 width={30}
+                alt="link"
+                height={30}
                 className="max-w-full	"
-              ></img>
+              ></Image>
               <div className="flex flex-col justify-center flex-wrap overflow-hidden	">
                 <p className="text-[#3d3266] ">{data.name}</p>
                 <p className="text-sm text-[#7152E1] ">

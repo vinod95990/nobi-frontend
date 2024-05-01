@@ -9,7 +9,7 @@ import Loader from "../components/Common/Loader";
 import { toast } from "react-toastify";
 
 export default function withAuthAccessLoginPage(WrappedComponent) {
-  return (props) => {
+  return function WrappedComponentWithAuthAcessHOC(props) {
     const router = useRouter();
     let { userDetails } = useSelector((state) => state.auth);
 
@@ -54,7 +54,7 @@ export default function withAuthAccessLoginPage(WrappedComponent) {
 
         me();
       }
-    }, [router]);
+    }, [router, dispatch, userDetailsState]);
 
     if (userDetails) {
       router.push("/");

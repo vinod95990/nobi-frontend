@@ -1,20 +1,22 @@
+import Image from "next/image";
+
 export default function Socials(props) {
   const { isLoading } = props;
   const linkToIconMap = [
     {
       key: "github",
       href: "https://github.com/vinod95990",
-      src: "../../icons/github-logo-fill.svg",
+      src: "/../../icons/github-logo-fill.svg",
     },
     {
       key: "linkedin",
       href: "https://www.linkedin.com/in/vinod-m-345a701b6/",
-      src: "../../icons/linkedin-logo-fill.svg",
+      src: "/../../icons/linkedin-logo-fill.svg",
     },
     {
       key: "twitter",
       href: "https://twitter.com/TricksArena1",
-      src: "../../icons/twitter-logo-fill.svg",
+      src: "/../../icons/twitter-logo-fill.svg",
     },
   ];
   return (
@@ -31,7 +33,13 @@ export default function Socials(props) {
               rel="noopener noreferrer"
               className=" cursor-pointer hover:border-b-4 hover:border-[#ff9696] transition-colors"
             >
-              <img width={30} className="max-w-full" src={data.src}></img>
+              <Image
+                width={30}
+                className="max-w-full"
+                alt={`${data.key} link`}
+                src={data.src}
+                height={30}
+              ></Image>
             </a>
           );
         })

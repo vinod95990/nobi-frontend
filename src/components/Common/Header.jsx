@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { addUserDetail } from "@/src/slices/authSlice";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
 export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -60,22 +61,27 @@ export default function Header() {
         nobi.
       </div>
       <div>
-        <img
-          src="nobi-logo.png"
+        <Image
+          src="/nobi-logo.png"
           width={40}
+          height={40}
+          alt="logo"
           className="cursor-pointer w-6 sm:w-10"
           onClick={() => redirectToNobi()}
-        ></img>
+        ></Image>
       </div>
       <div className="flex items-center cursor-pointer gap-5">
         <p
           className="p-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-base"
           onClick={toDustbin}
         >
-          <img
-            src="icons/trash-simple-bold.svg"
+          <Image
+            src="/icons/trash-simple-bold.svg"
             className=" cursor-pointer w-4 sm:w-6 bg-white"
-          ></img>
+            width={16}
+            height={16}
+            alt="dustbin"
+          ></Image>
         </p>
         <p
           className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-base"

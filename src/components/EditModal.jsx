@@ -7,6 +7,7 @@ import { nobiDocType } from "../constants/NobiConstants";
 import Loader from "./Common/Loader";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 
 export default function EditModal(props) {
   const { data, setOpenEditModal, openEditModal } = props;
@@ -75,13 +76,13 @@ export default function EditModal(props) {
           className="absolute -top-0 -right-0  cursor-pointer   rounded-md"
           onClick={handleCloseModal}
         >
-          <img
+          <Image
             src="/icons/x-square-bold.svg"
             className="bg-white rounded-md"
             alt="close"
             width={35}
             height={35}
-          ></img>
+          ></Image>
         </div>
         <p
           className="text-[#f4f5f0] text-xl bg-[#3d3266] shiny-text text-center py-3"
