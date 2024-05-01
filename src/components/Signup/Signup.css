@@ -1,0 +1,135 @@
+.auth-form {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+  width: 100%;
+}
+
+.auth-form label {
+  color: #3d3266;
+}
+
+.auth-non-active {
+  opacity: 0.3;
+  color: #7152e1;
+}
+
+.auth-active {
+  border-bottom: 3px solid #7152e1;
+  color: #7152e1;
+}
+
+.auth-doodle-btn {
+  position: relative;
+  z-index: 2;
+  color: #3d3266;
+  padding: 4px;
+  margin: 8px 0;
+  align-self: center;
+}
+
+/* in complete front */
+.auth-doodle-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #fff;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  border-radius: 8px;
+}
+
+/* in back */
+.auth-doodle-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 8px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -6px;
+  left: -5px;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.auth-doodle-btn:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 8px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -4px;
+  left: -3px;
+  transition: background-color 0.2s ease-in-out;
+  /* border:2px solid #16171c; */
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.auth-doodle-input {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+  background-color: #16171c;
+  border-radius: 16px;
+  color: #16171c;
+  align-self: stretch;
+  margin-bottom: 4px;
+}
+
+.auth-doodle-input::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  border-radius: 8px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  background-color: #fff;
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  border-radius: 16px;
+}
+
+.auth-doodle-input::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -6;
+  border-radius: 16px;
+
+  width: 100%;
+  height: 100%;
+  bottom: -6px;
+  left: -5px;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #3d3266;
+  background-color: #3d3266;
+}
+
+.auth-doodle-input input {
+  border: 2px solid #3d3266;
+  width: 100%;
+  padding: 12px;
+  border-radius: 16px;
+}

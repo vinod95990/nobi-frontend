@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import AuthService from "@/src/services/auth";
 import { useRouter } from "next/navigation";
-import { addUserDetail } from "@/src/slices/authSlice";
+import "./Signup.css";
 import Loader from "../Common/Loader";
 import { toast } from "react-toastify";
 const authStateTypes = {
@@ -112,18 +112,19 @@ export default function Signup(props) {
     <div
       className="w-full p-5 flex gap-4 flex-col text-2xl"
       style={{
-        height: "100%",
+        height: "600px",
+
         position: "relative",
         zIndex: "4",
       }}
     >
-      <div className="flex justify-center gap-4 items-center w-full mb-2">
+      <div className="flex justify-center gap-4 items-center  mb-2 bg-white rounded-lg ">
         <div
           onClick={() => handleAuthStateChange(authStateTypes.signup)}
           className={`${
             authState == authStateTypes.signup
-              ? "doodle-active"
-              : "doodle-white"
+              ? "auth-active"
+              : "auth-non-active"
           } cursor-pointer`}
         >
           <p className="text-base sm:text-xl">Signup</p>
@@ -131,7 +132,9 @@ export default function Signup(props) {
         <div
           onClick={() => handleAuthStateChange(authStateTypes.login)}
           className={`${
-            authState == authStateTypes.login ? "doodle-active" : "doodle-white"
+            authState == authStateTypes.login
+              ? "auth-active"
+              : "auth-non-active"
           } cursor-pointer`}
         >
           <p className="text-base sm:text-xl">Login</p>
@@ -139,12 +142,15 @@ export default function Signup(props) {
       </div>
 
       {/* form */}
-      <div className="text-white auth-form mx-2 sm:mx-6 sm:my-4 ">
-        <form onSubmit={formik.handleSubmit} className="text-center">
+      <div
+        className="bg-white rounded-lg p-4"
+        style={{ border: "3px solid #3d3266" }}
+      >
+        <form onSubmit={formik.handleSubmit} className="auth-form">
           {authState == authStateTypes.signup && (
-            <div>
+            <div className="flex items-center justify-center gap-1 flex-col">
               <label htmlFor="name" className="flex items-center gap-4">
-                <p className="text-base sm:text-2xl">User name</p>
+                <p className="text-lg">User name</p>
                 {formik.touched.name && formik.errors.name ? (
                   <div className="text-lg text-rose-400	text-center">
                     {"{ "}
@@ -152,39 +158,46 @@ export default function Signup(props) {
                   </div>
                 ) : null}
               </label>
-              <input
-                className=" auth-form-input font-sans text-base sm:text-lg"
-                placeholder="Who are you in this magical realm?"
-                id="name"
-                name="name"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.name}
-              />
+              <div className="auth-doodle-input">
+                <input
+                  className=" font-sans text-base sm:text-lg"
+                  placeholder="Your name 😊"
+                  id="name"
+                  name="name"
+                  type="text"
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                />{" "}
+              </div>
             </div>
           )}
-          <div>
+          <div className="flex items-center justify-center gap-1 flex-col">
             <label htmlFor="emailId" className="flex items-center gap-4">
-              <p className="text-base sm:text-2xl">Email Address</p>
+              <p className="text-lg">Email Address</p>
               {formik.touched.emailId && formik.errors.emailId ? (
                 <div className="text-lg text-rose-400	text-center">
                   {"{ "} {formik.errors.emailId} {" }"}
                 </div>
               ) : null}
             </label>
-            <input
-              className=" auth-form-input font-sans text-base sm:text-lg"
-              id="emailId"
-              name="emailId"
-              placeholder="Where should the forest owls send your messages?"
-              type="email"
-              onChange={formik.handleChange}
-              value={formik.values.emailId}
-            />
+            <div className="auth-doodle-input">
+              <input
+                className=" font-sans text-base sm:text-lg"
+                id="emailId"
+                name="emailId"
+                placeholder="Your email 📧"
+                type="email"
+                onChange={formik.handleChange}
+                value={formik.values.emailId}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="password" className="flex items-center gap-4">
-              <p className="text-base sm:text-2xl">Password</p>
+          <div className="flex items-center justify-center flex-col">
+            <label
+              htmlFor="password "
+              className="flex items-center justify-center gap-4"
+            >
+              <p className="text-lg">Password</p>
               {formik.touched.password && formik.errors.password ? (
                 <div className="text-lg text-rose-400	text-center">
                   {"{ "}
@@ -192,25 +205,27 @@ export default function Signup(props) {
                   {" }"}
                 </div>
               ) : null}
-            </label>{" "}
-            <input
-              className=" auth-form-input font-sans text-base sm:text-lg "
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Speak the words that unlock the hidden grove"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-            />
+            </label>
+            <div className=" auth-doodle-input">
+              <input
+                className=" font-sans text-base sm:text-lg"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password 🔑"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+            </div>
           </div>
           {formik.isSubmitting ? (
-            <div className="relative my-3">
+            <div className="relative my-4">
               <Loader />
             </div>
           ) : (
             <button
               type="submit"
-              className={`text-center text-base sm:text-xl ${
+              className={`text-center text-base sm:text-xl auth-doodle-btn ${
                 Object.keys(formik.errors).length > 0
                   ? "text-slate-700 opacity-30 none"
                   : "opacity-100 none "

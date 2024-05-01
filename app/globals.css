@@ -1157,50 +1157,70 @@ input::selection {
   }
 }
 
-/* LEFT FORM */
-
-.auth-form {
-  text-shadow: 0 0 7px rgba(255, 255, 255, 0.3),
-    0 0 3px rgba(255, 255, 255, 0.3);
-}
-
-.auth-form-input {
-  margin: 12px 0;
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-  border-radius: 12px;
-  padding: 12px;
-  width: 100%;
-  letter-spacing: 1.5px;
-  font-size: large;
-}
-
-.auth-form-input::placeholder {
-  font-size: 16px;
-  opacity: 0.4; /* Set your desired opacity value (0 to 1) */
-}
-
-.auth-form button {
-  background-color: white;
-  color: var(--background-color);
-  font-size: 16px;
-  border-radius: 8px;
-  padding: 6px 20px;
-  margin: 12px 0;
-  letter-spacing: 2px;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.auth-form button:hover {
-  background-color: var(--background-color);
-  color: white;
-  font-size: 16px;
-  border-radius: 8px;
-  padding: 6px 20px;
-  margin: 12px 0;
-  letter-spacing: 2px;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
 /*---------------------------------*/
+
+/*----------------------    AUTH PAGE CARDS       --------------------------------------------*/
+
+.neuShadow-tiger {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #fee6a8;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #fee6a8, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-sheep-stack {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #efe1d1;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #efe1d1, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-orange-cat-girl {
+  border-radius: 12px;
+  background: #fff;
+  opacity: 0.7;
+  border: 4px solid #f5f3f0;
+  box-shadow: 5px 5px 0px #f5f3f0, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-shared-curl-girl {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #f0f0f0;
+  opacity: 0.7;
+  box-shadow: -3px -3px 0px #f0f0f0, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-shared-leaf-cat-girl {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #feb398;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #feb398, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-vibrant-animals {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #003b71;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #003b71, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-totoro-sticker-card {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #ffca79;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #ffca79, -4px -4px 0px #ffffff;
+}
+
+.neuShadow-pink-bear {
+  border-radius: 12px;
+  background: transparent;
+  border: 4px solid #e0b79b;
+  opacity: 0.7;
+  box-shadow: 3px 3px 0px #e0b79b, -4px -4px 0px #ffffff;
+}
