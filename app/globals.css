@@ -39,17 +39,17 @@ input::selection {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #fff;
+  background: #ff9090;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #3d3266;
+  background: #fff;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #7152e1;
+  background: #fff;
 }
 .shiny-text {
   text-shadow: 0 0 7px rgba(255, 255, 255, 0.3),

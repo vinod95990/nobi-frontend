@@ -29,7 +29,7 @@ export default function BreadCrumb(props) {
       className="flex w-9/12 gap-3 my-1 mb-7 items-center overflow-x-auto py-2"
       style={{
         scrollbarWidth: "thin",
-        scrollbarColor: "#7152E1 transparent",
+        scrollbarColor: "#ff9090 transparent",
       }}
     >
       <Image
