@@ -34,7 +34,7 @@ export default function SearchBar(props) {
             }}
           ></input>
           <div
-            className="cursor-pointer px-6 py-2 rounded-3xl   shiny-text bg-[#3d3266]  border-2 border-[#3d3266] hover:bg-[#7152e1]  text-[#fff] transition-colors hidden sm:block"
+            className="cursor-pointer px-6 py-2 rounded-3xl   shiny-text bg-[#060708]  border-2 border-[#060708] hover:bg-[#3d3266]  text-[#f2f2f2] transition-colors hidden sm:block"
             onClick={(e) => handleSearchClick(e)}
           >
             Search

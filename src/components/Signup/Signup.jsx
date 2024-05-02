@@ -118,7 +118,7 @@ export default function Signup(props) {
         zIndex: "4",
       }}
     >
-      <div className="flex justify-center gap-4 items-center  mb-2 bg-white rounded-lg ">
+      <div className="flex justify-center gap-4 items-center  mb-2 bg-white rounded-lg p-3">
         <div
           onClick={() => handleAuthStateChange(authStateTypes.signup)}
           className={`${
