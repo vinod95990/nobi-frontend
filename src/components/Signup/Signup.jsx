@@ -254,13 +254,13 @@ export default function Signup(props) {
         style={{ border: "3px solid #3d3266" }}
         className="flex items-center justify-center  gap-2 m-2 bg-white p-3 rounded-lg "
       >
-        <Image
+        <img
           src="/../../icons/google.png"
           width={40}
           height={40}
-          alt="sparkle"
+          alt="Google"
           className=" cursor-pointer w-6 sm:w-10"
-        ></Image>
+        ></img>
       </div>
     </div>
   );
