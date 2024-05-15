@@ -6,7 +6,7 @@ import withAuthAccessLoginPage from "@/src/hoc/withAccessLoginPage";
 import Image from "next/image";
 function SignupHome() {
   return (
-    <div className="h-screen">
+    <div className="h-full">
       {/* <div
         className=" sm:flex items-center justify-center hidden"
         style={{
@@ -18,7 +18,7 @@ function SignupHome() {
       </div> */}
 
       {/* FORM */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75%] sm:w-[45%] lg:w-[35%]">
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-0 w-[75%] sm:w-[45%] lg:w-[35%]">
         <Signup />
       </div>
 

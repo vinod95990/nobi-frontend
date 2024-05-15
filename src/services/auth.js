@@ -42,6 +42,11 @@ export default class AuthService {
       };
     }
   }
+
+  static async googleLogin() {
+    return (window.location.href = `${base_url}/google`);
+  }
+
   static async me() {
     try {
       const res = await axios.get(`${base_url}/user/me`, {

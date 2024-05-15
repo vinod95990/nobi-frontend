@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import AuthService from "@/src/services/auth";
 import { useRouter } from "next/navigation";
 import "./Signup.css";
+import Image from "next/image";
+
 import Loader from "../Common/Loader";
 import { toast } from "react-toastify";
 const authStateTypes = {
@@ -108,12 +110,14 @@ export default function Signup(props) {
     formik.resetForm();
   }
 
+  async function handleGoogleLogin() {
+    await AuthService.googleLogin();
+  }
+
   return (
     <div
-      className="w-full p-5 flex gap-4 flex-col text-2xl"
+      className="w-full p-5 flex gap-4 flex-col text-2xl pb-5"
       style={{
-        height: "600px",
-
         position: "relative",
         zIndex: "4",
       }}
@@ -218,6 +222,7 @@ export default function Signup(props) {
               />
             </div>
           </div>
+
           {formik.isSubmitting ? (
             <div className="relative my-4">
               <Loader />
@@ -240,6 +245,22 @@ export default function Signup(props) {
             </button>
           )}
         </form>
+      </div>
+      <div className="flex items-center text-[#3d3266] justify-center text-center text-2xl sm:text-4xl my-4">
+        - OR -{" "}
+      </div>
+      <div
+        onClick={handleGoogleLogin}
+        style={{ border: "3px solid #3d3266" }}
+        className="flex items-center justify-center  gap-2 m-2 bg-white p-3 rounded-lg "
+      >
+        <Image
+          src="/../../icons/google.png"
+          width={40}
+          height={40}
+          alt="sparkle"
+          className=" cursor-pointer w-6 sm:w-10"
+        ></Image>
       </div>
     </div>
   );
