@@ -114,6 +114,10 @@ export default function Signup(props) {
     await AuthService.googleLogin();
   }
 
+  async function handleGithubLogin() {
+    await AuthService.githubLogin();
+  }
+
   return (
     <div
       className="w-full p-5 flex gap-4 flex-col text-2xl pb-5"
@@ -250,15 +254,23 @@ export default function Signup(props) {
         - OR -{" "}
       </div>
       <div
-        onClick={handleGoogleLogin}
         style={{ border: "3px solid #3d3266" }}
-        className="flex items-center justify-center  gap-2 m-2 bg-white p-3 rounded-lg "
+        className="flex items-center justify-around  gap-3 m-2  bg-white p-3 rounded-lg "
       >
         <img
           src="/../../icons/google.png"
           width={40}
           height={40}
           alt="Google"
+          onClick={handleGoogleLogin}
+          className=" cursor-pointer w-6 sm:w-10"
+        ></img>
+        <img
+          src="/../../icons/github.png"
+          width={40}
+          height={40}
+          alt="Github"
+          onClick={handleGithubLogin}
           className=" cursor-pointer w-6 sm:w-10"
         ></img>
       </div>

@@ -46,6 +46,9 @@ export default class AuthService {
   static async googleLogin() {
     return (window.location.href = `${base_url}/google`);
   }
+  static async githubLogin() {
+    return (window.location.href = `${base_url}/github`);
+  }
 
   static async me() {
     try {
