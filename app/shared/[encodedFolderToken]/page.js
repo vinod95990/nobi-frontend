@@ -171,7 +171,7 @@ export default function Home({ params }) {
 
       <Image
         className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-sheep-stack   -rotate-3"
-        src="/floats/f17.jpg"
+        src="/floats/f23.jpg"
         width={192}
         height={192}
         alt="cards"

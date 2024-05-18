@@ -24,7 +24,7 @@ function SignupHome() {
 
       <Image
         className="w-36 sm:w-44 fixed top-8 -left-16 -z-10 neuShadow-sheep-stack   rotate-[40deg]"
-        src="/floats/f17.jpg"
+        src="/floats/f23.jpg"
         alt="cards"
         width={144}
         height={144}
