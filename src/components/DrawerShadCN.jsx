@@ -117,10 +117,10 @@ export default function DrawerShadCN() {
                 <p className="font-mono">
                   {" "}
                   Enter keywords separated by spaces to search through your
-                  saved public links. For example, type "spiced coffee" to find
-                  links containing both terms. Notice that words do not
-                  necessarily need to appear near each other as long as they
-                  appear in the document somewhere
+                  saved public links. For example, type &quot;spiced
+                  coffee&quot; to find links containing both terms. Notice that
+                  words do not necessarily need to appear near each other as
+                  long as they appear in the document somewhere
                 </p>
               </TooltipContent>
             </Tooltip>
