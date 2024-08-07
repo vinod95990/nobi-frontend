@@ -18,6 +18,8 @@ import MoveToModal from "@/src/components/MoveToModal";
 import useNobi from "@/src/hooks/useNobi";
 import withAuth from "@/src/hoc/withAuth";
 import Image from "next/image";
+import DrawerShadCN from "@/src/components/DrawerShadCN";
+import LinkExistsAlert from "@/src/components/AddedLinkAlreadyExistsAlert";
 
 function Home() {
   const router = useRouter();
@@ -36,7 +38,8 @@ function Home() {
     hideContextMenu,
     openMoveToModal,
     debouncedHandleSearchedString,
-    handleSearchClick,
+    linkExistsResponseData,
+    setLinkExistsResponseData,
   } = useNobi();
   const {
     data: queryData,
@@ -74,6 +77,10 @@ function Home() {
     }
   }, [queryData, router, isLoading]);
 
+  async function handleSearchClick() {
+    await refetch();
+  }
+
   return (
     <div
       className=" text-5xl    w-full   home-page relative"
@@ -99,7 +106,11 @@ function Home() {
         />
       </div>
 
-      <AddModal type={addModalType} setAddModalType={setAddModalType} />
+      <AddModal
+        type={addModalType}
+        setAddModalType={setAddModalType}
+        setLinkExistsResponseData={setLinkExistsResponseData}
+      />
       <EditModal
         data={selectedItem}
         openEditModal={openEditModal}
@@ -112,6 +123,12 @@ function Home() {
           hideContextMenu={hideContextMenu}
         />
       )}
+
+      <LinkExistsAlert
+        linkExistsResponseData={linkExistsResponseData}
+        setLinkExistsResponseData={setLinkExistsResponseData}
+        slug={"5e8b7a3346a1f02d9b851e5c"}
+      />
 
       <div
         className="flex justify-center flex-col items-center p-4 w-full my-3 "
@@ -157,9 +174,13 @@ function Home() {
           openMoveToModal={openMoveToModal}
         />
       </div>
+
+      <div>
+        <DrawerShadCN />
+      </div>
       <Socials isLoading={isLoading} />
 
-      <Image
+      {/* <Image
         className="w-36 sm:w-44 fixed bottom-52 -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
         src="/floats/f1.jpg"
         alt="cards"
@@ -192,7 +213,7 @@ function Home() {
         height={160}
         alt="cards"
         loading="lazy"
-      ></Image>
+      ></Image> */}
     </div>
   );
 }

@@ -41,6 +41,35 @@ export default class NobiServices {
       };
     }
   }
+
+  static async searchQQuery(payload) {
+    const { searchedString } = payload;
+
+    try {
+      const res = await axios.get(`${base_url}/searchQuery`, {
+        withCredentials: true,
+        params: {
+          searchedString: searchedString,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return {
+        data: res?.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        unauthorized: error?.response?.status == 401 ? true : false,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while fetching data. Please try again later.",
+      };
+    }
+  }
+
   static async getFolderDetails(payload) {
     const { folderId = "null", searchedString } = payload;
     try {

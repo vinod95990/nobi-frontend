@@ -27,7 +27,7 @@ export default function SearchBar(props) {
             className="w-full p-3 font-sans tracking-wider	text-[#3d3266] font-bold gradient-css "
             onChange={handleSearchedStringChange}
             // value={searchedString}
-            placeholder="Seek answers in the whispers of time..."
+            placeholder="Search by name..."
             style={{
               background: "transparent",
               outline: "none",

@@ -10,4 +10,6 @@ export const pageTypes = {
   sharedFolder: "sharedFolder",
   //page.js(/dustbin)
   dustbin: "dustbin",
+  // drawer data
+  drawerKeyword: "drawerKeyword",
 };

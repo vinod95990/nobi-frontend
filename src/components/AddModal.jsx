@@ -10,7 +10,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 
 export default function AddModal(props) {
-  const { type, parentId = null, setAddModalType } = props;
+  const {
+    type,
+    parentId = null,
+    setAddModalType,
+    setLinkExistsResponseData,
+  } = props;
   const queryClient = useQueryClient();
 
   const folderForm = useFormik({
@@ -86,6 +91,12 @@ export default function AddModal(props) {
         className: "toast-message",
       });
       return;
+    }
+
+    // that link already exists alert
+    if (res?.data?.linkAlreadyExists) {
+      setLinkExistsResponseData(res?.data);
+      // return;
     }
 
     queryClient.invalidateQueries();

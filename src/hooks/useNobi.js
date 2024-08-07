@@ -9,6 +9,10 @@ export default function useNobi() {
   const [searchedString, setSearchedString] = useState("");
   const [addModalType, setAddModalType] = useState(null);
 
+  /*state for -> jab user is adding link and that link already exists toh we populate this state with the data from server
+  that include information about that already existing link and hence this state triggers the alertlinkexists alert in page.js */
+  const [linkExistsResponseData, setLinkExistsResponseData] = useState(false);
+
   function handleAddModal(type) {
     setAddModalType(type);
   }
@@ -32,9 +36,7 @@ export default function useNobi() {
     800
   );
 
-  async function handleSearchClick() {
-    await refetch();
-  }
+  // when user adds link and link already exists in some other folder, take the user to that folder
 
   return {
     selectedItem,
@@ -52,6 +54,7 @@ export default function useNobi() {
     openMoveToModal,
     handleSearchedStringChange,
     debouncedHandleSearchedString,
-    handleSearchClick,
+    linkExistsResponseData,
+    setLinkExistsResponseData,
   };
 }

@@ -19,6 +19,8 @@ import MoveToModal from "@/src/components/MoveToModal";
 import useNobi from "@/src/hooks/useNobi";
 import withAuth from "@/src/hoc/withAuth";
 import Image from "next/image";
+import DrawerShadCN from "@/src/components/DrawerShadCN";
+import LinkExistsAlert from "@/src/components/AddedLinkAlreadyExistsAlert";
 
 function Home({ params }) {
   const { slug } = params;
@@ -38,7 +40,8 @@ function Home({ params }) {
     hideContextMenu,
     openMoveToModal,
     debouncedHandleSearchedString,
-    handleSearchClick,
+    linkExistsResponseData,
+    setLinkExistsResponseData,
   } = useNobi();
 
   const {
@@ -84,6 +87,10 @@ function Home({ params }) {
     // };
   }, [queryData, router]);
 
+  async function handleSearchClick() {
+    await refetch();
+  }
+
   return (
     <div
       className=" text-5xl    w-full   home-page  relative"
@@ -114,6 +121,7 @@ function Home({ params }) {
         type={addModalType}
         setAddModalType={setAddModalType}
         parentId={slug}
+        setLinkExistsResponseData={setLinkExistsResponseData}
       />
       <EditModal
         data={selectedItem}
@@ -128,6 +136,12 @@ function Home({ params }) {
           hideContextMenu={hideContextMenu}
         />
       )}
+
+      <LinkExistsAlert
+        linkExistsResponseData={linkExistsResponseData}
+        setLinkExistsResponseData={setLinkExistsResponseData}
+        slug={slug}
+      />
       <div
         className="flex justify-center flex-col items-center p-4 w-full my-3  "
         style={{
@@ -174,9 +188,13 @@ function Home({ params }) {
           openMoveToModal={openMoveToModal}
         />
       </div>
+
+      <div>
+        <DrawerShadCN />
+      </div>
       <Socials isLoading={isLoading} />
 
-      <Image
+      {/* <Image
         className="w-36 sm:w-44  fixed bottom-52  -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
         src="/floats/f1.jpg"
         alt="cards"
@@ -209,7 +227,7 @@ function Home({ params }) {
         height={192}
         alt="cards"
         loading="lazy"
-      ></Image>
+      ></Image> */}
     </div>
   );
 }

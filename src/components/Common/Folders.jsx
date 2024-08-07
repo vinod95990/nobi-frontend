@@ -9,6 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import copy from "clipboard-copy";
 import Link from "next/link";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Folders(props) {
   const {
@@ -28,22 +29,28 @@ export default function Folders(props) {
     x: 0,
     y: 0,
   });
-  let folderLen =
-    folderData?.length > 2 ? folderData?.length - 2 : folderData?.length;
 
-  function handleFolderNavigation(id) {
+  function handleFolderNavigation(event, id) {
+    event.preventDefault();
+
     if (pageType == pageTypes.dustbin) {
       toast.info("Don't worry! The folder is empty", {
         className: "toast-message",
       });
       return;
     }
+
+    setMinorLoading(true);
     router.push(`/${id}`);
+    setMinorLoading(false);
   }
 
   function handleRightClick(event, item) {
     event.preventDefault();
-    if (pageType == pageTypes.sharedFolder) {
+    if (
+      pageType == pageTypes.sharedFolder ||
+      pageType == pageTypes.drawerKeyword
+    ) {
       return;
     }
     const containerRect = event.currentTarget.getBoundingClientRect();
@@ -317,15 +324,18 @@ export default function Folders(props) {
 
   if (isLoading) {
     return (
-      <div className="relative w-full mx-2">
-        <Loader />
+      <div className="transition-all flex flex-wrap  items-center gap-5  w-9/12 pb-24">
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
       </div>
     );
   }
 
   return (
     <div
-      className="flex flex-wrap  items-center gap-5  text-[#16171c] text-xl w-9/12  pb-24"
+      className=" transition-all flex flex-wrap  items-center gap-5  text-[#16171c] text-xl w-9/12  pb-24"
       style={{
         zIndex: 25,
       }}
@@ -340,7 +350,7 @@ export default function Folders(props) {
       {/* right click pe jo context menu ata hai */}
       {selectedItem && (
         <div
-          className="custom-scrollbar absolute z-1000 bg-[#ff9090] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px]  sm:h-[210px] overflow-auto  "
+          className="custom-scrollbar absolute z-1000 bg-[#ff9090] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px] overflow-auto  "
           style={{
             top: contextMenuPosition.y,
             left: contextMenuPosition.x,
@@ -380,7 +390,7 @@ export default function Folders(props) {
                 position: "relative",
                 zIndex: "10",
               }}
-              onClick={() => handleFolderNavigation(data._id)}
+              onClick={(e) => handleFolderNavigation(e, data._id)}
               onContextMenu={(e) => handleRightClick(e, data)}
             >
               <Image
@@ -447,7 +457,7 @@ export default function Folders(props) {
           );
         })
       ) : (
-        <p className="text-[#3d3266] text-3xl font-medium">[ EMPTY ]</p>
+        <p className="text-[#3d3266] text-lg sm:text-3xl font-medium ">...</p>
       )}
     </div>
   );
