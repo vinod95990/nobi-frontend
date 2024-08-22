@@ -10,6 +10,14 @@ import copy from "clipboard-copy";
 import Link from "next/link";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 export default function Folders(props) {
   const {
@@ -230,95 +238,113 @@ export default function Folders(props) {
 
     if (pageType == pageTypes.dustbin) {
       return (
-        <>
-          <button
+        <ContextMenuContent>
+          <ContextMenuItem
             onClick={(e) => restoreFromBin(e)}
-            className="text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl "
           >
-            <Image
-              src="/icons/magic-wand.svg"
-              width={20}
-              height={20}
-              alt="restore"
-              className="z-10 max-w-full	"
-            ></Image>
-            <p>Restore</p>
-          </button>
+            Restore
+            <ContextMenuShortcut>
+              <Image
+                src="/icons/magic-wand.svg"
+                width={20}
+                height={20}
+                alt="restore"
+                className="z-10 max-w-full	"
+              ></Image>
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSeparator />
 
-          <button
+          <ContextMenuItem
             onClick={() => handleDelete()}
-            className="text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
+            className="text-lg sm:text-xl "
           >
-            <Image
-              src="/icons/trash-simple-bold.svg"
-              width={20}
-              height={20}
-              alt="delete"
-              className="z-10 max-w-full	"
-            ></Image>
-            <p>Delete</p>
-          </button>
-        </>
+            Delete
+            <ContextMenuShortcut>
+              <Image
+                src="/icons/trash-simple-bold.svg"
+                width={20}
+                height={20}
+                alt="trash"
+                className="z-10 max-w-full	"
+              ></Image>
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuContent>
       );
     }
 
     return (
-      <>
-        {selectedItem.type == nobiDocType.folder && (
-          <button
-            onClick={(e) => handleShareFolder(e)}
-            className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
-          >
+      <ContextMenuContent>
+        {/* {selectedItem.type == nobiDocType.folder && (
+          <ContextMenuItem>
+            <button
+              onClick={(e) => handleShareFolder(e)}
+              className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
+            >
+              <Image
+                src="/icons/share-fat-bold.svg"
+                width={20}
+                height={20}
+                alt="share"
+                className="z-10 max-w-full	"
+              ></Image>
+              <p>Share</p>
+            </button>
+          </ContextMenuItem>
+        )} */}
+        <ContextMenuItem
+          onClick={(e) => handleEdit(e)}
+          className="text-lg sm:text-xl "
+        >
+          Edit
+          <ContextMenuShortcut>
             <Image
-              src="/icons/share-fat-bold.svg"
+              src="/icons/pencil-simple-bold.svg"
               width={20}
               height={20}
-              alt="share"
+              alt="edit"
+              className="z-10 max-w-full	"
+            ></Image>{" "}
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+
+        <ContextMenuItem
+          onClick={() => pushToRecycleBin()}
+          className="text-lg sm:text-xl "
+        >
+          {/**/}
+          Delete
+          <ContextMenuShortcut>
+            <Image
+              src="/icons/trash-simple-bold.svg"
+              width={20}
+              height={20}
+              alt="trash"
               className="z-10 max-w-full	"
             ></Image>
-            <p>Share</p>
-          </button>
-        )}
-        <button
-          onClick={(e) => handleEdit(e)}
-          className=" text-lg bg-white sm:text-xl flex items-center gap-2  text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
-        >
-          <Image
-            src="/icons/pencil-simple-bold.svg"
-            width={20}
-            height={20}
-            alt="edit"
-            className="z-10 max-w-full	"
-          ></Image>
-          <p>Edit</p>
-        </button>
-        <button
-          onClick={() => pushToRecycleBin()}
-          className="text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
-        >
-          <Image
-            src="/icons/trash-simple-bold.svg"
-            width={20}
-            height={20}
-            alt="trash"
-            className="z-10 max-w-full	"
-          ></Image>
-          <p>Delete</p>
-        </button>
-        <button
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+
+        <ContextMenuItem
           onClick={(e) => openMoveToModal(e)}
-          className=" text-lg bg-white sm:text-xl flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
+          className="text-lg sm:text-xl "
         >
-          <Image
-            src="/icons/magic-wand.svg"
-            width={20}
-            height={20}
-            alt="move folder/link"
-            className="z-10 max-w-full	"
-          ></Image>
-          <p>Move</p>
-        </button>
-      </>
+          Move
+          <ContextMenuShortcut>
+            <Image
+              src="/icons/magic-wand.svg"
+              width={20}
+              height={20}
+              alt="move folder/link"
+              className="z-10 max-w-full	"
+            ></Image>
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
     );
   }
 
@@ -348,7 +374,7 @@ export default function Folders(props) {
         </div>
       )}
       {/* right click pe jo context menu ata hai */}
-      {selectedItem && (
+      {false && (
         <div
           className="custom-scrollbar absolute z-1000 bg-[#ff9090] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px] overflow-auto  "
           style={{
@@ -382,78 +408,102 @@ export default function Folders(props) {
       {folderData?.length >= 1 ? (
         folderData.map((data, index) => {
           return data.type == nobiDocType.folder ? (
-            <div
-              key={index}
-              className="doodle-folder  p-2 sm:p-3 flex items-center gap-3 cursor-pointer text-base sm:text-xl"
-              style={{
-                width: "160px",
-                position: "relative",
-                zIndex: "10",
+            <ContextMenu
+              className="media"
+              onOpenChange={() => {
+                setSelectedItem(data);
               }}
-              onClick={(e) => handleFolderNavigation(e, data._id)}
-              onContextMenu={(e) => handleRightClick(e, data)}
             >
-              <Image
-                src="/icons/folder-bold.svg"
-                width={30}
-                alt="folder"
-                height={30}
-                className="max-w-full	"
-              ></Image>
-
-              <p className="text-[#3d3266]  overflow-hidden	">{data.name}</p>
-            </div>
-          ) : (
-            <Link
-              key={index}
-              href={data?.link || undefined}
-              target="_blank"
-              className="doodle-link p-2 sm:p-3 flex gap-3 items-center text-base sm:text-xl"
-              style={{
-                width: "280px",
-                gridColumnEnd: "span 2",
-                position: "relative",
-                zIndex: "10",
-              }}
-              onContextMenu={(e) => handleRightClick(e, data)}
-            >
-              <Image
-                src="/icons/link-simple-bold.svg"
-                width={30}
-                alt="link"
-                height={30}
-                className="max-w-full	"
-              ></Image>
-              <div className="flex flex-col justify-center flex-wrap overflow-hidden	">
-                <p className="text-[#3d3266] ">{data.name}</p>
-                <p className="text-sm text-[#7152E1] ">
-                  {data?.link
-                    ? data.link.substring(0, 20) + "..."
-                    : "Link is missing"}
-                </p>
-              </div>
-              {data.link && (
-                <span
+              <ContextMenuTrigger>
+                <div
+                  key={index}
+                  className="doodle-folder  p-2 sm:p-3 flex items-center gap-3 cursor-pointer text-base sm:text-xl"
                   style={{
-                    position: "absolute",
-                    top: "0%",
-                    left: "0%",
-                    border: "2px solid #3d3266",
-                    borderRadius: "12px",
-                    width: "100%",
-                    height: "100%",
+                    width: "160px",
+                    position: "relative",
+                    zIndex: "10",
                   }}
-                  className="bg-[#3d3266] tracking-wider text-[#f4f5f0] text-sm "
+                  onClick={(e) => handleFolderNavigation(e, data._id)}
+                  // onContextMenu={(e) => handleRightClick(e, data)}
                 >
-                  <p
-                    className="p-2 text-wrap"
-                    style={{ wordWrap: "break-word", letterSpacing: "1.5px" }}
-                  >
-                    {data?.link?.substring(8, 60) + "..."}
-                  </p>
-                </span>
-              )}
-            </Link>
+                  <Image
+                    src="/icons/folder-bold.svg"
+                    width={30}
+                    alt="folder"
+                    height={30}
+                    className="max-w-full	"
+                  ></Image>
+
+                  <p className="text-[#3d3266]  overflow-hidden	">{data.name}</p>
+                </div>
+              </ContextMenuTrigger>
+              {righClickMenus()}
+            </ContextMenu>
+          ) : (
+            <ContextMenu
+              className="media"
+              onOpenChange={() => {
+                setSelectedItem(data);
+              }}
+            >
+              <ContextMenuTrigger>
+                <Link
+                  key={index}
+                  href={data?.link || undefined}
+                  target="_blank"
+                  className="doodle-link p-2 sm:p-3 flex gap-3 items-center text-base sm:text-xl"
+                  style={{
+                    width: "280px",
+                    gridColumnEnd: "span 2",
+                    position: "relative",
+                    zIndex: "10",
+                  }}
+                  // onContextMenu={(e) => handleRightClick(e, data)}
+                >
+                  <Image
+                    src="/icons/link-simple-bold.svg"
+                    width={30}
+                    alt="link"
+                    height={30}
+                    className="max-w-full	"
+                  ></Image>
+                  <div className="flex flex-col justify-center flex-wrap overflow-hidden	">
+                    <p className="text-[#3d3266] ">{data.name}</p>
+                    <p className="text-sm text-[#7152E1] ">
+                      {data?.link
+                        ? data.link.substring(0, 20) + "..."
+                        : "Link is missing"}
+                    </p>
+                  </div>
+                  {data.link && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "0%",
+                        left: "0%",
+                        border: "2px solid #3d3266",
+                        borderRadius: "12px",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      className="bg-[#3d3266] tracking-wider text-[#f4f5f0] text-sm "
+                    >
+                      <p
+                        className="p-2 text-wrap"
+                        style={{
+                          wordWrap: "break-word",
+                          letterSpacing: "1.5px",
+                        }}
+                      >
+                        {data?.link?.substring(8, 60) + "..."}
+                      </p>
+                    </span>
+                  )}
+                </Link>{" "}
+              </ContextMenuTrigger>
+
+              {righClickMenus()}
+            </ContextMenu>
           );
         })
       ) : (

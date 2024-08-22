@@ -7,7 +7,6 @@ import { useEffect, useMemo, useState } from "react";
 import { navigationTabs } from "@/src/constants/navigation";
 import SearchBar from "@/src/components/Common/SearchBar";
 import Folders from "@/src/components/Common/Folders";
-import AddModal from "@/src/components/AddModal";
 import { nobiDocType, pageTypes } from "@/src/constants/NobiConstants";
 import BreadCrumb from "@/src/components/Common/BreadCrumb";
 import EditModal from "@/src/components/EditModal";
@@ -17,9 +16,16 @@ import Socials from "@/src/components/Common/Socials";
 import MoveToModal from "@/src/components/MoveToModal";
 import useNobi from "@/src/hooks/useNobi";
 import withAuth from "@/src/hoc/withAuth";
-import Image from "next/image";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import DrawerShadCN from "@/src/components/DrawerShadCN";
 import LinkExistsAlert from "@/src/components/AddedLinkAlreadyExistsAlert";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { Separator } from "@/components/ui/separator";
+import AddModal from "@/src/components_v2/AddModal";
 
 function Home() {
   const router = useRouter();
@@ -40,6 +46,7 @@ function Home() {
     debouncedHandleSearchedString,
     linkExistsResponseData,
     setLinkExistsResponseData,
+    setSearchedString,
   } = useNobi();
   const {
     data: queryData,
@@ -82,139 +89,105 @@ function Home() {
   }
 
   return (
-    <div
-      className=" text-5xl    w-full   home-page relative"
-      onClick={(e) => {
-        hideContextMenu();
-      }}
-    >
-      <div
-        style={{
-          opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
-        }}
-      >
-        <Header />
-      </div>
-      <div
-        style={{
-          opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
-        }}
-      >
-        <SearchBar
-          handleSearchClick={handleSearchClick}
-          handleSearchedStringChange={debouncedHandleSearchedString}
-        />
-      </div>
+    <ResizablePanelGroup direction="horizontal">
+      <ResizablePanel defaultSize={20}>
+        One
+        <Separator orientation="vertical" />
+      </ResizablePanel>
 
-      <AddModal
-        type={addModalType}
-        setAddModalType={setAddModalType}
-        setLinkExistsResponseData={setLinkExistsResponseData}
-      />
-      <EditModal
-        data={selectedItem}
-        openEditModal={openEditModal}
-        setOpenEditModal={setOpenEditModal}
-      />
-      {moveToModal && selectedItem && (
-        <MoveToModal
-          setMoveToModal={setMoveToModal}
-          selectedItem={selectedItem}
-          hideContextMenu={hideContextMenu}
-        />
-      )}
-
-      <LinkExistsAlert
-        linkExistsResponseData={linkExistsResponseData}
-        setLinkExistsResponseData={setLinkExistsResponseData}
-        slug={"5e8b7a3346a1f02d9b851e5c"}
-      />
-
-      <div
-        className="flex justify-center flex-col items-center p-4 w-full my-3 "
-        style={{
-          zIndex: "5",
-          opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
-        }}
-      >
-        <div className="flex items-center justify-center sm:justify-end gap-4 text-sm p-4  w-9/12 mb-4">
-          <button
-            disabled={addModalType || openEditModal ? true : false}
+      <ResizablePanel defaultSize={80}>
+        <ScrollArea type="scroll" className=" text-5xl h-screen ">
+          <div
             style={{
-              opacity: addModalType || openEditModal ? 0.3 : 1,
+              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
             }}
-            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-base sm:text-xl tracking-wide	"
-            onClick={() => handleAddModal(nobiDocType.folder)}
+            className=" text-5xl "
+            // onClick={(e) => {
+            //   hideContextMenu();
+            // }}
           >
-            <p>Add Folder</p>
-          </button>
-          <button
-            disabled={addModalType || openEditModal ? true : false}
-            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer  text-base sm:text-xl  tracking-wide	"
-            onClick={() => handleAddModal(nobiDocType.link)}
+            <Header />
+          </div>
+          <Separator orientation="vertical" />
+          <div
             style={{
-              opacity: addModalType || openEditModal || moveToModal ? 0.3 : 1,
+              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
             }}
           >
-            <p>Add Link</p>
-          </button>
-        </div>
-        <BreadCrumb />
+            <SearchBar
+              handleSearchClick={handleSearchClick}
+              handleSearchedStringChange={debouncedHandleSearchedString}
+            />
+          </div>
 
-        <Folders
-          key="folder"
-          folderData={queryData?.data?.data}
-          selectedItem={selectedItem}
-          hideContextMenu={hideContextMenu}
-          setSelectedItem={setSelectedItem}
-          setOpenEditModal={setOpenEditModal}
-          isLoading={isLoading}
-          pageType={pageTypes.mainFolder}
-          setMoveToModal={setMoveToModal}
-          openMoveToModal={openMoveToModal}
-        />
-      </div>
+          <EditModal
+            data={selectedItem}
+            openEditModal={openEditModal}
+            setOpenEditModal={setOpenEditModal}
+          />
 
-      <div>
-        <DrawerShadCN />
-      </div>
-      <Socials isLoading={isLoading} />
+          {moveToModal && selectedItem && (
+            <MoveToModal
+              setMoveToModal={setMoveToModal}
+              selectedItem={selectedItem}
+              hideContextMenu={hideContextMenu}
+            />
+          )}
 
-      {/* <Image
-        className="w-36 sm:w-44 fixed bottom-52 -left-20 -z-10 neuShadow-brave   rotate-[50deg]"
-        src="/floats/f1.jpg"
-        alt="cards"
-        width={144}
-        height={144}
-        loading="lazy"
-      ></Image>
-      <Image
-        className="w-36 sm:w-44 fixed -bottom-5 -left-10 -z-10 neuShadow-dragon-girl  rotate-[30deg]"
-        src="/floats/f4.jpg"
-        alt="cards"
-        width={144}
-        height={144}
-        loading="lazy"
-      ></Image>
+          <LinkExistsAlert
+            linkExistsResponseData={linkExistsResponseData}
+            setLinkExistsResponseData={setLinkExistsResponseData}
+            slug={"5e8b7a3346a1f02d9b851e5c"}
+            setSearchedString={setSearchedString}
+          />
 
-      <Image
-        className="w-36 sm:w-44 fixed bottom-52 -right-20 -z-10 neuShadow-curl-girl  -rotate-45"
-        src="/floats/f5.jpg"
-        alt="cards"
-        width={144}
-        height={144}
-        loading="lazy"
-      ></Image>
+          <div
+            className="flex justify-center flex-col items-center p-4 w-full my-3 "
+            style={{
+              zIndex: "5",
+              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
+            }}
+          >
+            <div className="flex items-center justify-center sm:justify-end gap-4 text-sm p-4  w-9/12 mb-4">
+              {/* if while adding link that link already exists so set his state and the above LinkExistsAlert component will get triggered */}
+              <AddModal setLinkExistsResponseData={setLinkExistsResponseData} />
+              {/* 
+              <button
+                disabled={addModalType || openEditModal ? true : false}
+                className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer  text-base sm:text-xl  tracking-wide	"
+                onClick={() => handleAddModal(nobiDocType.link)}
+                style={{
+                  opacity:
+                    addModalType || openEditModal || moveToModal ? 0.3 : 1,
+                }}
+              >
+                <p>Add Link</p>
+              </button> */}
+            </div>
 
-      <Image
-        className="w-40 sm:w-48 right-0 fixed -bottom-24 sm:right-32 -z-10 neuShadow-girl-with-pot-at-back   -rotate-3"
-        src="/floats/f3.jpg"
-        width={160}
-        height={160}
-        alt="cards"
-        loading="lazy"
-      ></Image> */}
-    </div>
+            <BreadCrumb />
+
+            <Folders
+              key="folder"
+              folderData={queryData?.data?.data}
+              selectedItem={selectedItem}
+              hideContextMenu={hideContextMenu}
+              setSelectedItem={setSelectedItem}
+              setOpenEditModal={setOpenEditModal}
+              isLoading={isLoading}
+              pageType={pageTypes.mainFolder}
+              setMoveToModal={setMoveToModal}
+              openMoveToModal={openMoveToModal}
+            />
+          </div>
+
+          <div>
+            <DrawerShadCN />
+          </div>
+          <Socials isLoading={isLoading} />
+        </ScrollArea>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
 

@@ -27,6 +27,7 @@ import { Button } from "@/components/ui/button";
 
 export default function DrawerShadCN() {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const [searchedString, setSearchedString] = useState("");
   const {
@@ -65,6 +66,14 @@ export default function DrawerShadCN() {
     }
   }, [queryData, router, isLoading]);
 
+  useEffect(() => {
+    if (open) {
+      document.documentElement.style.scrollBehavior = "auto";
+    } else {
+      document.documentElement.style.scrollBehavior = "smooth";
+    }
+  }, [open]);
+
   async function handleSearchClick() {
     if (searchedString.length == 0) return;
     await refetch();
@@ -79,6 +88,7 @@ export default function DrawerShadCN() {
     if (!isOpen) {
       setSearchedString("");
     }
+    setOpen(isOpen);
   }
   return (
     <Drawer
@@ -86,6 +96,7 @@ export default function DrawerShadCN() {
       noBodyStyles={true}
       setBackgroundColorOnScale={true}
       modal={false}
+      open={open}
       onOpenChange={handleDrawerClose}
       className=""
     >

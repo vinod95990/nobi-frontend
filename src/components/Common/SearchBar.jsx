@@ -10,9 +10,9 @@ export default function SearchBar(props) {
       }}
     >
       <div className="flex items-center justify-center flex-col gap-3 w-full ">
-        <h1 className="text-[#3d3266] shiny-text text-lg sm:text-3xl ">
+        {/* <h1 className="text-[#3d3266] shiny-text text-lg sm:text-3xl ">
           Discover your treasures
-        </h1>
+        </h1> */}
         <div
           className=" text-[#f4f5f0] relative p-1 z-10 w-3/4 sm:w-1/2 rounded-full flex items-center justify-between text-sm search-box"
           // style={{

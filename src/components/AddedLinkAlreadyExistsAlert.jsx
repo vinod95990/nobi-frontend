@@ -27,6 +27,8 @@ export default function LinkExistsAlert(props) {
     setLinkExistsResponseData,
     // slug(/id) used to determine which folder user is currently at
     slug = null,
+    // search string state ko set kardo us already present link name se ki logo ko dikh jaye
+    setSearchedString,
   } = props;
   const { message, linkData } = linkExistsResponseData;
   const queryClient = useQueryClient();
@@ -131,7 +133,7 @@ export default function LinkExistsAlert(props) {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="font-medium text-xl">
-            {isLoading ? "Wait..." : message}
+            {isLoading ? "Wait..." : "Link already exists!"}
           </AlertDialogTitle>
           <AlertDialogDescription className="text-base font-mono text-[#3d3266]">
             {isLoading ? "" : message}
