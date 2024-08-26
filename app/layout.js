@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/src/Providers.jsx";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "@/components/ui/sonner";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -22,12 +22,7 @@ export default function RootLayout({ children }) {
               color: "#16171c",
             }}
           >
-            <ToastContainer
-              hideProgressBar={false}
-              position="top-center"
-              autoClose={3000}
-              limit={2}
-            />
+            <Toaster />
           </div>
           {children}
         </body>

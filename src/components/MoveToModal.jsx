@@ -5,7 +5,7 @@ import NobiServices from "../services/nobiServices";
 import * as Yup from "yup";
 import { nobiDocType } from "../constants/NobiConstants";
 import Loader from "./Common/Loader";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -18,10 +18,10 @@ const FolderPig = (props) => {
   return (
     <div className="my-2 ml-11">
       <p
-        className={`text-sm w-40 sm:text-lg px-3 py-2 border-2 border-[#3d3266] rounded-md transition-all cursor-pointer ${
+        className={`text-sm w-40 sm:text-lg px-3 py-2 border-2 border-[#0b1215] rounded-md transition-all cursor-pointer ${
           selectedParent?._id == _id
-            ? "text-[#fff] bg-[#3d3266] shiny-text"
-            : "text-[#3d3266]"
+            ? "text-[#fff] bg-[#0b1215] shiny-text"
+            : "text-[#0b1215]"
         } ${
           selectedItem?.parentId == folder?._id
             ? "text-[#2a2b29] opacity-40 border-double cursor-none "
@@ -82,16 +82,12 @@ export default function MoveToModal(props) {
     });
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
+      toast.error(res?.error);
       return null;
     }
 
@@ -137,7 +133,7 @@ export default function MoveToModal(props) {
           ></Image>
         </div>
         <p
-          className="text-[#fff] text-xl bg-[#3d3266] text-center py-3 "
+          className="text-[#fff] text-xl bg-[#0b1215] text-center py-3 "
           style={{
             borderTopLeftRadius: "16px",
             borderTopRightRadius: "16px",
@@ -154,20 +150,20 @@ export default function MoveToModal(props) {
               height={45}
               className="bg-white rounded-md"
             ></Image>
-            <p className="text-sm sm:text-lg  px-2 py-1 bg-[#3d3266] text-white rounded-md shiny-text">
+            <p className="text-sm sm:text-lg  px-2 py-1 bg-[#0b1215] text-white rounded-md shiny-text">
               {selectedItem?.name}
             </p>
           </div>
           <div className="flex items-center justify-center gap-2 flex-col p-3 m-2 w-[75%] ">
-            <p className="text-[#3d3266] text-base sm:text-lg">
+            <p className="text-[#0b1215] text-base sm:text-lg">
               Folders(Select One)
             </p>
             <div className="h-44 sm:h-56  w-[100%] sm:w-[100%] md:w-[100%]  overflow-auto p-2 m-1">
               <p
-                className={`text-sm sm:text-lg px-3 py-2 border-2 border-[#3d3266] rounded-md transition-all cursor-pointer ${
+                className={`text-sm sm:text-lg px-3 py-2 border-2 border-[#0b1215] rounded-md transition-all cursor-pointer ${
                   selectedParent == "5e8b7a3346a1f02d9b851e5c"
-                    ? "text-[#fff] bg-[#3d3266] shiny-text"
-                    : "text-[#3d3266]"
+                    ? "text-[#fff] bg-[#0b1215] shiny-text"
+                    : "text-[#0b1215]"
                 } ${
                   selectedItem?.parentId === null
                     ? "text-[#2a2b29] opacity-40 cursor-none "
@@ -198,7 +194,7 @@ export default function MoveToModal(props) {
         </div>
         <div className="w-full flex items-center  gap-2 p-3">
           <button
-            className={`border-2 rounded-xl w-full border-[#3d3266] bg-[#7152E1] text-[#fff] p-2 hover:bg-[#3d3266] hover:text-[#fff] transition-colors cursor-pointer  tracking-wide ${
+            className={`border-2 rounded-xl w-full border-[#0b1215] bg-[#0b1215] text-[#fff] p-2 hover:bg-black hover:text-[#fff] transition-colors cursor-pointer  tracking-wide ${
               !selectedItem || !selectedParent ? "opacity-60" : ""
             }`}
             onClick={handleMoveFolder}
@@ -213,7 +209,7 @@ export default function MoveToModal(props) {
             </p>
           </button>
           <button
-            className="border-2 rounded-xl w-full border-[#3d3266]  text-[#3d3266] hover:text-[#fff]  p-2 hover:bg-[#3d3266]  transition-colors cursor-pointer   tracking-wide"
+            className="border-2 rounded-xl w-full border-[#0b1215]  text-[#0b1215] hover:text-black p-2 transition-colors cursor-pointer   tracking-wide"
             onClick={handleCloseModal}
           >
             <p className=" text-xl">Cancel</p>

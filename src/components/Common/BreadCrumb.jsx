@@ -1,3 +1,4 @@
+import { CaretRight, HouseSimple } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -12,14 +13,19 @@ export default function BreadCrumb(props) {
   if (!parentData) {
     return (
       <div className="flex  w-9/12 gap-3 my-1 mb-7 items-center py-2">
-        <Image
+        <HouseSimple
+          size={32}
+          color="#0b1215"
+          weight="fill"
           className="cursor-pointer"
+          onClick={() => handleNavigation("/")}
+        />
+        {/* <Image
           width={40}
           height={40}
           alt="home"
           src="/icons/house-bold.svg"
-          onClick={() => handleNavigation("/")}
-        ></Image>
+        ></Image> */}
       </div>
     );
   }
@@ -32,28 +38,22 @@ export default function BreadCrumb(props) {
         scrollbarColor: "#ff9090 transparent",
       }}
     >
-      <Image
+      <HouseSimple
+        size={32}
+        color="#0b1215"
+        weight="fill"
         className="cursor-pointer"
-        width={40}
-        height={40}
-        alt="navigation"
-        src="/icons/house-bold.svg"
         onClick={() => handleNavigation("/")}
-      ></Image>
+      />
       {parentData?.map((data, index) => {
         return (
           <React.Fragment key={data._id}>
-            <Image
-              width={30}
-              height={30}
-              alt="path"
-              src="/icons/arrow-fat-right-bold.svg"
-            ></Image>
+            <CaretRight size={20} color="#0b1215" className="cursor-pointer" />
             <p
               className={`text-sm sm:text-lg ${
                 parentData.length == index + 1
-                  ? "text-[#7152E1]"
-                  : "text-[#16171c]"
+                  ? "text-[#353535]"
+                  : "text-[#0b1215]"
               } cursor-pointer`}
               onClick={() => handleNavigation(`/${data._id}`)}
               style={{ whiteSpace: "nowrap" }}

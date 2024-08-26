@@ -12,12 +12,12 @@ export function InputWithButton(props) {
       <Input
         type="email"
         placeholder={placeholderText}
-        className="border-[#060708]	 border-2 outline-none text-base	sm:text-lg"
+        className="border-[#0b1215]	 border-2 outline-none text-base	sm:text-lg"
         onChange={(e) => debouncedHandleSearchedString(e)}
       />
       <Button
         type="submit"
-        className="text-base sm:text-lg tracking-wider bg-[#060708] hover:bg-[#3d3266] shiny-text"
+        className="p-2 sm:p-5 text-sm sm:text-lg tracking-wider bg-[#0b1215] hover:bg-black shiny-text"
         onClick={() => onSubmit()}
       >
         Search

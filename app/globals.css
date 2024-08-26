@@ -20,7 +20,7 @@
 body {
   width: 100%;
   height: 100vh;
-  background-color: "#f4f5f0";
+  background-color: #fff;
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: 1.2px;
 }
@@ -30,8 +30,8 @@ input {
 }
 /* Add this CSS to your AddModal.css file */
 input::selection {
-  background-color: #3d3266;
-  color: #f4f5f0;
+  background-color: #0b1215;
+  color: #fff;
 }
 ::-webkit-scrollbar {
   width: 12px;
@@ -39,42 +39,21 @@ input::selection {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #ff9090;
+  background: #f6f6f6;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #fff;
+  background: #f6f6f6;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #fff;
+  background: #f6f6f6;
 }
 .shiny-text {
   text-shadow: 0 0 7px rgba(255, 255, 255, 0.3),
     0 0 3px rgba(255, 255, 255, 0.3);
-}
-
-.toast-message {
-  padding: 4px 12px !important;
-  color: 3d3266 !important;
-  border: 2px solid #3d3266;
-  border-radius: 16px !important;
-  width: 400px !important;
-  background-color: #ffffff !important;
-  position: relative !important;
-  z-index: 2 !important;
-  text-align: start;
-}
-
-@media screen and (max-width: 768px) {
-  .toast-message {
-    font-size: 14px;
-    width: 100%; /* Set width to 100% on smaller screens */
-    max-width: 90%; /* Optionally, limit the maximum width */
-    margin: 0 auto; /* Center the toast message horizontally */
-  }
 }
 
 .doodle-white {

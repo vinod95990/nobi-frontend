@@ -1,3 +1,4 @@
+import { GithubLogo, LinkedinLogo, XLogo } from "@phosphor-icons/react";
 import Image from "next/image";
 
 export default function Socials(props) {
@@ -6,17 +7,17 @@ export default function Socials(props) {
     {
       key: "github",
       href: "https://github.com/vinod95990",
-      src: "/../../icons/github-logo-fill.svg",
+      image: GithubLogo,
     },
     {
       key: "linkedin",
       href: "https://www.linkedin.com/in/vinod-m-345a701b6/",
-      src: "/../../icons/linkedin-logo-fill.svg",
+      image: LinkedinLogo,
     },
     {
       key: "twitter",
-      href: "https://twitter.com/TricksArena1",
-      src: "/../../icons/twitter-logo-fill.svg",
+      href: "https://twitter.com/mystic_ezra",
+      image: XLogo,
     },
   ];
   return (
@@ -31,20 +32,20 @@ export default function Socials(props) {
               href={data.href}
               target="_blank"
               rel="noopener noreferrer"
-              className=" cursor-pointer hover:border-b-4 hover:border-[#ff9696] transition-colors"
+              className=" transition-all "
             >
-              <Image
-                width={30}
-                className="max-w-full"
-                alt={`${data.key} link`}
-                src={data.src}
-                height={30}
-              ></Image>
+              {
+                <data.image
+                  size={32}
+                  color="#0b1215"
+                  className="hover:border-2 hover:border-[#0b1215] hover:p-1  transition-all hover:rounded-md"
+                />
+              }
             </a>
           );
         })
       )}
-      <p className="h-16  hidden sm:block w-1 bg-[#3d3266]"></p>
+      <p className="h-16  hidden sm:block w-1 bg-[#0b1215]"></p>
     </div>
   );
 }

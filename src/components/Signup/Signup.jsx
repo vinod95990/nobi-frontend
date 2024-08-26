@@ -9,7 +9,7 @@ import "./Signup.css";
 import Image from "next/image";
 
 import Loader from "../Common/Loader";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 const authStateTypes = {
   login: "login",
   signup: "signup",
@@ -67,28 +67,19 @@ export default function Signup(props) {
         const res = await AuthService.signup(values);
 
         if (res?.error) {
-          toast.error(res?.error, {
-            className: "toast-message",
-          });
+          toast.error(res?.error);
         }
         if (res?.data) {
           router.push("/");
         }
       } catch (error) {
-        toast.error(
-          error?.message || "Something went wrong! Please try again later",
-          {
-            className: "toast-message",
-          }
-        );
+        toast(error?.message || "Something went wrong! Please try again later");
       }
     } else {
       try {
         const res = await AuthService.login(values);
         if (res?.error) {
-          toast.error(res?.error, {
-            className: "toast-message",
-          });
+          toast.error(res?.error);
         }
 
         if (res.data) {
@@ -96,10 +87,7 @@ export default function Signup(props) {
         }
       } catch (error) {
         toast.error(
-          error?.message || "Something went wrong! Please try again later",
-          {
-            className: "toast-message",
-          }
+          error?.message || "Something went wrong! Please try again later"
         );
       }
     }
@@ -152,7 +140,7 @@ export default function Signup(props) {
       {/* form */}
       <div
         className="bg-white rounded-lg p-4"
-        style={{ border: "3px solid #3d3266" }}
+        style={{ border: "3px solid #0b1215" }}
       >
         <form onSubmit={formik.handleSubmit} className="auth-form">
           {authState == authStateTypes.signup && (

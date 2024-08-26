@@ -10,7 +10,7 @@
   left: 0px;
   background-color: #fff;
   transition: background-color 0.2s ease-in-out;
-  border: 2px solid #3d3266;
+  border: 2px solid #0b1215;
   border-radius: 16px;
 }
 
@@ -25,7 +25,8 @@
   bottom: -6px;
   left: -5px;
   transition: all 0.2s ease-in-out;
-  border: 2px solid #3d3266;
+  border: 2px solid #0b1215;
+  background: white;
 }
 
 /* .search-box:hover::after{

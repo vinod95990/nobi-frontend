@@ -4,11 +4,9 @@ import "./Folder.css";
 import { useRouter } from "next/navigation";
 import NobiServices from "@/src/services/nobiServices";
 import Loader from "./Loader";
-import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import copy from "clipboard-copy";
 import Link from "next/link";
-import Image from "next/image";
+import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   ContextMenu,
@@ -18,12 +16,20 @@ import {
   ContextMenuShortcut,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import {
+  TerminalWindow,
+  LinkSimple,
+  Horse,
+  TrashSimple,
+  PencilSimple,
+  MagicWand,
+  ClockClockwise,
+} from "@phosphor-icons/react";
 
 export default function Folders(props) {
   const {
     folderData = [],
     selectedItem,
-    hideContextMenu,
     setOpenEditModal,
     setSelectedItem,
     isLoading,
@@ -33,18 +39,12 @@ export default function Folders(props) {
   const queryClient = useQueryClient();
   const [minorLoading, setMinorLoading] = useState(false);
   const router = useRouter();
-  const [contextMenuPosition, setContextMenuPosition] = useState({
-    x: 0,
-    y: 0,
-  });
 
   function handleFolderNavigation(event, id) {
     event.preventDefault();
 
     if (pageType == pageTypes.dustbin) {
-      toast.info("Don't worry! The folder is empty", {
-        className: "toast-message",
-      });
+      toast.info("Don't worry! The folder is empty");
       return;
     }
 
@@ -53,79 +53,15 @@ export default function Folders(props) {
     setMinorLoading(false);
   }
 
-  function handleRightClick(event, item) {
-    event.preventDefault();
-    if (
-      pageType == pageTypes.sharedFolder ||
-      pageType == pageTypes.drawerKeyword
-    ) {
-      return;
-    }
-    const containerRect = event.currentTarget.getBoundingClientRect();
-    // const scrollX = window.scrollX || window.pageXOffset;
-    // const scrollY = window.scrollY || window.pageYOffset;
-    const viewportOffsetX = event.clientX + window.scrollX;
-    const viewportOffsetY = event.clientY + window.scrollY;
-    setSelectedItem(item);
-    setContextMenuPosition({
-      x: viewportOffsetX,
-      y: viewportOffsetY,
-    });
-  }
-
-  async function handleEdit(e) {
+  async function handleEdit() {
+    setMinorLoading(true);
     if (pageType == pageTypes.mainFolder) {
-      e.stopPropagation();
       if (!selectedItem) {
         return;
       }
       setOpenEditModal(true);
     }
-  }
-
-  async function handleShareFolder(e) {
-    e.stopPropagation();
-    if (!selectedItem) {
-      return;
-    }
-    setMinorLoading(true);
-    const res = await NobiServices.generateSharedFolderToken({
-      folderId: selectedItem?._id,
-    });
-
-    if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
-      router.push("/guard-gate");
-    }
-
-    if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
-    }
-
-    if (res?.data) {
-      try {
-        await copy(
-          `${window.location.origin}/shared/${res?.data?.encodedFolderToken}`
-        );
-        toast.success("Folder link copied successfully! 🚀", {
-          className: "toast-message",
-        });
-      } catch (err) {
-        toast.error(
-          "Oops! Couldn't copy the text. You can try copying it from the URL.",
-          {
-            className: "toast-message",
-          }
-        );
-      }
-      setMinorLoading(false);
-
-      router.push(`/shared/${res?.data?.encodedFolderToken}`);
-    }
+    setMinorLoading(false);
   }
 
   async function handleDelete() {
@@ -139,38 +75,28 @@ export default function Folders(props) {
         folderId: selectedItem._id,
       });
       if (unauthorized) {
-        toast.info("Please login again!", {
-          className: "toast-message",
-        });
+        toast.info("Please login again!");
         router.push("/guard-gate");
       }
 
       if (error) {
-        toast.error(error, {
-          className: "toast-message",
-        });
+        toast.error(error);
       }
 
       if (data) {
-        toast.success(data?.message, {
-          className: "toast-message",
-        });
+        toast.success(data?.message);
       }
     } else {
       const { data, error, unauthorized } = await NobiServices.deleteLink({
         linkId: selectedItem._id,
       });
       if (unauthorized) {
-        toast.info("Please login again!", {
-          className: "toast-message",
-        });
+        toast.info("Please login again!");
         router.push("/guard-gate");
       }
 
       if (error) {
-        toast.error(error, {
-          className: "toast-message",
-        });
+        toast.error(error);
       }
     }
     setMinorLoading(false);
@@ -188,16 +114,12 @@ export default function Folders(props) {
       docId: selectedItem._id,
     });
     if (unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (error) {
-      toast.error(error, {
-        className: "toast-message",
-      });
+      toast.error(error);
     }
     setMinorLoading(false);
 
@@ -215,43 +137,33 @@ export default function Folders(props) {
     });
 
     if (unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (error) {
-      toast.error(error, {
-        className: "toast-message",
-      });
+      toast.error(error);
     }
     setMinorLoading(false);
 
     queryClient.invalidateQueries();
   }
 
-  function righClickMenus() {
+  function righClickMenus(data) {
     if (pageType == pageTypes.sharedFolder) {
       return <></>;
     }
 
     if (pageType == pageTypes.dustbin) {
       return (
-        <ContextMenuContent>
+        <ContextMenuContent className="bg-[#0b1215] text-white  ">
           <ContextMenuItem
             onClick={(e) => restoreFromBin(e)}
             className="text-lg sm:text-xl "
           >
             Restore
             <ContextMenuShortcut>
-              <Image
-                src="/icons/magic-wand.svg"
-                width={20}
-                height={20}
-                alt="restore"
-                className="z-10 max-w-full	"
-              ></Image>
+              <ClockClockwise size={22} color="#fff" />
             </ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuSeparator />
@@ -262,13 +174,7 @@ export default function Folders(props) {
           >
             Delete
             <ContextMenuShortcut>
-              <Image
-                src="/icons/trash-simple-bold.svg"
-                width={20}
-                height={20}
-                alt="trash"
-                className="z-10 max-w-full	"
-              ></Image>
+              <TrashSimple size={22} color="#fff" />
             </ContextMenuShortcut>
           </ContextMenuItem>
         </ContextMenuContent>
@@ -276,72 +182,33 @@ export default function Folders(props) {
     }
 
     return (
-      <ContextMenuContent>
-        {/* {selectedItem.type == nobiDocType.folder && (
-          <ContextMenuItem>
-            <button
-              onClick={(e) => handleShareFolder(e)}
-              className=" text-lg sm:text-xl bg-white flex items-center gap-2 text-[#3d3266] border-2 rounded-md border-[#3d3266] p-2 hover:bg-[#ff9696] hover:text-[#f4f5f0] transition-colors	"
-            >
-              <Image
-                src="/icons/share-fat-bold.svg"
-                width={20}
-                height={20}
-                alt="share"
-                className="z-10 max-w-full	"
-              ></Image>
-              <p>Share</p>
-            </button>
-          </ContextMenuItem>
-        )} */}
-        <ContextMenuItem
-          onClick={(e) => handleEdit(e)}
-          className="text-lg sm:text-xl "
-        >
+      <ContextMenuContent className="bg-[#0b1215] text-white  ">
+        <ContextMenuItem className="text-lg sm:text-xl" onClick={handleEdit}>
           Edit
           <ContextMenuShortcut>
-            <Image
-              src="/icons/pencil-simple-bold.svg"
-              width={20}
-              height={20}
-              alt="edit"
-              className="z-10 max-w-full	"
-            ></Image>{" "}
+            <PencilSimple size={22} color="#fff" />
           </ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSeparator />
 
         <ContextMenuItem
           onClick={() => pushToRecycleBin()}
-          className="text-lg sm:text-xl "
+          className="text-lg sm:text-xl"
         >
-          {/**/}
           Delete
           <ContextMenuShortcut>
-            <Image
-              src="/icons/trash-simple-bold.svg"
-              width={20}
-              height={20}
-              alt="trash"
-              className="z-10 max-w-full	"
-            ></Image>
+            <TrashSimple size={20} color="#fff" />
           </ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSeparator />
 
         <ContextMenuItem
           onClick={(e) => openMoveToModal(e)}
-          className="text-lg sm:text-xl "
+          className="text-lg sm:text-xl"
         >
           Move
           <ContextMenuShortcut>
-            <Image
-              src="/icons/magic-wand.svg"
-              width={20}
-              height={20}
-              alt="move folder/link"
-              className="z-10 max-w-full	"
-            ></Image>
+            <MagicWand size={22} color="#fff" />
           </ContextMenuShortcut>
         </ContextMenuItem>
       </ContextMenuContent>
@@ -350,18 +217,18 @@ export default function Folders(props) {
 
   if (isLoading) {
     return (
-      <div className="transition-all flex flex-wrap  items-center gap-5  w-9/12 pb-24">
-        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
-        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
-        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
-        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-opacity-100" />
+      <div className="m-2 transition-all flex flex-wrap  items-center gap-5  w-full pb-24">
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-[#0b1215]" />
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-[#0b1215]" />
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-[#0b1215]" />
+        <Skeleton className=" w-[180px]  h-[40px] rounded-[4px] bg-[#0b1215]" />
       </div>
     );
   }
 
   return (
     <div
-      className=" transition-all flex flex-wrap  items-center gap-5  text-[#16171c] text-xl w-9/12  pb-24"
+      className="m-2 transition-all flex flex-wrap  items-center gap-5  text-[#16171c] text-xl w-full  pb-24"
       style={{
         zIndex: 25,
       }}
@@ -371,38 +238,6 @@ export default function Folders(props) {
           <div className="w-3/4  sm:w-1/2">
             <Loader />
           </div>
-        </div>
-      )}
-      {/* right click pe jo context menu ata hai */}
-      {false && (
-        <div
-          className="custom-scrollbar absolute z-1000 bg-[#ff9090] border-2 rounded-md border-[#3d3266] p-3  grid gap-3 grid-cols-1  sm:w-[135px] h-[160px] overflow-auto  "
-          style={{
-            top: contextMenuPosition.y,
-            left: contextMenuPosition.x,
-            zIndex: "100",
-          }}
-        >
-          {righClickMenus()}
-          <style>
-            {`
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 8px;  
-      }
-
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: #ffb8b8;
-      }
-
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #fff;
-      }
-
-      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #7152e1;
-      }
-    `}
-          </style>
         </div>
       )}
       {folderData?.length >= 1 ? (
@@ -417,27 +252,29 @@ export default function Folders(props) {
               <ContextMenuTrigger>
                 <div
                   key={index}
-                  className="doodle-folder  p-2 sm:p-3 flex items-center gap-3 cursor-pointer text-base sm:text-xl"
+                  className="doodle-folder border-[2px] border-[#0b1215] rounded-2xl	 p-2 sm:p-3 flex items-center gap-3 cursor-pointer text-base sm:text-xl"
                   style={{
                     width: "160px",
                     position: "relative",
                     zIndex: "10",
+                    display: "grid",
+                    gridTemplateColumns: "32px auto",
+                    gap: "8px",
+                    alignItems: "center",
                   }}
                   onClick={(e) => handleFolderNavigation(e, data._id)}
                   // onContextMenu={(e) => handleRightClick(e, data)}
                 >
-                  <Image
-                    src="/icons/folder-bold.svg"
-                    width={30}
-                    alt="folder"
-                    height={30}
-                    className="max-w-full	"
-                  ></Image>
-
-                  <p className="text-[#3d3266]  overflow-hidden	">{data.name}</p>
+                  <TerminalWindow
+                    size={30}
+                    color="#091a03"
+                    className="w-5 sm:w-8"
+                    weight="bold"
+                  />
+                  <p className="text-[#0b1215]  overflow-hidden	">{data.name}</p>
                 </div>
               </ContextMenuTrigger>
-              {righClickMenus()}
+              {righClickMenus(data)}
             </ContextMenu>
           ) : (
             <ContextMenu
@@ -451,24 +288,23 @@ export default function Folders(props) {
                   key={index}
                   href={data?.link || undefined}
                   target="_blank"
-                  className="doodle-link p-2 sm:p-3 flex gap-3 items-center text-base sm:text-xl"
+                  className="doodle-link p-2 w-full sm:w-[280px] sm:p-3 flex gap-3 items-center text-base sm:text-xl"
                   style={{
-                    width: "280px",
                     gridColumnEnd: "span 2",
                     position: "relative",
                     zIndex: "10",
                   }}
                   // onContextMenu={(e) => handleRightClick(e, data)}
                 >
-                  <Image
-                    src="/icons/link-simple-bold.svg"
-                    width={30}
-                    alt="link"
-                    height={30}
-                    className="max-w-full	"
-                  ></Image>
+                  <LinkSimple
+                    size={30}
+                    color="#091a03"
+                    weight="bold"
+                    className="w-5 sm:w-8"
+                  />
+
                   <div className="flex flex-col justify-center flex-wrap overflow-hidden	">
-                    <p className="text-[#3d3266] ">{data.name}</p>
+                    <p className="text-[#152131] ">{data.name}</p>
                     <p className="text-sm text-[#7152E1] ">
                       {data?.link
                         ? data.link.substring(0, 20) + "..."
@@ -481,12 +317,12 @@ export default function Folders(props) {
                         position: "absolute",
                         top: "0%",
                         left: "0%",
-                        border: "2px solid #3d3266",
+                        border: "2px solid #0b1215",
                         borderRadius: "12px",
                         width: "100%",
                         height: "100%",
                       }}
-                      className="bg-[#3d3266] tracking-wider text-[#f4f5f0] text-sm "
+                      className="bg-[#0b1215] tracking-wider text-[#f4f5f0] text-sm "
                     >
                       <p
                         className="p-2 text-wrap"
@@ -502,7 +338,7 @@ export default function Folders(props) {
                 </Link>{" "}
               </ContextMenuTrigger>
 
-              {righClickMenus()}
+              {righClickMenus(data)}
             </ContextMenu>
           );
         })

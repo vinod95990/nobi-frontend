@@ -1,6 +1,6 @@
 "use client";
 
-import AddModal from "@/src/components/AddModal";
+import AddModal from "@/src/components_v2/AddModal";
 import Folders from "@/src/components/Common/Folders";
 import Header from "@/src/components/Common/Header";
 import SearchBar from "@/src/components/Common/SearchBar";
@@ -10,9 +10,8 @@ import "../home.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import BreadCrumb from "@/src/components/Common/BreadCrumb";
-import Loader from "@/src/components/Common/Loader";
-import EditModal from "@/src/components/EditModal";
-import { toast } from "react-toastify";
+import EditModal from "@/src/components_v2/EditModal";
+import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import MoveToModal from "@/src/components/MoveToModal";
@@ -21,6 +20,14 @@ import withAuth from "@/src/hoc/withAuth";
 import Image from "next/image";
 import DrawerShadCN from "@/src/components/DrawerShadCN";
 import LinkExistsAlert from "@/src/components/AddedLinkAlreadyExistsAlert";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import SharedLinkCard from "@/src/components/SharedLinkCard";
+import Loader from "@/src/components/Common/Loader";
 
 function Home({ params }) {
   const { slug } = params;
@@ -35,13 +42,15 @@ function Home({ params }) {
     setMoveToModal,
     searchedString,
     addModalType,
-    setAddModalType,
-    handleAddModal,
+    handleShareFolder,
     hideContextMenu,
     openMoveToModal,
     debouncedHandleSearchedString,
     linkExistsResponseData,
     setLinkExistsResponseData,
+    sharedLink,
+    copySharedFolderLink,
+    routeToSharedFolder,
   } = useNobi();
 
   const {
@@ -68,16 +77,12 @@ function Home({ params }) {
     if (queryData) {
       const { data, error, unauthorized } = queryData;
       if (unauthorized) {
-        toast.info("Please login again!", {
-          className: "toast-message",
-        });
+        toast.info("Please login again!");
         router.push("/guard-gate");
       }
 
       if (error) {
-        toast.error(error, {
-          className: "toast-message",
-        });
+        toast.error(error);
         return;
       }
     }
@@ -94,9 +99,9 @@ function Home({ params }) {
   return (
     <div
       className=" text-5xl    w-full   home-page  relative"
-      onClick={(e) => {
-        hideContextMenu();
-      }}
+      // onClick={(e) => {
+      //   hideContextMenu();
+      // }}
     >
       <div
         style={{
@@ -117,18 +122,13 @@ function Home({ params }) {
         />
       </div>
 
-      <AddModal
-        type={addModalType}
-        setAddModalType={setAddModalType}
-        parentId={slug}
-        setLinkExistsResponseData={setLinkExistsResponseData}
-      />
       <EditModal
         data={selectedItem}
         openEditModal={openEditModal}
         setOpenEditModal={setOpenEditModal}
       />
-      {moveToModal && (
+
+      {moveToModal && selectedItem && (
         <MoveToModal
           moveToModal={moveToModal}
           setMoveToModal={setMoveToModal}
@@ -150,43 +150,45 @@ function Home({ params }) {
         }}
       >
         <div className="flex items-center justify-center sm:justify-end gap-4 text-sm p-4  w-9/12 mb-4">
-          <button
-            disabled={addModalType || openEditModal ? true : false}
-            style={{
-              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
-            }}
-            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-base sm:text-xl tracking-wide	"
-            onClick={() => handleAddModal(nobiDocType.folder)}
-          >
-            <p>Add Folder</p>
-          </button>
-          <button
-            disabled={addModalType || openEditModal ? true : false}
-            className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer text-base sm:text-xl tracking-wide	"
-            onClick={() => handleAddModal(nobiDocType.link)}
-            style={{
-              opacity: addModalType || moveToModal ? 0.12 : 1,
-            }}
-          >
-            <p>Add Link</p>
-          </button>
+          <AddModal
+            setLinkExistsResponseData={setLinkExistsResponseData}
+            parentId={slug}
+          />
+          <Popover>
+            <PopoverTrigger>
+              <Button
+                className="bg-[#0b1215] hover:bg-black text-lg sm:text-xl"
+                onClick={() => handleShareFolder(slug)}
+              >
+                Share
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <SharedLinkCard
+                sharedLink={sharedLink}
+                routeToSharedFolder={routeToSharedFolder}
+                copySharedFolderLink={copySharedFolderLink}
+              />
+            </PopoverContent>
+          </Popover>
         </div>
         <BreadCrumb
           parentData={queryData?.data?.data?.parent}
           current={queryData?.data?.data?.docData}
         />
-
-        <Folders
-          folderData={queryData?.data?.data?.children}
-          selectedItem={selectedItem}
-          hideContextMenu={hideContextMenu}
-          setSelectedItem={setSelectedItem}
-          setOpenEditModal={setOpenEditModal}
-          isLoading={isLoading}
-          pageType={pageTypes.mainFolder}
-          setMoveToModal={setMoveToModal}
-          openMoveToModal={openMoveToModal}
-        />
+        <div className="w-9/12">
+          <Folders
+            folderData={queryData?.data?.data?.children}
+            selectedItem={selectedItem}
+            hideContextMenu={hideContextMenu}
+            setSelectedItem={setSelectedItem}
+            setOpenEditModal={setOpenEditModal}
+            isLoading={isLoading}
+            pageType={pageTypes.mainFolder}
+            setMoveToModal={setMoveToModal}
+            openMoveToModal={openMoveToModal}
+          />
+        </div>
       </div>
 
       <div>

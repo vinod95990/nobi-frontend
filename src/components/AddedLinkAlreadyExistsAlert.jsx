@@ -12,10 +12,11 @@ import {
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import NobiServices from "../services/nobiServices";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import Loader from "./Common/Loader";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export default function LinkExistsAlert(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +28,6 @@ export default function LinkExistsAlert(props) {
     setLinkExistsResponseData,
     // slug(/id) used to determine which folder user is currently at
     slug = null,
-    // search string state ko set kardo us already present link name se ki logo ko dikh jaye
-    setSearchedString,
   } = props;
   const { message, linkData } = linkExistsResponseData;
   const queryClient = useQueryClient();
@@ -48,17 +47,13 @@ export default function LinkExistsAlert(props) {
     });
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       setIsLoading(false);
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
+      toast.error(res?.error);
       setIsLoading(false);
       return null;
     }
@@ -98,7 +93,7 @@ export default function LinkExistsAlert(props) {
       return (
         <>
           <AlertDialogAction
-            className="tracking-widest "
+            className="tracking-widest  bg-[#0b1215] text-white hover:bg-black "
             onClick={() => navigateTo("dustbin")}
           >
             To dustbin
@@ -111,12 +106,15 @@ export default function LinkExistsAlert(props) {
     return (
       <>
         <Button
-          className="tracking-widest "
+          className="tracking-widest bg-[#0b1215] hover:bg-black text-white"
           onClick={() => navigateTo(routeTo)}
         >
           Take me to it
         </Button>
-        <Button className="tracking-widest" onClick={moveLinkHere}>
+        <Button
+          className="tracking-widest  bg-[#0b1215] text-white hover:bg-black  "
+          onClick={moveLinkHere}
+        >
           Move that link here
         </Button>
       </>
@@ -134,8 +132,9 @@ export default function LinkExistsAlert(props) {
         <AlertDialogHeader>
           <AlertDialogTitle className="font-medium text-xl">
             {isLoading ? "Wait..." : "Link already exists!"}
+            <Separator className="my-1" />
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-base font-mono text-[#3d3266]">
+          <AlertDialogDescription className="text-base font-mono text-[#0b1215]">
             {isLoading ? "" : message}
           </AlertDialogDescription>
         </AlertDialogHeader>

@@ -24,7 +24,7 @@ export default function SearchBar(props) {
         >
           <input
             type="text"
-            className="w-full p-3 font-sans tracking-wider	text-[#3d3266] font-bold gradient-css "
+            className="w-full p-3 font-sans tracking-wider	text-[#0b1215] font-bold gradient-css "
             onChange={handleSearchedStringChange}
             // value={searchedString}
             placeholder="Search by name..."
@@ -34,7 +34,7 @@ export default function SearchBar(props) {
             }}
           ></input>
           <div
-            className="cursor-pointer px-6 py-2 rounded-3xl   shiny-text bg-[#060708]  border-2 border-[#060708] hover:bg-[#3d3266]  text-[#f2f2f2] transition-colors hidden sm:block"
+            className="cursor-pointer px-6 py-2 rounded-3xl   shiny-text bg-black  border-2 border-black hover:bg-[#0b1215]  text-white transition-colors hidden sm:block"
             onClick={(e) => handleSearchClick(e)}
           >
             Search

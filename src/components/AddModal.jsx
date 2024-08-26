@@ -5,7 +5,7 @@ import NobiServices from "../services/nobiServices";
 import * as Yup from "yup";
 import { nobiDocType } from "../constants/NobiConstants";
 import Loader from "./Common/Loader";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 
@@ -55,16 +55,12 @@ export default function AddModal(props) {
     const res = await NobiServices.addFolder(values);
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
+      toast.error(res?.error);
       return null;
     }
 
@@ -80,16 +76,12 @@ export default function AddModal(props) {
     const res = await NobiServices.addLink(values);
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
+      toast.error(res?.error);
       return;
     }
 

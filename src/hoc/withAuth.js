@@ -5,7 +5,7 @@ import { addUserDetail } from "../slices/authSlice";
 import AuthService from "../services/auth";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import Loader from "../components/Common/Loader";
 
 export default function withAuth(WrappedComponent) {
@@ -28,7 +28,7 @@ export default function withAuth(WrappedComponent) {
           }
 
           if (error?.serverError) {
-            toast.error(error, { className: "toast-message" });
+            toast.error(error);
             setIsError(error);
           }
 

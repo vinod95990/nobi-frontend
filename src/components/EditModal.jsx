@@ -5,7 +5,7 @@ import NobiServices from "../services/nobiServices";
 import * as Yup from "yup";
 import { nobiDocType } from "../constants/NobiConstants";
 import Loader from "./Common/Loader";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 
@@ -39,16 +39,12 @@ export default function EditModal(props) {
     }
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(error, {
-        className: "toast-message",
-      });
+      toast.error(error);
       return null;
     }
 

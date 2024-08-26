@@ -5,7 +5,7 @@ import NobiServices from "../services/nobiServices";
 import * as Yup from "yup";
 import { nobiDocType } from "../constants/NobiConstants";
 import Loader from "../components/Common/Loader";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import "../components/Signup/Signup.css";
@@ -89,16 +89,12 @@ export default function AddModal(props) {
     const res = await NobiServices.addFolder(values);
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
+      toast.error(res?.error);
       return null;
     }
 
@@ -114,16 +110,12 @@ export default function AddModal(props) {
     const res = await NobiServices.addLink(values);
 
     if (res?.unauthorized) {
-      toast.info("Please login again!", {
-        className: "toast-message",
-      });
+      toast.info("Please login again!");
       router.push("/guard-gate");
     }
 
     if (res?.error) {
-      toast.error(res?.error, {
-        className: "toast-message",
-      });
+      toast.error(res?.error);
       return;
     }
 
@@ -138,17 +130,12 @@ export default function AddModal(props) {
     setOpenModal(false);
   }
 
-  function handleCloseModal() {
-    setAddModalType(null);
-  }
-  console.log("open add moda", openModal);
   return (
     <AlertDialog onOpenChange={setOpenModal} open={openModal}>
-      <AlertDialogTrigger
-        asChild
-        className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer  text-base sm:text-xl  tracking-wide	"
-      >
-        <Button variant="outline">Add</Button>
+      <AlertDialogTrigger asChild>
+        <Button className="bg-[#0b1215] hover:bg-black text-lg sm:text-xl">
+          Add
+        </Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent className="p-3 outline-none">
@@ -245,7 +232,7 @@ export default function AddModal(props) {
                           Cancel
                         </AlertDialogCancel>
                         <Button
-                          className=" tracking-wider text-base sm:text-lg"
+                          className=" tracking-wider text-base sm:text-lg bg-[#0b1215] hover:bg-black"
                           type="submit"
                           disabled={
                             folderForm.isSubmitting ||
@@ -254,7 +241,7 @@ export default function AddModal(props) {
                               : false
                           }
                         >
-                          Deploy
+                          Add
                         </Button>
                       </>
                     )}
@@ -340,14 +327,14 @@ export default function AddModal(props) {
 
                         <Button
                           type="submit"
-                          className=" tracking-wider text-base sm:text-lg"
+                          className=" tracking-wider text-base sm:text-lg bg-[#0b1215] hover:bg-black"
                           disabled={
                             Object.keys(linkForm.errors).length > 0
                               ? true
                               : false
                           }
                         >
-                          Deploy
+                          Add
                         </Button>
                       </>
                     )}

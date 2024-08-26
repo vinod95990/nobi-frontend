@@ -9,8 +9,7 @@ import SearchBar from "@/src/components/Common/SearchBar";
 import Folders from "@/src/components/Common/Folders";
 import { nobiDocType, pageTypes } from "@/src/constants/NobiConstants";
 import BreadCrumb from "@/src/components/Common/BreadCrumb";
-import EditModal from "@/src/components/EditModal";
-import { toast } from "react-toastify";
+import EditModal from "@/src/components_v2/EditModal";
 import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import MoveToModal from "@/src/components/MoveToModal";
@@ -26,6 +25,15 @@ import {
 } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import AddModal from "@/src/components_v2/AddModal";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import SharedLinkCard from "@/src/components/SharedLinkCard";
+import Loader from "@/src/components/Common/Loader";
+import { toast } from "sonner";
 
 function Home() {
   const router = useRouter();
@@ -38,16 +46,18 @@ function Home() {
     moveToModal,
     setMoveToModal,
     searchedString,
-    addModalType,
-    setAddModalType,
-    handleAddModal,
+    handleShareFolder,
     hideContextMenu,
     openMoveToModal,
     debouncedHandleSearchedString,
     linkExistsResponseData,
     setLinkExistsResponseData,
     setSearchedString,
+    sharedLink,
+    copySharedFolderLink,
+    routeToSharedFolder,
   } = useNobi();
+
   const {
     data: queryData,
     isLoading,
@@ -69,16 +79,13 @@ function Home() {
     if (queryData && !isLoading) {
       const { data, error, unauthorized } = queryData;
       if (unauthorized) {
-        toast.info("Please login again!", {
-          className: "toast-message",
-        });
+        toast.info("Please login again!");
+
         router.push("/guard-gate");
       }
 
       if (error) {
-        toast.error(error, {
-          className: "toast-message",
-        });
+        toast.error(error);
         return;
       }
     }
@@ -90,28 +97,25 @@ function Home() {
 
   return (
     <ResizablePanelGroup direction="horizontal">
-      <ResizablePanel defaultSize={20}>
+      {/* <ResizablePanel defaultSize={20} className="bg-[#0b1215]">
         One
-        <Separator orientation="vertical" />
-      </ResizablePanel>
+        <Separator orientation="horizontal" />
+      </ResizablePanel> */}
 
       <ResizablePanel defaultSize={80}>
         <ScrollArea type="scroll" className=" text-5xl h-screen ">
           <div
             style={{
-              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
+              opacity: openEditModal || moveToModal ? 0.12 : 1,
             }}
             className=" text-5xl "
-            // onClick={(e) => {
-            //   hideContextMenu();
-            // }}
           >
             <Header />
           </div>
           <Separator orientation="vertical" />
           <div
             style={{
-              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
+              opacity: openEditModal || moveToModal ? 0.12 : 1,
             }}
           >
             <SearchBar
@@ -137,48 +141,58 @@ function Home() {
           <LinkExistsAlert
             linkExistsResponseData={linkExistsResponseData}
             setLinkExistsResponseData={setLinkExistsResponseData}
+            // slug is used to know what folder user currently on and it is used to move folders to the current folder
+            // this number is basically indicating root folder for backend as in backend we will send this in order to bypass yup validation for hex,
             slug={"5e8b7a3346a1f02d9b851e5c"}
-            setSearchedString={setSearchedString}
           />
 
           <div
             className="flex justify-center flex-col items-center p-4 w-full my-3 "
             style={{
               zIndex: "5",
-              opacity: addModalType || openEditModal || moveToModal ? 0.12 : 1,
+              opacity: openEditModal || moveToModal ? 0.12 : 1,
             }}
           >
             <div className="flex items-center justify-center sm:justify-end gap-4 text-sm p-4  w-9/12 mb-4">
               {/* if while adding link that link already exists so set his state and the above LinkExistsAlert component will get triggered */}
               <AddModal setLinkExistsResponseData={setLinkExistsResponseData} />
-              {/* 
-              <button
-                disabled={addModalType || openEditModal ? true : false}
-                className="shiny-text  rounded-md   py-1 px-3  text-[#3d3266] border-2 border-[#3d3266] hover:bg-[#3d3266] hover:text-[#f4f5f0] transition-colors cursor-pointer  text-base sm:text-xl  tracking-wide	"
-                onClick={() => handleAddModal(nobiDocType.link)}
-                style={{
-                  opacity:
-                    addModalType || openEditModal || moveToModal ? 0.3 : 1,
-                }}
-              >
-                <p>Add Link</p>
-              </button> */}
+              <Popover>
+                <PopoverTrigger>
+                  <Button
+                    className="bg-[#0b1215] hover:bg-black text-lg sm:text-xl"
+                    onClick={() =>
+                      //this hex decimal number indicates in backend ki bahi root hi share kardiya
+                      handleShareFolder("5e8b7a3346a1f02d9b851e5c")
+                    }
+                  >
+                    Share
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <SharedLinkCard
+                    sharedLink={sharedLink}
+                    routeToSharedFolder={routeToSharedFolder}
+                    copySharedFolderLink={copySharedFolderLink}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
 
             <BreadCrumb />
-
-            <Folders
-              key="folder"
-              folderData={queryData?.data?.data}
-              selectedItem={selectedItem}
-              hideContextMenu={hideContextMenu}
-              setSelectedItem={setSelectedItem}
-              setOpenEditModal={setOpenEditModal}
-              isLoading={isLoading}
-              pageType={pageTypes.mainFolder}
-              setMoveToModal={setMoveToModal}
-              openMoveToModal={openMoveToModal}
-            />
+            <div className="w-9/12">
+              <Folders
+                key="folder"
+                folderData={queryData?.data?.data}
+                selectedItem={selectedItem}
+                hideContextMenu={hideContextMenu}
+                setSelectedItem={setSelectedItem}
+                setOpenEditModal={setOpenEditModal}
+                isLoading={isLoading}
+                pageType={pageTypes.mainFolder}
+                setMoveToModal={setMoveToModal}
+                openMoveToModal={openMoveToModal}
+              />
+            </div>
           </div>
 
           <div>

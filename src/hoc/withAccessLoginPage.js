@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { addUserDetail } from "../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Common/Loader";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 export default function withAuthAccessLoginPage(WrappedComponent) {
   return function WrappedComponentWithAuthAcessHOC(props) {
@@ -39,7 +39,7 @@ export default function withAuthAccessLoginPage(WrappedComponent) {
           }
 
           if (error?.serverError) {
-            toast.error(error, { className: "toast-message" });
+            toast.error(error);
             setIsError(error);
           }
 

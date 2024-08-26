@@ -5,13 +5,15 @@ import NobiServices from "@/src/services/nobiServices";
 import "../home.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import Socials from "@/src/components/Common/Socials";
 import Header from "@/src/components/Common/Header";
 import { pageTypes } from "@/src/constants/NobiConstants";
 import withAuth from "@/src/hoc/withAuth";
 import Image from "next/image";
+import { Sparkle } from "@phosphor-icons/react";
+import TooltipCustom from "@/src/components/Common/TooltipCustom";
 
 function Home({ params }) {
   const router = useRouter();
@@ -31,16 +33,12 @@ function Home({ params }) {
     if (queryData) {
       const { data, error, unauthorized } = queryData;
       if (unauthorized) {
-        toast.info("Please login again!", {
-          className: "toast-message",
-        });
+        toast.info("Please login again!");
         router.push("/guard-gate");
       }
 
       if (error) {
-        toast.error(error, {
-          className: "toast-message",
-        });
+        toast.error(error);
         return;
       }
     }
@@ -66,29 +64,26 @@ function Home({ params }) {
     >
       <Header />
 
-      <div className="m-8 text-[#3d3266]">
+      <div className="m-8 text-[#0b1215]">
         <div className="flex items-center justify-center  gap-5">
-          <div className="flex  items-baseline  justify-center gap-3 ">
+          <div className="flex  items-center  justify-center gap-3 ">
             <h1 className="text-center text-2xl sm:text-4xl ">
               Pixie&apos;s Dustbin
             </h1>
-            <Image
-              src="/../../icons/sparkle.svg"
-              width={40}
-              height={40}
-              alt="sparkle"
-              className=" cursor-pointer w-6 sm:w-10"
-            ></Image>
+            <TooltipCustom
+              trigger={<Sparkle size={32} color="#0b1215" />}
+              content="  Nobi Fox will magically tidy up and clear data every Sunday!"
+            />
           </div>
 
           <p
-            className="px-4 py-2 text-[#3d3266]  doodle-btn shiny-text text-sm sm:text-lg cursor-pointer"
+            className="px-4 py-2 text-[#0b1215]  doodle-btn shiny-text text-sm sm:text-base cursor-pointer"
             onClick={returnBack}
           >
             Back
           </p>
         </div>
-        <div className="flex justify-center flex-col items-center p-4 w-full mt-8  ">
+        <div className="flex justify-center flex-col items-center p-4  w-9/12 mx-auto mt-8  ">
           <Folders
             folderData={queryData?.data?.data}
             isLoading={isLoading}
@@ -100,22 +95,9 @@ function Home({ params }) {
         </div>
       </div>
 
-      <div className="hidden md:flex fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#3d3266] opacity-25  items-center  justify-center gap-3 ">
-        <h1 className="text-center text-base sm:text-xl ">
-          Nobi Fox will magically tidy up and clear data every Sunday!{" "}
-        </h1>
-        <Image
-          src="/../../icons/broom.svg"
-          className=" cursor-pointer w-5 sm:w-10"
-          alt="broom"
-          loading="lazy"
-          width={20}
-          height={20}
-        ></Image>
-      </div>
       <Socials isLoading={isLoading} />
 
-      <Image
+      {/* <Image
         className="w-36 sm:w-44   fixed bottom-52  -left-20 -z-10 neuShadow-camp-fire   rotate-[50deg]"
         src="/floats/f7.jpg"
         width={176}
@@ -148,7 +130,7 @@ function Home({ params }) {
         height={192}
         alt="cards"
         loading="lazy"
-      ></Image>
+      ></Image> */}
     </div>
   );
 }

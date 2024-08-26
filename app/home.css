@@ -34,7 +34,7 @@
   left: 0px;
   background-color: #fff;
   transition: background-color 0.2s ease-in-out;
-  border: 2px solid #3d3266;
+  border: 2px solid #0b1215;
   border-radius: 16px;
 }
 
@@ -51,7 +51,7 @@
   bottom: -6px;
   left: -5px;
   transition: background-color 0.2s ease-in-out;
-  border: 2px solid #3d3266;
+  border: 2px solid #0b1215;
   background-color: #fff;
   transition: all 0.2s ease-in-out;
 }
@@ -157,8 +157,6 @@
   opacity: 0.7;
   box-shadow: -3px -3px 0px #f0f0f0, -4px -4px 0px #ffffff;
 }
-
-
 
 .neuShadow-shared-leaf-cat-girl {
   border-radius: 12px;

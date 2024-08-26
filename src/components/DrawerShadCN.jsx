@@ -13,7 +13,7 @@ import { InputWithButton } from "@/src/components/Common/InputWithButton";
 import { useEffect, useState } from "react";
 import NobiServices from "../services/nobiServices";
 import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import Folders from "./Common/Folders";
 import { pageTypes } from "../constants/NobiConstants";
 import Image from "next/image";
@@ -24,6 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function DrawerShadCN() {
   const router = useRouter();
@@ -51,16 +52,12 @@ export default function DrawerShadCN() {
     if (queryData && !isLoading) {
       const { data, error, unauthorized } = queryData;
       if (unauthorized) {
-        toast.info("Please login again!", {
-          className: "toast-message",
-        });
+        toast.info("Please login again!");
         router.push("/guard-gate");
       }
 
       if (error) {
-        toast.error(error, {
-          className: "toast-message",
-        });
+        toast.error(error);
         return;
       }
     }
@@ -101,11 +98,11 @@ export default function DrawerShadCN() {
       className=""
     >
       <DrawerTrigger>
-        <Button className="sm:text-2xl text-lg rotate-[270deg]  -left-1 tracking-wider fixed bottom-10 bg-transparent border-2 text-[#3d3266]    hover:text-white border-[#3d3266]  hover:bg-[#3d3266]">
+        <Button className="sm:text-2xl text-lg rotate-[270deg]  -left-1 tracking-wider fixed bottom-10 bg-transparent border-2 text-[#0b1215]    hover:text-white border-[#0b1215]  hover:bg-black">
           Search
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="bg-[#fff] border-[#060708]	 border-2	items-center">
+      <DrawerContent className="bg-[#fff] border-[#0b1215]	 border-2	items-center ">
         <DrawerHeader className={"mb-6 justify-items-center"}>
           {/* tooltip */}
           <TooltipProvider delayDuration={0}>
@@ -147,16 +144,19 @@ export default function DrawerShadCN() {
           />
           <DrawerDescription className="text-lg text-center tracking-wider w-[60%]"></DrawerDescription>
         </DrawerHeader>
-        <Folders
-          pageType={pageTypes.drawerKeyword}
-          folderData={queryData?.data?.data}
-          isLoading={isLoading}
-        />
+        <ScrollArea className="h-44 w-[90%] mx-auto ">
+          <Folders
+            pageType={pageTypes.drawerKeyword}
+            folderData={queryData?.data?.data}
+            isLoading={isLoading}
+            width={`100%`}
+          />
+        </ScrollArea>
         <DrawerFooter>
           <DrawerClose>
             <Button
               type="submit"
-              className="hover:shiny-text text-base sm:text-lg bg-white text-[#060708] border-[#060708]	 border-2 outline-none hover:text-white hover:bg-[#060708]"
+              className="hover:shiny-text text-base sm:text-lg bg-white text-[#0b1215] border-[#0b1215]	 border-2 outline-none hover:text-white hover:bg-black"
             >
               Close
             </Button>
