@@ -34,22 +34,22 @@ input::selection {
   color: #fff;
 }
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f6f6f6;
+  background: #fff;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #f6f6f6;
+  background: #0b1215;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #f6f6f6;
+  background: black;
 }
 .shiny-text {
   text-shadow: 0 0 7px rgba(255, 255, 255, 0.3),
