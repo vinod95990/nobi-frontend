@@ -391,4 +391,137 @@ export default class NobiServices {
       };
     }
   }
+
+  static async deleteLink(payload) {
+    const { linkId } = payload;
+    try {
+      const res = await axios.delete(`${base_url}/deleteLink`, {
+        params: { linkId },
+        withCredentials: true,
+      });
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while deleting link. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
+      };
+    }
+  }
+
+  static async getLinksByTag(payload) {
+    const { tagIds } = payload;
+
+    try {
+      const res = await axios.get(`${base_url}/getLinksByTags`, {
+        params: payload,
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while getting links. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
+      };
+    }
+  }
+
+  static async getLinkTags(payload) {
+    const { linkId } = payload;
+
+    try {
+      const res = await axios.get(`${base_url}/getLinkTags`, {
+        params: { linkId },
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while getting links. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
+      };
+    }
+  }
+
+  static async updateTags(payload) {
+    const { addTagIds, removeTagIds, linkId } = payload;
+
+    try {
+      const res = await axios.patch(`${base_url}/updateTags`, payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while adding tag. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
+      };
+    }
+  }
+
+  static async createTagAndAttach(payload) {
+    const { name, linkId } = payload;
+
+    try {
+      const res = await axios.post(
+        `${base_url}/createTagAndAttach`,
+        { tagName: name, linkId },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return {
+        data: res.data,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error:
+          error?.response?.data?.message ||
+          "Oops! Something went wrong while removing tag. Please try again later.",
+        unauthorized: error?.response?.status == 401 ? true : false,
+      };
+    }
+  }
 }

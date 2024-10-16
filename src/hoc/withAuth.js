@@ -23,11 +23,15 @@ export default function withAuth(WrappedComponent) {
           const { data, error, unauthorized } = await AuthService.me();
           if (unauthorized) {
             setIsLoading(false);
+            dispatch(addUserDetail(null));
 
             router.push("/guard-gate");
+            return;
           }
 
           if (error?.serverError) {
+            dispatch(addUserDetail(null));
+
             toast.error(error);
             setIsError(error);
           }
@@ -35,6 +39,7 @@ export default function withAuth(WrappedComponent) {
           if (data) {
             dispatch(addUserDetail(data?.userData));
           }
+
           setIsLoading(false);
         }
         meRequest();

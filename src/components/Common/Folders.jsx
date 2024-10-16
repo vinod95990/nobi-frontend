@@ -25,6 +25,7 @@ import {
   MagicWand,
   ClockClockwise,
 } from "@phosphor-icons/react";
+import DropDownWithOptions from "./DropDownWithOptions";
 
 export default function Folders(props) {
   const {
@@ -150,7 +151,10 @@ export default function Folders(props) {
   }
 
   function righClickMenus(data) {
-    if (pageType == pageTypes.sharedFolder) {
+    if (
+      pageType == pageTypes.sharedFolder ||
+      pageType == pageTypes.drawerKeyword
+    ) {
       return <></>;
     }
 
@@ -280,10 +284,19 @@ export default function Folders(props) {
             <ContextMenu
               className="media"
               onOpenChange={() => {
+                if (
+                  pageType == pageTypes.sharedFolder ||
+                  pageType == pageTypes.drawerKeyword
+                ) {
+                  return;
+                }
                 setSelectedItem(data);
               }}
             >
               <ContextMenuTrigger>
+                {pageType == pageTypes.mainFolder && (
+                  <DropDownWithOptions linkId={data?._id} />
+                )}
                 <Link
                   key={index}
                   href={data?.link || undefined}

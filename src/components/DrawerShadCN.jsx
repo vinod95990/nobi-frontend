@@ -63,14 +63,6 @@ export default function DrawerShadCN() {
     }
   }, [queryData, router, isLoading]);
 
-  useEffect(() => {
-    if (open) {
-      document.documentElement.style.scrollBehavior = "auto";
-    } else {
-      document.documentElement.style.scrollBehavior = "smooth";
-    }
-  }, [open]);
-
   async function handleSearchClick() {
     if (searchedString.length == 0) return;
     await refetch();
@@ -98,7 +90,7 @@ export default function DrawerShadCN() {
       className=""
     >
       <DrawerTrigger>
-        <Button className="sm:text-2xl text-lg rotate-[270deg]  -left-1 tracking-wider fixed bottom-10 bg-transparent border-2 text-[#0b1215]    hover:text-white border-[#0b1215]  hover:bg-black">
+        <Button className="sm:text-xl outline-none text-base  bg-white border-2 text-[#0b1215]    hover:text-white border-[#0b1215]  hover:bg-black">
           Search
         </Button>
       </DrawerTrigger>

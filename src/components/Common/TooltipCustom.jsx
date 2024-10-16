@@ -4,17 +4,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { twMerge } from "tailwind-merge";
 function TooltipCustom(props) {
-  const { trigger, content, side } = props;
+  const { trigger, content, side, className } = props;
   return (
     <TooltipProvider delayDuration={0}>
       <Tooltip>
-        <TooltipTrigger>{trigger}</TooltipTrigger>
+        <TooltipTrigger type="button">{trigger}</TooltipTrigger>
         <TooltipContent
           collisionPadding={20}
           arrowPadding={10}
           side={side || "top"}
-          className="p-2 text-base"
+          className={twMerge(className, "p-2 text-base")}
         >
           <p>{content}</p>
         </TooltipContent>

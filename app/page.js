@@ -34,6 +34,9 @@ import { Button } from "@/components/ui/button";
 import SharedLinkCard from "@/src/components/SharedLinkCard";
 import Loader from "@/src/components/Common/Loader";
 import { toast } from "sonner";
+import TagFilterDrawer from "@/src/components/TagFilterDrawer";
+import { Fire } from "@phosphor-icons/react";
+import TooltipCustom from "@/src/components/Common/TooltipCustom";
 
 function Home() {
   const router = useRouter();
@@ -81,7 +84,7 @@ function Home() {
       if (unauthorized) {
         toast.info("Please login again!");
 
-        router.push("/guard-gate");
+        // router.push("/guard-gate");
       }
 
       if (error) {
@@ -195,9 +198,30 @@ function Home() {
             </div>
           </div>
 
-          <div>
-            <DrawerShadCN />
-          </div>
+          <Popover>
+            <PopoverTrigger className="left-2 tracking-wider fixed bottom-20 ">
+              <TooltipCustom
+                trigger={
+                  <Fire
+                    size={32}
+                    color="white"
+                    className="bg-cyan-400 p-2 w-14 h-14 rounded-md font-mono hover:mb-2 transition-all"
+                  />
+                }
+                content="I'm I looking odd!"
+                side="top"
+                className="font-serif bg-cyan-500 text-white "
+              />
+            </PopoverTrigger>
+            <PopoverContent className="bg-red-100 w-fit">
+              <div className="flex items-center gap-2  bg-cyan-200 justify-around w-full">
+                <DrawerShadCN />
+
+                <TagFilterDrawer />
+              </div>
+            </PopoverContent>
+          </Popover>
+
           <Socials isLoading={isLoading} />
         </ScrollArea>
       </ResizablePanel>

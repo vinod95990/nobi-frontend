@@ -33,6 +33,7 @@ export default function withAuthAccessLoginPage(WrappedComponent) {
           const { data, error, unauthorized } = await AuthService.me();
 
           if (unauthorized) {
+            dispatch(addUserDetail(null));
             setUserDetailsState(
               "setting this true in order to make the below condtion work"
             );
@@ -40,6 +41,8 @@ export default function withAuthAccessLoginPage(WrappedComponent) {
 
           if (error?.serverError) {
             toast.error(error);
+            dispatch(addUserDetail(null));
+
             setIsError(error);
           }
 
